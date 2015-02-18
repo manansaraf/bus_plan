@@ -2,7 +2,6 @@ package com.davidtoh.helloworld;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -28,18 +27,24 @@ public class MainActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+			case R.id.action_settings:
+				//openSettings();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
 
     public void toFavoriteStops(View view) {
         Intent changeToFavorites = new Intent(view.getContext(), FavoriteStops.class);
         startActivityForResult(changeToFavorites, 0);
     }
+
+	public void toSearchStops(View view) {
+		Intent changeToSearch = new Intent(view.getContext(), SearchStops.class);
+		startActivityForResult(changeToSearch, 0);
+	}
 }
