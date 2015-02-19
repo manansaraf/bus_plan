@@ -32,6 +32,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.MainActivity" />
         </activity>
+        <activity
+            android:name=".BusStopStatistics"
+            android:label="Item"
+            android:parentActivityName=".FavoriteStops">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidtoh.helloworld.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
