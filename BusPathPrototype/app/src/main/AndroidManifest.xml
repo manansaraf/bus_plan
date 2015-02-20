@@ -18,12 +18,27 @@
         </activity>
         <activity
             android:name=".FavoriteStops"
-            android:label="Favorite Bus Stops" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="Favorites"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidtoh.helloworld.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SearchStops"
+            android:label="Search"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidtoh.helloworld.MainActivity" />
+        </activity>
+        <activity
+            android:name=".BusStopStatistics"
+            android:label="Item"
+            android:parentActivityName=".FavoriteStops">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidtoh.helloworld.MainActivity" />
         </activity>
     </application>
 
