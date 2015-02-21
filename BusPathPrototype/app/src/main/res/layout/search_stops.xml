@@ -15,4 +15,11 @@
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal" />
 
+    <SearchView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchView"
+        android:layout_gravity="center_horizontal"
+        android:entries="@array/stops" />
+
 </LinearLayout>

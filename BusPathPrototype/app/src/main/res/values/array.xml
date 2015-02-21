@@ -6,4 +6,10 @@
         <item >The Moon</item>
         <item >Other</item>
     </string-array>
+    <string-array name="reminders">
+        <item >Monday Morning Class</item>
+        <item >Tuesday Return</item>
+        <item >Wednesday Return</item>
+        <item >Thursday Morning Class</item>
+    </string-array>
 </resources>
