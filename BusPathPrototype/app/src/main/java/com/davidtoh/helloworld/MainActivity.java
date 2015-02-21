@@ -47,4 +47,14 @@ public class MainActivity extends Activity {
 		Intent changeToSearch = new Intent(view.getContext(), SearchStops.class);
 		startActivityForResult(changeToSearch, 0);
 	}
+
+    public void toScheduler(View view) {
+        Intent changeToScheduler = new Intent(view.getContext(), Scheduler.class);
+        startActivityForResult(changeToScheduler, 0);
+    }
+
+    public void toTripPlanner(View view) {
+        Intent changeToTripPlanner = new Intent(view.getContext(), TripPlanner.class);
+        startActivityForResult(changeToTripPlanner, 0);
+    }
 }

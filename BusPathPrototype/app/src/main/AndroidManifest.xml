@@ -28,14 +28,36 @@
             android:name=".SearchStops"
             android:label="Search"
             android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidtoh.helloworld.MainActivity" />
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+        </activity>
+        <activity
+            android:name=".BusStopStatistics"
+            android:label="Stop Statistics"
+            android:parentActivityName=".FavoriteStops">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.MainActivity" />
         </activity>
         <activity
-            android:name=".BusStopStatistics"
-            android:label="Item"
-            android:parentActivityName=".FavoriteStops">
+            android:name=".Scheduler"
+            android:label="Scheduler"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidtoh.helloworld.MainActivity" />
+        </activity>
+        <activity
+            android:name=".TripPlanner"
+            android:label="Trip Planner"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.MainActivity" />
