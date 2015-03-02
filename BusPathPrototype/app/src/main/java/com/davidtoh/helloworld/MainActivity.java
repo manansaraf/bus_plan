@@ -38,9 +38,9 @@ public class MainActivity extends Activity {
 		}
 	}
 
-    public void toFavoriteStops(View view) {
-        Intent changeToFavorites = new Intent(view.getContext(), FavoriteStops.class);
-        startActivityForResult(changeToFavorites, 0);
+    public void toNearbyStops(View view) {
+        Intent changeToNearby = new Intent(view.getContext(), NearbyStops.class);
+        startActivityForResult(changeToNearby, 0);
     }
 
 	public void toSearchStops(View view) {
@@ -56,5 +56,10 @@ public class MainActivity extends Activity {
     public void toTripPlanner(View view) {
         Intent changeToTripPlanner = new Intent(view.getContext(), TripPlanner.class);
         startActivityForResult(changeToTripPlanner, 0);
+    }
+
+    public void toAlarm(View view) {
+        Intent changeToFavorites = new Intent(view.getContext(), Alarm.class);
+        startActivityForResult(changeToFavorites, 0);
     }
 }

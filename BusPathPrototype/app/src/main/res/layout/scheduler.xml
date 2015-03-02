@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:text="Add Reminder"
         android:id="@+id/button5"
+        android:onClick="toSchedulerAddReminder"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"

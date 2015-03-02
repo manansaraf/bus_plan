@@ -17,6 +17,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".NearbyStops"
+            android:label="Nearby Bus Stops"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidtoh.helloworld.MainActivity" />
+        </activity>
+        <activity
             android:name=".FavoriteStops"
             android:label="Favorites"
             android:parentActivityName=".MainActivity">
@@ -55,8 +63,24 @@
                 android:value="com.davidtoh.helloworld.MainActivity" />
         </activity>
         <activity
+            android:name=".SchedulerAddReminder"
+            android:label="Add Reminder"
+            android:parentActivityName=".Scheduler">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidtoh.helloworld.MainActivity" />
+        </activity>
+        <activity
             android:name=".TripPlanner"
             android:label="Trip Planner"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidtoh.helloworld.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Alarm"
+            android:label="Alarm"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
