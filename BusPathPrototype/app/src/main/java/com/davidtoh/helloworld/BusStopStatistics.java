@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -16,6 +17,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by dylan on 2/19/15.
@@ -54,6 +57,9 @@ public class BusStopStatistics extends Activity{
 
 	}
 
+	/* most of the networking code from basic android developers website
+	http://developer.android.com/training/basics/network-ops/connecting.html
+	 */
 	private class getDeparturesByStop extends AsyncTask<String, Void, String> {
 		@Override
 		protected String doInBackground(String... urls) {
@@ -87,7 +93,7 @@ public class BusStopStatistics extends Activity{
 			inputStream = conn.getInputStream();
 
 			// Convert the InputStream into a string
-			return readIt(inputStream);
+			return (readJsonStream(inputStream).get(0)).getBusName();
 
 			// Makes sure that the InputStream is closed after the app is
 			// finished using it.
@@ -111,5 +117,49 @@ public class BusStopStatistics extends Activity{
 		return JSONresult.toString();
 	}
 
-}
+	/* JSON parser code from basic android development site
+	http://developer.android.com/reference/android/util/JsonReader.html
+	 */
+	public List<BusStopInfo> readJsonStream(InputStream in) throws IOException {
+		JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+		try {
+			return readAllStops(reader);
+		} finally {
+			reader.close();
+		}
+	}
 
+	public List<BusStopInfo> readAllStops(JsonReader reader) throws IOException {
+		List<BusStopInfo> stops = new ArrayList<>();
+
+		reader.beginArray();
+		while (reader.hasNext()) {
+			stops.add(readStopInfo(reader));
+		}
+		reader.endArray();
+		return stops;
+	}
+
+	public BusStopInfo readStopInfo(JsonReader reader) throws IOException {
+		String busName = null;
+		int timeExpected = 0;
+
+		reader.beginObject();
+		while (reader.hasNext()) {
+			String name = reader.nextName();
+			switch (name) {
+				case "headsign":
+					busName = reader.nextString();
+					break;
+				case "expected_mins":
+					timeExpected = reader.nextInt();
+					break;
+				default:
+					reader.skipValue();
+					break;
+			}
+		}
+		reader.endObject();
+		return new BusStopInfo(busName, timeExpected);
+	}
+}
