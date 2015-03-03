@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.JsonReader;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -96,10 +95,12 @@ public class BusStopStatistics extends Activity{
 			conn.connect();
 			inputStream = conn.getInputStream();
             String JSONString = readIt(inputStream);
-            List<BusStopInfo> BusList = BuildJSON(JSONString);
+            List<BusRouteInfo> BusList = BuildJSON(JSONString);
             String TestString = "";
             for(int i = 0; i < BusList.size();i++){
-                TestString += BusList.get(i).getBusName() + " : " + BusList.get(i).getTimeExpected() + " ";
+                TestString += " { " + BusList.get(i).getBusName() + " : "
+						+ BusList.get(i).getTimeExpected() + " : "
+						+ BusList.get(i).getStopID() + " } " + "\n";
             }
             //System.out.println(JSONdata);
             return TestString;
@@ -128,28 +129,30 @@ public class BusStopStatistics extends Activity{
 		return JSONResult.toString();
 	}
 
-    public List<BusStopInfo> BuildJSON(String str) throws IOException{
-        JSONObject JObject = null;
-        List<BusStopInfo> BusList = null;
+    public List<BusRouteInfo> BuildJSON(String str) throws IOException{
+        JSONObject JObject;
+        List<BusRouteInfo> BusList = null;
         try {
             JObject = new JSONObject(str);
             JSONArray JArray = JObject.getJSONArray("departures");
-            BusList = new ArrayList<BusStopInfo>();
+            BusList = new ArrayList<>();
             for (int i = 0; i < JArray.length(); i++) {
                 JObject = JArray.getJSONObject(i);
-                BusStopInfo stopInfo = new BusStopInfo(JObject.getString("headsign"),Integer.parseInt(JObject.getString("expected_mins")));
-                BusList.add(stopInfo);
+                BusRouteInfo routeInfo = new BusRouteInfo(JObject.getString("headsign"),Integer.parseInt(JObject.getString("expected_mins")), JObject.getString("stop_id"));
+                BusList.add(routeInfo);
             }
         }catch (JSONException e) {
             Log.d("JSON ERROR: ", e.getMessage());
         }
         return BusList;
     }
-    //public List<BusStopInfo> readJson
+
+
+    //public List<BusRouteInfo> readJson
 	/* JSON parser code from basic android development site
 	http://developer.android.com/reference/android/util/JsonReader.html
 	 */
-	public List<BusStopInfo> readJsonStream(InputStream in) throws IOException {
+/*	public List<BusRouteInfo> readJsonStream(InputStream in) throws IOException {
 		JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
 		try {
 			return readAllStops(reader);
@@ -158,8 +161,8 @@ public class BusStopStatistics extends Activity{
 		}
 	}
 
-	public List<BusStopInfo> readAllStops(JsonReader reader) throws IOException {
-		List<BusStopInfo> stops = new ArrayList<>();
+	public List<BusRouteInfo> readAllStops(JsonReader reader) throws IOException {
+		List<BusRouteInfo> stops = new ArrayList<>();
 
 		reader.beginArray();
 		while (reader.hasNext()) {
@@ -169,7 +172,7 @@ public class BusStopStatistics extends Activity{
 		return stops;
 	}
 
-	public BusStopInfo readStopInfo(JsonReader reader) throws IOException {
+	public BusRouteInfo readStopInfo(JsonReader reader) throws IOException {
 		String busName = null;
 		int timeExpected = 0;
 
@@ -189,6 +192,6 @@ public class BusStopStatistics extends Activity{
 			}
 		}
 		reader.endObject();
-		return new BusStopInfo(busName, timeExpected);
-	}
+		return new BusRouteInfo(busName, timeExpected);
+	}*/
 }

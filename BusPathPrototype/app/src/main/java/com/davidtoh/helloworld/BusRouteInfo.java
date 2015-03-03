@@ -2,14 +2,17 @@ package com.davidtoh.helloworld;
 
 /**
  * Created by dylan on 2/27/15.
+ * this class saves information form the stop JSON to be displayed on the BusStopStatistics activity
  */
-public class BusStopInfo {
+public class BusRouteInfo {
 	String busName = null;
 	int timeExpected = 0;
+	String stopID = "";
 
-	public BusStopInfo(String busName, int timeExpected) {
+	public BusRouteInfo(String busName, int timeExpected, String stopID) {
 		this.busName = busName;
 		this.timeExpected = timeExpected;
+		this.stopID = stopID;
 	}
 
 	public String getBusName() {
@@ -19,4 +22,6 @@ public class BusStopInfo {
 	public int getTimeExpected() {
 		return timeExpected;
 	}
+
+	public String getStopID() { return stopID; }
 }
