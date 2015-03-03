@@ -11,6 +11,10 @@ import android.util.JsonReader;
 import android.util.Log;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -91,9 +95,16 @@ public class BusStopStatistics extends Activity{
 			// Starts the query
 			conn.connect();
 			inputStream = conn.getInputStream();
-
+            String JSONString = readIt(inputStream);
+            List<BusStopInfo> BusList = BuildJSON(JSONString);
+            String TestString = "";
+            for(int i = 0; i < BusList.size();i++){
+                TestString += BusList.get(i).getBusName() + " : " + BusList.get(i).getTimeExpected() + " ";
+            }
+            //System.out.println(JSONdata);
+            return TestString;
 			// Convert the InputStream into a string
-			return (readJsonStream(inputStream).get(0)).getBusName();
+			//return (readJsonStream(inputStream).get(0)).getBusName();
 
 			// Makes sure that the InputStream is closed after the app is
 			// finished using it.
@@ -108,15 +119,33 @@ public class BusStopStatistics extends Activity{
 		BufferedReader reader;
 		reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
 
-		StringBuilder JSONresult = new StringBuilder();
+		StringBuilder JSONResult = new StringBuilder();
 		String line;
 		while ((line = reader.readLine()) != null) {
-			JSONresult.append(line);
+            JSONResult.append(line);
 		}
 		reader.close();
-		return JSONresult.toString();
+		return JSONResult.toString();
 	}
 
+    public List<BusStopInfo> BuildJSON(String str) throws IOException{
+        JSONObject JObject = null;
+        List<BusStopInfo> BusList = null;
+        try {
+            JObject = new JSONObject(str);
+            JSONArray JArray = JObject.getJSONArray("departures");
+            BusList = new ArrayList<BusStopInfo>();
+            for (int i = 0; i < JArray.length(); i++) {
+                JObject = JArray.getJSONObject(i);
+                BusStopInfo stopInfo = new BusStopInfo(JObject.getString("headsign"),Integer.parseInt(JObject.getString("expected_mins")));
+                BusList.add(stopInfo);
+            }
+        }catch (JSONException e) {
+            Log.d("JSON ERROR: ", e.getMessage());
+        }
+        return BusList;
+    }
+    //public List<BusStopInfo> readJson
 	/* JSON parser code from basic android development site
 	http://developer.android.com/reference/android/util/JsonReader.html
 	 */
