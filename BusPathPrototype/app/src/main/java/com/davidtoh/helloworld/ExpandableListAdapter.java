@@ -51,11 +51,19 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = infalInflater.inflate(R.layout.list_item, null);
 		}
+		int splitPosition = childText.indexOf(':');
+		TextView routeTextView = (TextView) convertView.findViewById(R.id.routeLabel);
+		TextView timeTextView = (TextView) convertView.findViewById(R.id.timeLabel);
 
-		TextView txtListChild = (TextView) convertView
-				.findViewById(R.id.lblListItem);
+		routeTextView.setText(childText.substring(0,splitPosition));
 
-		txtListChild.setText(childText);
+		String time = childText.substring(splitPosition+1);
+		if (time.equals("0"))
+			time = "DUE";
+		else
+			time += " minutes";
+		timeTextView.setText(time);
+
 		return convertView;
 	}
 

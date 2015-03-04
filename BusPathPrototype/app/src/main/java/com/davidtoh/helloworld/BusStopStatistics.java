@@ -121,8 +121,8 @@ public class BusStopStatistics extends Activity{
 				List<String> busStopInfoList = new ArrayList<>();
 				for(BusRouteInfo route : BusList){
 					if(route.getStopID().equals(stop.getStopID())) {
-						busStopInfoList.add(" { " + route.getBusName() + " : "
-								+ route.getTimeExpected() + " } ");
+						busStopInfoList.add(route.getBusName() + ":"
+								+ route.getTimeExpected());
 					}
 				}
 				allStopInfoList.put(stop.getStopName(), busStopInfoList);
