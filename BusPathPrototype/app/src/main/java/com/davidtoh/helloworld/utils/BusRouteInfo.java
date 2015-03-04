@@ -1,4 +1,4 @@
-package com.davidtoh.helloworld;
+package com.davidtoh.helloworld.utils;
 
 /**
  * Created by dylan on 2/27/15.
