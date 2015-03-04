@@ -9,4 +9,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/textview"/>
 
+    <ListView
+        android:id="@+id/routeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ExpandableListView
+        android:id="@+id/expandRouteView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+
 </LinearLayout>

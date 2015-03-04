@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -21,6 +22,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -41,19 +43,23 @@ public class BusStopStatistics extends Activity{
 
 		//not needed
 		TextView textView = (TextView) findViewById(R.id.textview);
-		textView.setText(stopID);
+		//textView.setText(stopID);
 
 		//check connection
 		ConnectivityManager connMgr = (ConnectivityManager)
 				getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-		String urlString = "https://developer.cumtd.com/api/v2.2/JSON/GetDeparturesByStop?key="
+		String departureURL = "https://developer.cumtd.com/api/v2.2/JSON/GetDeparturesByStop?key="
 				+ getResources().getString(R.string.apiKey) + "&stop_id=" + stopID;
-		Log.d("URL", urlString);
+		String stopURL = "https://developer.cumtd.com/api/v2.2/JSON/GetStop?key="
+				+ getResources().getString(R.string.apiKey) + "&stop_id=" + stopID;
+
+		//Log.d("departURL", departureURL);
+		//Log.d("stopURL", stopURL);
 
 		if (networkInfo != null && networkInfo.isConnected()) {
-			new getDeparturesByStop().execute(urlString);
+			new getDeparturesByStop().execute(departureURL, stopURL);
 		} else {
 			textView.setText("No network connection available.");
 		}
@@ -67,7 +73,7 @@ public class BusStopStatistics extends Activity{
 		@Override
 		protected String doInBackground(String... urls) {
 			try {
-				return downloadUrl(urls[0]);
+				return downloadUrl(urls[0], urls[1]);
 			} catch (IOException e) {
 				return "Unable to retrieve web page. URL may be invalid.";
 			}
@@ -81,29 +87,64 @@ public class BusStopStatistics extends Activity{
 		}
 	}
 
-	private String downloadUrl(String myurl) throws IOException {
+	private String downloadUrl(String departURL, String stopURL) throws IOException {
 		InputStream inputStream = null;
 
 		try {
-			URL url = new URL(myurl);
+			URL url = new URL(departURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setReadTimeout(10000 /* milliseconds */);
 			conn.setConnectTimeout(15000 /* milliseconds */);
 			conn.setRequestMethod("GET");
 			conn.setDoInput(true);
-			// Starts the query
 			conn.connect();
 			inputStream = conn.getInputStream();
-            String JSONString = readIt(inputStream);
-            List<BusRouteInfo> BusList = BuildJSON(JSONString);
-            String TestString = "";
-            for(int i = 0; i < BusList.size();i++){
-                TestString += " { " + BusList.get(i).getBusName() + " : "
-						+ BusList.get(i).getTimeExpected() + " : "
-						+ BusList.get(i).getStopID() + " } " + "\n";
-            }
+            String departJSON = readIt(inputStream);
+
+			url = new URL(stopURL);
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setReadTimeout(10000 /* milliseconds */);
+			conn.setConnectTimeout(15000 /* milliseconds */);
+			conn.setRequestMethod("GET");
+			conn.setDoInput(true);
+			conn.connect();
+			inputStream = conn.getInputStream();
+			String stopJSON = readIt(inputStream);
+
+			List<BusRouteInfo> BusList = buildDepartJSON(departJSON);
+			List<ChildStop> ChildList = buildStopJSON(stopJSON);
+
+			HashMap<String, List<String>> allStopInfoList = new HashMap<>();
+			List<String> listDataHeader = new ArrayList<>();
+
+			for (ChildStop stop : ChildList) {
+				List<String> busStopInfoList = new ArrayList<>();
+				for(BusRouteInfo route : BusList){
+					if(route.getStopID().equals(stop.getStopID())) {
+						busStopInfoList.add(" { " + route.getBusName() + " : "
+								+ route.getTimeExpected() + " } ");
+					}
+				}
+				allStopInfoList.put(stop.getStopName(), busStopInfoList);
+				listDataHeader.add(stop.getStopName());
+			}
+
+			//final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+			//		android.R.layout.simple_list_item_1, busStopInfoList);
+
+			final ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, listDataHeader, allStopInfoList);
+			final ExpandableListView expListView = (ExpandableListView) findViewById(R.id.expandRouteView);
+
+			//final ListView listView = (ListView) findViewById(R.id.routeView);
+
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					expListView.setAdapter(listAdapter);
+				}
+			});
             //System.out.println(JSONdata);
-            return TestString;
+            return "";
 			// Convert the InputStream into a string
 			//return (readJsonStream(inputStream).get(0)).getBusName();
 
@@ -129,7 +170,7 @@ public class BusStopStatistics extends Activity{
 		return JSONResult.toString();
 	}
 
-    public List<BusRouteInfo> BuildJSON(String str) throws IOException{
+    public List<BusRouteInfo> buildDepartJSON(String str) throws IOException{
         JSONObject JObject;
         List<BusRouteInfo> BusList = null;
         try {
@@ -147,6 +188,24 @@ public class BusStopStatistics extends Activity{
         return BusList;
     }
 
+
+	public List<ChildStop> buildStopJSON(String str) throws IOException{
+		JSONObject JObject;
+		List<ChildStop> ChildList = null;
+		try {
+			JObject = new JSONObject(str);
+			JSONArray JArray = JObject.getJSONArray("stops").getJSONObject(0).getJSONArray("stop_points");
+			ChildList = new ArrayList<>();
+			for (int i = 0; i < JArray.length(); i++) {
+				JObject = JArray.getJSONObject(i);
+				ChildStop childStop = new ChildStop(JObject.getString("stop_name"), JObject.getString("stop_id"));
+				ChildList.add(childStop);
+			}
+		}catch (JSONException e) {
+			Log.d("JSON ERROR: ", e.getMessage());
+		}
+		return ChildList;
+	}
 
     //public List<BusRouteInfo> readJson
 	/* JSON parser code from basic android development site

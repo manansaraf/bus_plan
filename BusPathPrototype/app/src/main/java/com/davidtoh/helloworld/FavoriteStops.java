@@ -33,7 +33,6 @@ public class FavoriteStops extends Activity implements AdapterView.OnItemClickLi
     }
 
 	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-
 		Intent intent = new Intent();
 		intent.setClass(this, BusStopStatistics.class);
 		intent.putExtra("position", position);
