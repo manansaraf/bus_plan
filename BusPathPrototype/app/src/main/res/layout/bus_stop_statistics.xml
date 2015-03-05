@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textview"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview"/>
 
-    <ListView
-        android:id="@+id/routeView"
+        <ListView
+            android:id="@+id/routeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ExpandableListView
+            android:id="@+id/expandRouteView"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
+
+    </LinearLayout>
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <ExpandableListView
-        android:id="@+id/expandRouteView"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
-
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_gravity='center'
+        >
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+</FrameLayout>

@@ -1,6 +1,7 @@
 package com.davidtoh.helloworld;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -8,7 +9,10 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.davidtoh.helloworld.utils.BusRouteInfo;
@@ -34,7 +38,8 @@ import java.util.List;
  * idea for this gotten from http://stackoverflow.com/questions/13281197/android-how-to-create-clickable-listview
  */
 public class BusStopStatistics extends Activity{
-	@Override
+    private ProgressBar spinner;
+    @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bus_stop_statistics);
@@ -61,8 +66,10 @@ public class BusStopStatistics extends Activity{
 
 		//Log.d("departURL", departureURL);
 		//Log.d("stopURL", stopURL);
-
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+        spinner.setVisibility(View.GONE);
 		if (networkInfo != null && networkInfo.isConnected()) {
+            ShowProgressBar();
 			new getDeparturesByStop().execute(departureURL, stopURL);
 		} else {
 			textView.setText("No network connection available.");
@@ -88,8 +95,10 @@ public class BusStopStatistics extends Activity{
 			//displayed for testing purposes
 			TextView textView = (TextView) findViewById(R.id.textview);
 			textView.setText(result);
+            CloseProgressBar();
 		}
 	}
+
 
 	private String downloadUrl(String departURL, String stopURL) throws IOException {
 		InputStream inputStream = null;
@@ -192,7 +201,6 @@ public class BusStopStatistics extends Activity{
         return BusList;
     }
 
-
 	public List<ChildStop> buildStopJSON(String str) throws IOException{
 		JSONObject JObject;
 		List<ChildStop> ChildList = null;
@@ -210,7 +218,12 @@ public class BusStopStatistics extends Activity{
 		}
 		return ChildList;
 	}
-
+    public void ShowProgressBar(){
+        spinner.setVisibility(View.VISIBLE);
+    }
+    public void CloseProgressBar(){
+        spinner.setVisibility(View.GONE);
+    }
     //public List<BusRouteInfo> readJson
 	/* JSON parser code from basic android development site
 	http://developer.android.com/reference/android/util/JsonReader.html
