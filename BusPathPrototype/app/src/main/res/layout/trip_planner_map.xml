@@ -38,12 +38,23 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <ListView
-        android:id="@+id/listView"
+    <ImageButton
         android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/imageButton"
+        android:layout_below="@+id/editText3"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/google_map_strack"/>
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:entries="@array/stops"
-        android:layout_below="@+id/editText3">
-    </ListView>
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Route 72-Harlem"
+        android:id="@+id/textView"
+        android:layout_below="@+id/imageButton"
+        android:layout_gravity="center_horizontal" />
 
 </RelativeLayout>
