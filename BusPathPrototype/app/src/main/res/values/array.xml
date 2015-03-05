@@ -2,7 +2,7 @@
 <resources>
     <string-array name="stops">
         <item >iu</item>
-        <item >Test Stop 2</item>
+        <item >it</item>
         <item >The Moon</item>
         <item >Other</item>
     </string-array>

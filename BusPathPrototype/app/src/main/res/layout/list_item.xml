@@ -7,12 +7,12 @@
             android:id="@+id/routeLabel"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:textSize="13sp"/>
+            android:paddingLeft="45dp"
+            android:textSize="15sp"/>
         <TextView
             android:id="@+id/timeLabel"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:textSize="10sp"/>
+            android:paddingLeft="60dp"
+            android:textSize="12sp"/>
 </LinearLayout>

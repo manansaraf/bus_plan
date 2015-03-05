@@ -7,21 +7,20 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="vertical">
-
+        <ExpandableListView
+            android:id="@+id/expandRouteView"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal|bottom"
+            android:paddingTop="5dp"/>
         <TextView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textview"
             android:gravity="center_horizontal"
-            android:paddingTop="0dp"
-            android:textSize="18sp"
-            android:visibility="gone"/>
-
-        <ExpandableListView
-            android:id="@+id/expandRouteView"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"/>
-
+            android:paddingTop="25dp"
+            android:textSize="18sp"/>
     </LinearLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -33,7 +32,6 @@
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="50sp"
             android:layout_height="50sp"
-            android:layout_centerInParent="true"
-            />
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
 </FrameLayout>
