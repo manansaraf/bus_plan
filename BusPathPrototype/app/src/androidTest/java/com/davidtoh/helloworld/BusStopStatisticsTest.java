@@ -1,6 +1,14 @@
 package com.davidtoh.helloworld;
 
+import android.content.res.Resources;
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
+
+import com.davidtoh.helloworld.utils.BusRouteInfo;
+import com.davidtoh.helloworld.utils.ChildStop;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by dylan on 2/20/15.
@@ -23,5 +31,33 @@ public class BusStopStatisticsTest extends ActivityInstrumentationTestCase2<BusS
 
 	public void testPreconditions() {
 		assertNotNull("busStopStatistics is null", busStopStatistics);
+	}
+
+	public void testBuildDepartJSON() {
+		Resources res = getInstrumentation().getTargetContext().getResources();
+		try {
+			List<BusRouteInfo> stops =  busStopStatistics.buildDepartJSON(res.getString(R.string.iuBusStop));
+			assertNotNull("stops is null", stops);
+			assertEquals("13N Silver", stops.get(0).getBusName());
+			assertEquals(0, stops.get(0).getTimeExpected());
+			assertEquals("5W GreenHOPPER", stops.get(1).getBusName());
+			assertEquals(3, stops.get(2).getTimeExpected());
+		} catch (IOException e) {
+			Log.e("TEST_ERROR", e.getMessage());
+		}
+	}
+
+	public void testBuildStopJSON() {
+		Resources res = getInstrumentation().getTargetContext().getResources();
+		try {
+			List<ChildStop> children =  busStopStatistics.buildStopJSON(res.getString(R.string.childTest));
+			assertNotNull("children is null", children);
+			assertEquals("Illini Union (South Side Shelter)", children.get(0).getStopName());
+			assertEquals("IU:1", children.get(0).getStopID());
+			assertEquals("Illini Union (Engineering Side)", children.get(1).getStopName());
+			assertEquals("IU:2", children.get(1).getStopID());
+		} catch (IOException e) {
+			Log.e("TEST_ERROR", e.getMessage());
+		}
 	}
 }

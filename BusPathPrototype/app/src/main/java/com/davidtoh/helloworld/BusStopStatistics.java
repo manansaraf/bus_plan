@@ -197,7 +197,7 @@ public class BusStopStatistics extends Activity{
                 BusList.add(routeInfo);
             }
         }catch (JSONException e) {
-            Log.d("JSON ERROR: ", e.getMessage());
+            Log.e("JSON ERROR: ", e.getMessage());
         }
         return BusList;
     }
@@ -215,7 +215,7 @@ public class BusStopStatistics extends Activity{
 				ChildList.add(childStop);
 			}
 		}catch (JSONException e) {
-			Log.d("JSON ERROR: ", e.getMessage());
+			Log.e("JSON ERROR: ", e.getMessage());
 		}
 		return ChildList;
 	}
