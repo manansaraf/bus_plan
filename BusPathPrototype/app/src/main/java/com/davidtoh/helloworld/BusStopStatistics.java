@@ -8,6 +8,8 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
@@ -33,7 +35,7 @@ import java.util.List;
 
 /**
  * Created by dylan on 2/19/15.
- * idea for this gotten from http://stackoverflow.com/questions/13281197/android-how-to-create-clickable-listview
+ * activity to display routes coming to each child stop of stop selected
  */
 public class BusStopStatistics extends Activity{
     private ProgressBar spinner;
@@ -44,14 +46,12 @@ public class BusStopStatistics extends Activity{
 
 		Intent intent = getIntent();
 		int position = intent.getIntExtra("position", 0);
-
+		//TODO change once database gets implemented
 		String[] myKeys = getResources().getStringArray(R.array.stops);
 		String stopID = myKeys[position];
 
-		//not needed
-		TextView textView = (TextView) findViewById(R.id.textview);
+		TextView textView = (TextView) findViewById(R.id.statisticsStatusView);
 		textView.setVisibility(View.GONE);
-		//textView.setText(stopID);
 
 		//check connection
 		ConnectivityManager connMgr = (ConnectivityManager)
@@ -63,8 +63,6 @@ public class BusStopStatistics extends Activity{
 		String stopURL = "https://developer.cumtd.com/api/v2.2/JSON/GetStop?key="
 				+ getResources().getString(R.string.apiKey) + "&stop_id=" + stopID;
 
-		//Log.d("departURL", departureURL);
-		//Log.d("stopURL", stopURL);
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
         spinner.setVisibility(View.GONE);
 		if (networkInfo != null && networkInfo.isConnected()) {
@@ -84,7 +82,8 @@ public class BusStopStatistics extends Activity{
 		@Override
 		protected String doInBackground(String... urls) {
 			try {
-				return downloadUrl(urls[0], urls[1]);
+				createLists(urls[0], urls[1]);
+				return "";
 			} catch (IOException e) {
 				return "Unable to retrieve web page. URL may be invalid.";
 			}
@@ -92,20 +91,19 @@ public class BusStopStatistics extends Activity{
 		// onPostExecute displays the results of the AsyncTask.
 		@Override
 		protected void onPostExecute(String result) {
-			//displayed for testing purposes
-			TextView textView = (TextView) findViewById(R.id.textview);
-			textView.setVisibility(View.VISIBLE);
-			textView.setText(result);
+			TextView textView = (TextView) findViewById(R.id.statisticsStatusView);
+			if(!result.equals("")) {
+				textView.setVisibility(View.VISIBLE);
+				textView.setText(result);
+			}
             CloseProgressBar();
 		}
 	}
 
-
-	private String downloadUrl(String departURL, String stopURL) throws IOException {
+	public String makeConnection(String urlString) throws IOException{
 		InputStream inputStream = null;
-
 		try {
-			URL url = new URL(departURL);
+			URL url = new URL(urlString);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setReadTimeout(10000 /* milliseconds */);
 			conn.setConnectTimeout(15000 /* milliseconds */);
@@ -113,62 +111,49 @@ public class BusStopStatistics extends Activity{
 			conn.setDoInput(true);
 			conn.connect();
 			inputStream = conn.getInputStream();
-            String departJSON = readIt(inputStream);
-
-			url = new URL(stopURL);
-			conn = (HttpURLConnection) url.openConnection();
-			conn.setReadTimeout(10000 /* milliseconds */);
-			conn.setConnectTimeout(15000 /* milliseconds */);
-			conn.setRequestMethod("GET");
-			conn.setDoInput(true);
-			conn.connect();
-			inputStream = conn.getInputStream();
-			String stopJSON = readIt(inputStream);
-
-			List<BusRouteInfo> BusList = buildDepartJSON(departJSON);
-			List<ChildStop> ChildList = buildStopJSON(stopJSON);
-
-			HashMap<String, List<String>> allStopInfoList = new HashMap<>();
-			List<String> listDataHeader = new ArrayList<>();
-
-			for (ChildStop stop : ChildList) {
-				List<String> busStopInfoList = new ArrayList<>();
-				for(BusRouteInfo route : BusList){
-					if(route.getStopID().equals(stop.getStopID())) {
-						busStopInfoList.add(route.getBusName() + ":"
-								+ route.getTimeExpected());
-					}
-				}
-				allStopInfoList.put(stop.getStopName(), busStopInfoList);
-				listDataHeader.add(stop.getStopName());
-			}
-
-			//final ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-			//		android.R.layout.simple_list_item_1, busStopInfoList);
-
-			final ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, listDataHeader, allStopInfoList);
-			final ExpandableListView expListView = (ExpandableListView) findViewById(R.id.expandRouteView);
-
-			//final ListView listView = (ListView) findViewById(R.id.routeView);
-
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					expListView.setAdapter(listAdapter);
-				}
-			});
-            //System.out.println(JSONdata);
-            return "";
-			// Convert the InputStream into a string
-			//return (readJsonStream(inputStream).get(0)).getBusName();
-
-			// Makes sure that the InputStream is closed after the app is
-			// finished using it.
+			return readIt(inputStream);
 		} finally {
 			if (inputStream != null) {
 				inputStream.close();
 			}
 		}
+	}
+
+	private void createLists(String departURL, String stopURL) throws IOException {
+		String departJSON = makeConnection(departURL);
+		String stopJSON = makeConnection(stopURL);
+
+		List<BusRouteInfo> BusList = buildDepartJSON(departJSON);
+		List<ChildStop> ChildList = buildStopJSON(stopJSON);
+
+		HashMap<String, List<String>> allStopInfoList = new HashMap<>();
+		List<String> listDataHeader = new ArrayList<>();
+
+		for (ChildStop stop : ChildList) {
+			List<String> busStopInfoList = new ArrayList<>();
+			for(BusRouteInfo route : BusList){
+				if(route.getStopID().equals(stop.getStopID())) {
+					busStopInfoList.add(route.getBusName() + ":"
+							+ route.getTimeExpected());
+				}
+			}
+			allStopInfoList.put(stop.getStopName(), busStopInfoList);
+			listDataHeader.add(stop.getStopName());
+		}
+
+		final ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, listDataHeader, allStopInfoList);
+		final ExpandableListView expListView = (ExpandableListView) findViewById(R.id.expandRouteView);
+
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				expListView.setAdapter(listAdapter);
+				int count = listAdapter.getGroupCount();
+				for(int pos = 0; pos < count; pos++) {
+					expListView.expandGroup(pos);
+				}
+			}
+		});
 	}
 
 	public String readIt(InputStream stream) throws IOException {
@@ -225,50 +210,27 @@ public class BusStopStatistics extends Activity{
     public void CloseProgressBar(){
         spinner.setVisibility(View.GONE);
     }
-    //public List<BusRouteInfo> readJson
-	/* JSON parser code from basic android development site
-	http://developer.android.com/reference/android/util/JsonReader.html
-	 */
-/*	public List<BusRouteInfo> readJsonStream(InputStream in) throws IOException {
-		JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-		try {
-			return readAllStops(reader);
-		} finally {
-			reader.close();
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_main, menu);
+		return true;
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+			case R.id.action_refresh:
+				finish();
+				startActivity(getIntent());
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 	}
-
-	public List<BusRouteInfo> readAllStops(JsonReader reader) throws IOException {
-		List<BusRouteInfo> stops = new ArrayList<>();
-
-		reader.beginArray();
-		while (reader.hasNext()) {
-			stops.add(readStopInfo(reader));
-		}
-		reader.endArray();
-		return stops;
-	}
-
-	public BusRouteInfo readStopInfo(JsonReader reader) throws IOException {
-		String busName = null;
-		int timeExpected = 0;
-
-		reader.beginObject();
-		while (reader.hasNext()) {
-			String name = reader.nextName();
-			switch (name) {
-				case "headsign":
-					busName = reader.nextString();
-					break;
-				case "expected_mins":
-					timeExpected = reader.nextInt();
-					break;
-				default:
-					reader.skipValue();
-					break;
-			}
-		}
-		reader.endObject();
-		return new BusRouteInfo(busName, timeExpected);
-	}*/
 }

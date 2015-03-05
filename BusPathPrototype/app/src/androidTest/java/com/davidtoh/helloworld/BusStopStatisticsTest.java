@@ -60,4 +60,15 @@ public class BusStopStatisticsTest extends ActivityInstrumentationTestCase2<BusS
 			Log.e("TEST_ERROR", e.getMessage());
 		}
 	}
+
+	//this test requires network access
+	public void testMakeConnection() {
+		String url = "https://developer.cumtd.com/api/v2.2/JSON/GetDeparturesByStop?key=a6030286b6ed4d609f2178e7cc5a17c9&stop_id=IU";
+		try {
+			String result = busStopStatistics.makeConnection(url);
+			assertTrue(result.contains("{\"method\":\"GetDeparturesByStop\",\"params\":{\"stop_id\":\"IU\"}}"));
+		} catch (IOException e) {
+			Log.e("TEST_ERROR", e.getMessage());
+		}
+	}
 }

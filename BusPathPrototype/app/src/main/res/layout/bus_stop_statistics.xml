@@ -17,7 +17,7 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textview"
+            android:id="@+id/statisticsStatusView"
             android:gravity="center_horizontal"
             android:paddingTop="25dp"
             android:textSize="18sp"/>
