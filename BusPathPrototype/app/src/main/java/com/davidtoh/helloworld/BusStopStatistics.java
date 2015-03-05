@@ -1,7 +1,6 @@
 package com.davidtoh.helloworld;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -10,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -52,6 +50,7 @@ public class BusStopStatistics extends Activity{
 
 		//not needed
 		TextView textView = (TextView) findViewById(R.id.textview);
+		textView.setVisibility(View.GONE);
 		//textView.setText(stopID);
 
 		//check connection
@@ -72,6 +71,7 @@ public class BusStopStatistics extends Activity{
             ShowProgressBar();
 			new getDeparturesByStop().execute(departureURL, stopURL);
 		} else {
+			textView.setVisibility(View.VISIBLE);
 			textView.setText("No network connection available.");
 		}
 
@@ -94,6 +94,7 @@ public class BusStopStatistics extends Activity{
 		protected void onPostExecute(String result) {
 			//displayed for testing purposes
 			TextView textView = (TextView) findViewById(R.id.textview);
+			textView.setVisibility(View.VISIBLE);
 			textView.setText(result);
             CloseProgressBar();
 		}
