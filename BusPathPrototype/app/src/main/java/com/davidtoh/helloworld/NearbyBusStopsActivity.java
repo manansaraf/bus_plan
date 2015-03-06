@@ -15,13 +15,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 public class NearbyBusStopsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-
+    public locations[] markers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,11 +134,12 @@ public class NearbyBusStopsActivity extends FragmentActivity {
         createBusStopLocation();
     }
     private void createBusStopLocation(){
-        mMap.addMarker(new MarkerOptions().position(new LatLng(40.114452, -88.229298)).title("White and Wright"));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(40.114452, -88.230285)).title("White and Sixth"));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(40.113428, -88.228877)).title("Wright and Stoughton"));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(40.112852, -88.229020)).title("Wright and Springfield"));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(40.108590, -88.228847)).title("Transit Plaza"));
+        locations [] marker = getLocationOfMarkers();
+        markers = new locations[marker.length];
+        for(int i=0;i<markers.length;i++){
+            mMap.addMarker(new MarkerOptions().position(new LatLng(markers[i].getLatitude(), markers[i].getLongitude())).title(markers[i].getStopNames()));
+            markers[i] = marker[i];
+        }
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
@@ -160,6 +160,18 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 
             }
         });
+    }
+    public locations[] getLocationOfMarkers(){
+        locations [] marker=new locations[5];
+        marker[0]=new locations(40.114455, -88.229298,"White and Wright");
+        marker[1]=new locations(40.114452, -88.230285,"White and Sixth");
+        marker[2]=new locations(40.113428, -88.228877,"Wright and Stoughton");
+        marker[3]=new locations(40.112852, -88.229020,"Wright and Springfield");
+        marker[4]=new locations(40.108590, -88.228847,"Transit Plaza");
+        return marker;
+    }
+    public locations[] getMarkers(){
+        return markers;
     }
 
 }
