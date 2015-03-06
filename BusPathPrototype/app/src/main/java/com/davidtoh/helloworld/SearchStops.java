@@ -7,16 +7,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 /**
  * Created by dylan on 2/17/15.
  */
-public class SearchStops extends Activity {
+public class SearchStops extends Activity implements AdapterView.OnItemClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_stops);
+
+		ListView listview = (ListView) findViewById(R.id.listView);
+		listview.setOnItemClickListener(this);
 
         // Get the intent, verify the action and get the query
         Intent intent = getIntent();
@@ -29,6 +35,15 @@ public class SearchStops extends Activity {
     private void doMySearch(String query) {
 
     }
+
+	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+		Intent intent = new Intent();
+		intent.setClass(this, BusStopStatistics.class);
+		intent.putExtra("position", position);
+
+		intent.putExtra("id", id);
+		startActivity(intent);
+	}
 
     @Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         android:orientation="vertical"
-        android:id="@+id/center" ></LinearLayout>
+        android:id="@+id/center"/>
 
     <Button
             android:layout_width="wrap_content"
@@ -61,8 +61,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/favorite_stops"
         android:id="@+id/textView6"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button3" />
+        android:layout_below="@+id/button3"
+        android:layout_centerHorizontal="true"/>
 
     <ListView
         android:id="@+id/listView"

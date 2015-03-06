@@ -3,8 +3,8 @@
     <string-array name="stops">
         <item >iu</item>
         <item >it</item>
-        <item >The Moon</item>
-        <item >Other</item>
+        <item >Test Stop 1</item>
+        <item >Test Stop 2</item>
     </string-array>
     <string-array name="reminders">
         <item >Monday Morning Class</item>

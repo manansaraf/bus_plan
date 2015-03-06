@@ -6,13 +6,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements AdapterView.OnItemClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+		ListView listview = (ListView) findViewById(R.id.listView);
+		listview.setOnItemClickListener(this);
     }
 
     @Override
@@ -21,6 +26,15 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+		Intent intent = new Intent();
+		intent.setClass(this, BusStopStatistics.class);
+		intent.putExtra("position", position);
+
+		intent.putExtra("id", id);
+		startActivity(intent);
+	}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
