@@ -20,7 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class NearbyBusStopsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    public locations[] markers;
+    public locations_marker[] markers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,12 +130,12 @@ public class NearbyBusStopsActivity extends FragmentActivity {
                 }
             }
         };
-        loc.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,10,listener);
+        loc.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 10, listener);
         createBusStopLocation();
     }
     private void createBusStopLocation(){
-        locations [] marker = getLocationOfMarkers();
-        markers = new locations[marker.length];
+        locations_marker [] marker = getLocationOfMarkers();
+        markers = new locations_marker[marker.length];
         for(int i=0;i<marker.length;i++){
             mMap.addMarker(new MarkerOptions().position(new LatLng(marker[i].getLatitude(), marker[i].getLongitude())).title(marker[i].getStopNames()));
             markers[i] = marker[i];
@@ -161,16 +161,16 @@ public class NearbyBusStopsActivity extends FragmentActivity {
             }
         });
     }
-    public locations[] getLocationOfMarkers(){
-        locations [] marker=new locations[5];
-        marker[0]=new locations(40.114455, -88.229298,"White and Wright");
-        marker[1]=new locations(40.114452, -88.230285,"White and Sixth");
-        marker[2]=new locations(40.113428, -88.228877,"Wright and Stoughton");
-        marker[3]=new locations(40.112852, -88.229020,"Wright and Springfield");
-        marker[4]=new locations(40.108590, -88.228847,"Transit Plaza");
+    public locations_marker[] getLocationOfMarkers(){
+        locations_marker [] marker=new locations_marker[5];
+        marker[0]=new locations_marker(40.114455, -88.229298,"White and Wright");
+        marker[1]=new locations_marker(40.114452, -88.230285,"White and Sixth");
+        marker[2]=new locations_marker(40.113428, -88.228877,"Wright and Stoughton");
+        marker[3]=new locations_marker(40.112852, -88.229020,"Wright and Springfield");
+        marker[4]=new locations_marker(40.108590, -88.228847,"Transit Plaza");
         return marker;
     }
-    public locations[] getMarkers(){
+    public locations_marker[] getMarkers(){
         return markers;
     }
 

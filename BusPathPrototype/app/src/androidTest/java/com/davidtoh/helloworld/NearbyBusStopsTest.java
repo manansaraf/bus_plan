@@ -26,13 +26,13 @@ public class NearbyBusStopsTest extends ActivityInstrumentationTestCase2<NearbyB
     }
 
     public void testMarkers() {
-        locations[] loc = nearbyBusStops.getLocationOfMarkers();
-        locations [] test =nearbyBusStops.getMarkers();
+        locations_marker[] loc = nearbyBusStops.getLocationOfMarkers();
+        locations_marker[] test =nearbyBusStops.getMarkers();
         assertEquals(loc,test);
     }
 
     public void testLocations(){
-        locations loc = new locations(0.1,6.1,"Dummy Place");
+        locations_marker loc = new locations_marker(0.1,6.1,"Dummy Place");
         double longitude = loc.getLongitude();
         double latitude = loc.getLatitude();
         String stop = loc.getStopNames();
