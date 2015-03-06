@@ -53,7 +53,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 	}
 
     public void toNearbyStops(View view) {
-        Intent changeToNearby = new Intent(view.getContext(), NearbyStops.class);
+        Intent changeToNearby = new Intent(view.getContext(), NearbyBusStopsActivity.class);
         startActivityForResult(changeToNearby, 0);
     }
 
@@ -72,8 +72,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         startActivityForResult(changeToTripPlanner, 0);
     }
 
-    public void toAlarm(View view) {
+    /*public void toAlarm(View view) {
         Intent changeToFavorites = new Intent(view.getContext(), Alarm.class);
         startActivityForResult(changeToFavorites, 0);
-    }
+    }*/
 }

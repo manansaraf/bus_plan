@@ -16,8 +16,13 @@
     <string name="button_schedule">Scheduler</string>
     <string name="search_hint">Search bus stops</string>
     <string name="button_alarm">Set an alarm</string>
+<<<<<<< HEAD
     <string name="Start">Start</string>
     <string name="End">End</string>
     <string name="apiKey">a6030286b6ed4d609f2178e7cc5a17c9</string>
+=======
+    <string name="title_activity_nearby_stops">NearbyStopsActivity</string>
+    <string name="title_activity_nearby_bus_stops">Map</string>
+>>>>>>> remotes/origin/UC04_nearby_bus_stops
 
 </resources>

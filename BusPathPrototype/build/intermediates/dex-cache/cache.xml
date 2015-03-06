@@ -6,28 +6,28 @@
         jumboMode="false"
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-b814d6c23cf2d42933958f305e48e6ac2ca997c6.jar" />
+        <dex dex="/home/dylan/AndroidProjects/example/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-b814d6c23cf2d42933958f305e48e6ac2ca997c6.jar" />
     </item>
     <item
-        jar="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/debug/classes-5c86ec0ca2e2fb674edf32a9a0c2bedeac63d662.jar" />
-    </item>
-    <item
-        jar="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jar="/home/dylan/AndroidProjects/example/bus_plan/BusPathPrototype/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-d43645c121b48bc53bccb5c256b84cbcab4989c0.jar" />
+        <dex dex="/home/dylan/AndroidProjects/example/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-c7596b51ae389d1c4472f031fd533e93b08c0eb1.jar" />
     </item>
     <item
-        jar="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jar="/home/dylan/AndroidProjects/example/bus_plan/BusPathPrototype/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/debug/classes-943ddd82797e9ea991a17772e1a9971669c61e30.jar" />
+        <dex dex="/home/dylan/AndroidProjects/example/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/debug/classes-dfa13b862614d8d077052ce2bacaff4efc332b08.jar" />
+    </item>
+    <item
+        jar="/home/dylan/AndroidProjects/example/bus_plan/BusPathPrototype/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/home/dylan/AndroidProjects/example/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/debug/classes-58a9498d350d13fae22447e5502b7480b1471eea.jar" />
     </item>
 
 </items>
