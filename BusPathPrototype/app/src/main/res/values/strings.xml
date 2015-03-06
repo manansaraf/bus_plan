@@ -8,6 +8,8 @@
     <string name="button_nearby">Nearby Stops</string>
     <string name="favorite_stops">Favorite Stops</string>
     <string name="search_title">Test</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="button_favourites">Favorite Stops</string>
     <string name="button_search">Search</string>
     <string name="title_search">Search All Stops</string>
     <string name="button_plan">Plan Trip</string>
@@ -16,5 +18,6 @@
     <string name="button_alarm">Set an alarm</string>
     <string name="Start">Start</string>
     <string name="End">End</string>
+    <string name="apiKey">a6030286b6ed4d609f2178e7cc5a17c9</string>
 
 </resources>
