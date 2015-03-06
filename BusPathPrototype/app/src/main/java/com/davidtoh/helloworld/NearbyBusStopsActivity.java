@@ -136,8 +136,8 @@ public class NearbyBusStopsActivity extends FragmentActivity {
     private void createBusStopLocation(){
         locations [] marker = getLocationOfMarkers();
         markers = new locations[marker.length];
-        for(int i=0;i<markers.length;i++){
-            mMap.addMarker(new MarkerOptions().position(new LatLng(markers[i].getLatitude(), markers[i].getLongitude())).title(markers[i].getStopNames()));
+        for(int i=0;i<marker.length;i++){
+            mMap.addMarker(new MarkerOptions().position(new LatLng(marker[i].getLatitude(), marker[i].getLongitude())).title(marker[i].getStopNames()));
             markers[i] = marker[i];
         }
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
