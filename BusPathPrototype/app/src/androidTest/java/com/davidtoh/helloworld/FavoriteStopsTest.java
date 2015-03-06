@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 /**
  * Created by dylan on 2/20/15.
+ *
  */
 public class FavoriteStopsTest extends ActivityInstrumentationTestCase2<FavoriteStops> {
 
@@ -31,6 +32,5 @@ public class FavoriteStopsTest extends ActivityInstrumentationTestCase2<Favorite
 		assertNotNull("textView is null", textView);
 		assertNotNull("listView is null", listView);
 		assertEquals("Favorite Bus Stops", textView.getText());
-		assertEquals("Test Stop 1", listView.getItemAtPosition(0));
 	}
 }

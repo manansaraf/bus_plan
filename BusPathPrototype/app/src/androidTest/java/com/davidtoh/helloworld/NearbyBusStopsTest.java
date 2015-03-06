@@ -27,17 +27,18 @@ public class NearbyBusStopsTest extends ActivityInstrumentationTestCase2<NearbyB
 
     public void testMarkers() {
         locations_marker[] loc = nearbyBusStops.getLocationOfMarkers();
-        locations_marker[] test =nearbyBusStops.getMarkers();
-        assertEquals(loc,test);
+        locations_marker[] test = nearbyBusStops.getMarkers();
+        assertEquals(loc[3].getLatitude(),test[3].getLatitude());
+		assertNotSame(loc[3].getStopName(),test[1].getStopName());
     }
 
     public void testLocations(){
         locations_marker loc = new locations_marker(0.1,6.1,"Dummy Place");
         double longitude = loc.getLongitude();
         double latitude = loc.getLatitude();
-        String stop = loc.getStopNames();
-        assertEquals(longitude,0.1);
-        assertEquals(latitude,6.1);
+        String stop = loc.getStopName();
+        assertEquals(longitude,6.1);
+        assertEquals(latitude,0.1);
         assertTrue("Dummy Place".equals(stop));
     }
 }
