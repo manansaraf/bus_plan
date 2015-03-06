@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="stops">
+        <item >Test Stop 1</item>
+        <item >Test Stop 2</item>
+        <item >The Moon</item>
+        <item >Other</item>
+    </string-array>
+    <string-array name="reminders">
+        <item >Monday Morning Class</item>
+        <item >Tuesday Return</item>
+        <item >Wednesday Return</item>
+        <item >Thursday Morning Class</item>
+    </string-array>
+    <string-array name="alarms">
+        <item >1/1/1970 12:01 am</item>
+        <item >9/11/2001 8:46 am</item>
+        <item >11/11/2011 11:11 am</item>
+        <item >12/21/2012 12:21 am</item>
+    </string-array>
+</resources>
