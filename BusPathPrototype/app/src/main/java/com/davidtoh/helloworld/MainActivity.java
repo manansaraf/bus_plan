@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
     }
 
     public void toAlarm(View view) {
-        Intent changeToFavorites = new Intent(view.getContext(), Alarm.class);
-        startActivityForResult(changeToFavorites, 0);
+        //Intent changeToFavorites = new Intent(view.getContext(), Alarm.class);
+        //startActivityForResult(changeToFavorites, 0);
     }
 }
