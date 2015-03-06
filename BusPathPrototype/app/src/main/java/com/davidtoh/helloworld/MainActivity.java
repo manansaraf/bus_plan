@@ -38,6 +38,11 @@ public class MainActivity extends Activity {
 		}
 	}
 
+    public void toNearbyStops(View view) {
+        Intent changeToNearby = new Intent(view.getContext(), NearbyStops.class);
+        startActivityForResult(changeToNearby, 0);
+    }
+
 	public void toSearchStops(View view) {
 		Intent changeToSearch = new Intent(view.getContext(), SearchStops.class);
 		startActivityForResult(changeToSearch, 0);
