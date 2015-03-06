@@ -58,4 +58,8 @@ public class MainActivity extends Activity {
         startActivityForResult(changeToTripPlanner, 0);
     }
 
+    public void toAlarm(View view) {
+        Intent changeToFavorites = new Intent(view.getContext(), Alarm.class);
+        startActivityForResult(changeToFavorites, 0);
+    }
 }
