@@ -78,14 +78,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.MainActivity" />
         </activity>
-        <activity
-            android:name=".Alarm"
-            android:label="Alarm"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.MainActivity" />
-        </activity>
     </application>
 
 </manifest>

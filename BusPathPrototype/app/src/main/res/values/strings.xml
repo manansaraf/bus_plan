@@ -14,5 +14,7 @@
     <string name="button_schedule">Scheduler</string>
     <string name="search_hint">Search bus stops</string>
     <string name="button_alarm">Set an alarm</string>
+    <string name="Start">Start</string>
+    <string name="End">End</string>
 
 </resources>

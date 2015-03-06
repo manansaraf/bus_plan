@@ -34,8 +34,9 @@ public class SearchStops extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_main, menu);
-		return super.onCreateOptionsMenu(menu);
+		inflater.inflate(R.menu.menu_search, menu);
+        return true;
+		//return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
