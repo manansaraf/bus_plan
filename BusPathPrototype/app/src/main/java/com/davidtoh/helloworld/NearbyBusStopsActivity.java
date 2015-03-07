@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.davidtoh.helloworld.utils.locations_marker;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -154,7 +155,7 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 			@Override
 			public void onInfoWindowClick(Marker marker) {
 				Intent intent = new Intent(NearbyBusStopsActivity.this, BusStopStatistics.class);
-				//Send a stop id from the database
+				//TODO Send a stop id from the database
 				intent.putExtra("busStopID", 1);
 				startActivity(intent);
 

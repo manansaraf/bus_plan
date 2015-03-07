@@ -2,6 +2,8 @@ package com.davidtoh.helloworld;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.davidtoh.helloworld.utils.locations_marker;
+
 /**
  * Created by manansaraf on 03/01/15.
  * class to test the basic functions in BusStopStatistics Activity
