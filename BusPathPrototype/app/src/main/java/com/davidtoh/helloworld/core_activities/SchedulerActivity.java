@@ -1,4 +1,4 @@
-package com.davidtoh.helloworld;
+package com.davidtoh.helloworld.core_activities;
 
 /**
  * Created by davidtoh on 2/21/15.
@@ -13,7 +13,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class Scheduler extends Activity implements AdapterView.OnItemClickListener {
+import com.davidtoh.helloworld.R;
+import com.davidtoh.helloworld.SchedulerAddReminder;
+
+public class SchedulerActivity extends Activity implements AdapterView.OnItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,7 @@ public class Scheduler extends Activity implements AdapterView.OnItemClickListen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_scheduler, menu);
         return true;
     }
 
@@ -39,7 +42,7 @@ public class Scheduler extends Activity implements AdapterView.OnItemClickListen
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 
         Intent intent = new Intent();
-        intent.setClass(this, BusStopStatistics.class);
+        intent.setClass(this, BusStopStatisticsActivity.class);
         intent.putExtra("position", position);
 
         intent.putExtra("id", id);

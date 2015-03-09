@@ -9,6 +9,12 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.davidtoh.helloworld.core_activities.BusStopStatisticsActivity;
+import com.davidtoh.helloworld.core_activities.NearbyBusStopsActivity;
+import com.davidtoh.helloworld.core_activities.SchedulerActivity;
+import com.davidtoh.helloworld.core_activities.SearchStopsActivity;
+import com.davidtoh.helloworld.core_activities.TripPlannerActivity;
+
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener{
 
     @Override
@@ -29,7 +35,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
 	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 		Intent intent = new Intent();
-		intent.setClass(this, BusStopStatistics.class);
+		intent.setClass(this, BusStopStatisticsActivity.class);
 		intent.putExtra("position", position);
 
 		intent.putExtra("id", id);
@@ -58,17 +64,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
 	public void toSearchStops(View view) {
-		Intent changeToSearch = new Intent(view.getContext(), SearchStops.class);
+		Intent changeToSearch = new Intent(view.getContext(), SearchStopsActivity.class);
 		startActivityForResult(changeToSearch, 0);
 	}
 
     public void toScheduler(View view) {
-        Intent changeToScheduler = new Intent(view.getContext(), Scheduler.class);
+        Intent changeToScheduler = new Intent(view.getContext(), SchedulerActivity.class);
         startActivityForResult(changeToScheduler, 0);
     }
 
     public void toTripPlanner(View view) {
-        Intent changeToTripPlanner = new Intent(view.getContext(), TripPlanner.class);
+        Intent changeToTripPlanner = new Intent(view.getContext(), TripPlannerActivity.class);
         startActivityForResult(changeToTripPlanner, 0);
     }
 

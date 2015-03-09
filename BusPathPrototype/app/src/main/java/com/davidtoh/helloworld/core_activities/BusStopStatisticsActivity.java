@@ -1,4 +1,4 @@
-package com.davidtoh.helloworld;
+package com.davidtoh.helloworld.core_activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,8 +15,9 @@ import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.utils.BusRouteInfo;
-import com.davidtoh.helloworld.utils.ChildStop;
+import com.davidtoh.helloworld.utils.BusStopInfo;
 import com.davidtoh.helloworld.utils.ExpandableListAdapter;
 
 import org.json.JSONArray;
@@ -37,7 +38,7 @@ import java.util.List;
  * Created by dylan on 2/19/15.
  * activity to display routes coming to each child stop of stop selected
  */
-public class BusStopStatistics extends Activity{
+public class BusStopStatisticsActivity extends Activity{
     private ProgressBar spinner;
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,8 @@ public class BusStopStatistics extends Activity{
 
 		Intent intent = getIntent();
 		int position = intent.getIntExtra("position", 0);
+		String name = intent.getStringExtra("busStopName");
+		//make dataBase call with this name
 		//TODO change once database gets implemented
 		String[] myKeys = getResources().getStringArray(R.array.stops);
 		String stopID = myKeys[position];
@@ -124,12 +127,12 @@ public class BusStopStatistics extends Activity{
 		String stopJSON = makeConnection(stopURL);
 
 		List<BusRouteInfo> BusList = buildDepartJSON(departJSON);
-		List<ChildStop> ChildList = buildStopJSON(stopJSON);
+		List<BusStopInfo> ChildList = buildStopJSON(stopJSON);
 
 		HashMap<String, List<String>> allStopInfoList = new HashMap<>();
 		List<String> listDataHeader = new ArrayList<>();
 
-		for (ChildStop stop : ChildList) {
+		for (BusStopInfo stop : ChildList) {
 			List<String> busStopInfoList = new ArrayList<>();
 			for(BusRouteInfo route : BusList){
 				if(route.getStopID().equals(stop.getStopID())) {
@@ -187,16 +190,16 @@ public class BusStopStatistics extends Activity{
         return BusList;
     }
 
-	public List<ChildStop> buildStopJSON(String str) throws IOException{
+	public List<BusStopInfo> buildStopJSON(String str) throws IOException{
 		JSONObject JObject;
-		List<ChildStop> ChildList = null;
+		List<BusStopInfo> ChildList = null;
 		try {
 			JObject = new JSONObject(str);
 			JSONArray JArray = JObject.getJSONArray("stops").getJSONObject(0).getJSONArray("stop_points");
 			ChildList = new ArrayList<>();
 			for (int i = 0; i < JArray.length(); i++) {
 				JObject = JArray.getJSONObject(i);
-				ChildStop childStop = new ChildStop(JObject.getString("stop_name"), JObject.getString("stop_id"));
+				BusStopInfo childStop = new BusStopInfo(JObject.getString("stop_name"), JObject.getString("stop_id"), 0, 0);
 				ChildList.add(childStop);
 			}
 		}catch (JSONException e) {
@@ -214,7 +217,7 @@ public class BusStopStatistics extends Activity{
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu_main, menu);
+		getMenuInflater().inflate(R.menu.menu_stats, menu);
 		return true;
 	}
 	@Override

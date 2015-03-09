@@ -4,8 +4,9 @@ import android.content.res.Resources;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
+import com.davidtoh.helloworld.core_activities.BusStopStatisticsActivity;
 import com.davidtoh.helloworld.utils.BusRouteInfo;
-import com.davidtoh.helloworld.utils.ChildStop;
+import com.davidtoh.helloworld.utils.BusStopInfo;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,29 +15,29 @@ import java.util.List;
  * Created by dylan on 2/20/15.
  * class to test the basic functions in BusStopStatistics Activity
  */
-public class BusStopStatisticsTest extends ActivityInstrumentationTestCase2<BusStopStatistics> {
+public class BusStopStatisticsActivityTest extends ActivityInstrumentationTestCase2<BusStopStatisticsActivity> {
 
-	private BusStopStatistics busStopStatistics;
+	private BusStopStatisticsActivity busStopStatisticsActivity;
 
-	public BusStopStatisticsTest() {
-		super(BusStopStatistics.class);
+	public BusStopStatisticsActivityTest() {
+		super(BusStopStatisticsActivity.class);
 	}
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		busStopStatistics = getActivity();
+		busStopStatisticsActivity = getActivity();
 	}
 
 
 	public void testPreconditions() {
-		assertNotNull("busStopStatistics is null", busStopStatistics);
+		assertNotNull("busStopStatistics is null", busStopStatisticsActivity);
 	}
 
 	public void testBuildDepartJSON() {
 		Resources res = getInstrumentation().getTargetContext().getResources();
 		try {
-			List<BusRouteInfo> stops =  busStopStatistics.buildDepartJSON(res.getString(R.string.iuBusStop));
+			List<BusRouteInfo> stops =  busStopStatisticsActivity.buildDepartJSON(res.getString(R.string.iuBusStop));
 			assertNotNull("stops is null", stops);
 			assertEquals("13N Silver", stops.get(0).getBusName());
 			assertEquals(0, stops.get(0).getTimeExpected());
@@ -50,7 +51,7 @@ public class BusStopStatisticsTest extends ActivityInstrumentationTestCase2<BusS
 	public void testBuildStopJSON() {
 		Resources res = getInstrumentation().getTargetContext().getResources();
 		try {
-			List<ChildStop> children =  busStopStatistics.buildStopJSON(res.getString(R.string.childTest));
+			List<BusStopInfo> children =  busStopStatisticsActivity.buildStopJSON(res.getString(R.string.childTest));
 			assertNotNull("children is null", children);
 			assertEquals("Illini Union (South Side Shelter)", children.get(0).getStopName());
 			assertEquals("IU:1", children.get(0).getStopID());
@@ -65,7 +66,7 @@ public class BusStopStatisticsTest extends ActivityInstrumentationTestCase2<BusS
 	public void testMakeConnection() {
 		String url = "https://developer.cumtd.com/api/v2.2/JSON/GetDeparturesByStop?key=a6030286b6ed4d609f2178e7cc5a17c9&stop_id=IU";
 		try {
-			String result = busStopStatistics.makeConnection(url);
+			String result = busStopStatisticsActivity.makeConnection(url);
 			assertTrue(result.contains("{\"method\":\"GetDeparturesByStop\",\"params\":{\"stop_id\":\"IU\"}}"));
 		} catch (IOException e) {
 			Log.e("TEST_ERROR", e.getMessage());

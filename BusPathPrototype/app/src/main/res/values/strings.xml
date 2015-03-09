@@ -9,6 +9,7 @@
     <string name="favorite_stops">Favorite Stops</string>
     <string name="search_title">Test</string>
     <string name="action_refresh">Refresh</string>
+    <string name="action_favorites">Favorite</string>
     <string name="button_favourites">Favorite Stops</string>
     <string name="button_search">Search</string>
     <string name="title_search">Search All Stops</string>

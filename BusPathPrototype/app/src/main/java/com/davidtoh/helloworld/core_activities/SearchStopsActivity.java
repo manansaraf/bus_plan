@@ -1,4 +1,4 @@
-package com.davidtoh.helloworld;
+package com.davidtoh.helloworld.core_activities;
 
 import android.app.Activity;
 import android.app.SearchManager;
@@ -11,10 +11,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.davidtoh.helloworld.R;
+
 /**
  * Created by dylan on 2/17/15.
  */
-public class SearchStops extends Activity implements AdapterView.OnItemClickListener {
+public class SearchStopsActivity extends Activity implements AdapterView.OnItemClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class SearchStops extends Activity implements AdapterView.OnItemClickList
 
 	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 		Intent intent = new Intent();
-		intent.setClass(this, BusStopStatistics.class);
+		intent.setClass(this, BusStopStatisticsActivity.class);
 		intent.putExtra("position", position);
 
 		intent.putExtra("id", id);
@@ -63,9 +65,6 @@ public class SearchStops extends Activity implements AdapterView.OnItemClickList
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 			case R.id.action_search:
-				//openSettings();
-				return true;
-			case R.id.action_settings:
 				//openSettings();
 				return true;
 			default:

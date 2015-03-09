@@ -1,4 +1,4 @@
-package com.davidtoh.helloworld;
+package com.davidtoh.helloworld.core_activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,8 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.davidtoh.helloworld.utils.locations_marker;
+import com.davidtoh.helloworld.R;
+import com.davidtoh.helloworld.utils.BusStopInfo;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,7 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class NearbyBusStopsActivity extends FragmentActivity {
 
 	private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-	public locations_marker[] markers;
+	public BusStopInfo[] markers;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -135,8 +136,8 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 	}
 
 	private void createBusStopLocation() {
-		locations_marker[] marker = getLocationOfMarkers();
-		markers = new locations_marker[marker.length];
+		BusStopInfo[] marker = getLocationOfMarkers();
+		markers = new BusStopInfo[marker.length];
 		for (int i = 0; i < marker.length; i++) {
 			mMap.addMarker(new MarkerOptions().position(new LatLng(marker[i].getLatitude(), marker[i].getLongitude())).title(marker[i].getStopName()));
 			markers[i] = marker[i];
@@ -154,26 +155,26 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 		mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 			@Override
 			public void onInfoWindowClick(Marker marker) {
-				Intent intent = new Intent(NearbyBusStopsActivity.this, BusStopStatistics.class);
+				Intent intent = new Intent(NearbyBusStopsActivity.this, BusStopStatisticsActivity.class);
 				//TODO Send a stop id from the database
-				intent.putExtra("busStopID", 1);
+				intent.putExtra("busStopName", 1);
 				startActivity(intent);
 
 			}
 		});
 	}
 
-	public locations_marker[] getLocationOfMarkers() {
-		locations_marker[] marker = new locations_marker[5];
-		marker[0] = new locations_marker(40.114455, -88.229298, "White and Wright");
-		marker[1] = new locations_marker(40.114452, -88.230285, "White and Sixth");
-		marker[2] = new locations_marker(40.113428, -88.228877, "Wright and Stoughton");
-		marker[3] = new locations_marker(40.112852, -88.229020, "Wright and Springfield");
-		marker[4] = new locations_marker(40.108590, -88.228847, "Transit Plaza");
+	public BusStopInfo[] getLocationOfMarkers() {
+		BusStopInfo[] marker = new BusStopInfo[5];
+		marker[0] = new BusStopInfo("White and Wright", "", 40.114455, -88.229298);
+		marker[1] = new BusStopInfo("White and Sixth", "" , 40.114452, -88.230285);
+		marker[2] = new BusStopInfo("Wright and Stoughton", "", 40.113428, -88.228877);
+		marker[3] = new BusStopInfo("Wright and Springfield", "", 40.112852, -88.229020);
+		marker[4] = new BusStopInfo("Transit Plaza", "", 40.108590, -88.228847);
 		return marker;
 	}
 
-	public locations_marker[] getMarkers() {
+	public BusStopInfo[] getMarkers() {
 		return markers;
 	}
 

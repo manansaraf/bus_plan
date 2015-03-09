@@ -12,8 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Spinner;
+
+import com.davidtoh.helloworld.core_activities.BusStopStatisticsActivity;
 
 public class SchedulerAddReminder extends Activity implements AdapterView.OnItemClickListener {
 
@@ -51,7 +52,7 @@ public class SchedulerAddReminder extends Activity implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 
         Intent intent = new Intent();
-        intent.setClass(this, BusStopStatistics.class);
+        intent.setClass(this, BusStopStatisticsActivity.class);
         intent.putExtra("position", position);
 
         intent.putExtra("id", id);

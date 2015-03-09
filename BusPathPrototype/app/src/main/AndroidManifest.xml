@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NearbyBusStopsActivity"
+            android:name=".core_activities.NearbyBusStopsActivity"
             android:label="Nearby Bus Stops"
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -35,7 +35,7 @@
                 android:value="com.davidtoh.helloworld.MainActivity" />
         </activity>
         <activity
-            android:name=".FavoriteStops"
+            android:name=".core_activities.FavoriteStopsActivity"
             android:label="Favorites"
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -43,7 +43,7 @@
                 android:value="com.davidtoh.helloworld.MainActivity" />
         </activity>
         <activity
-            android:name=".SearchStops"
+            android:name=".core_activities.SearchStopsActivity"
             android:label="Search"
             android:parentActivityName=".MainActivity" >
             <intent-filter>
@@ -58,15 +58,15 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".BusStopStatistics"
+            android:name=".core_activities.BusStopStatisticsActivity"
             android:label="Stop Statistics"
-            android:parentActivityName=".FavoriteStops" >
+            android:parentActivityName=".core_activities.FavoriteStopsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.MainActivity" />
         </activity>
         <activity
-            android:name=".Scheduler"
+            android:name=".core_activities.SchedulerActivity"
             android:label="Scheduler"
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -76,13 +76,13 @@
         <activity
             android:name=".SchedulerAddReminder"
             android:label="Add Reminder"
-            android:parentActivityName=".Scheduler" >
+            android:parentActivityName=".core_activities.SchedulerActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.MainActivity" />
         </activity>
         <activity
-            android:name=".TripPlanner"
+            android:name=".core_activities.TripPlannerActivity"
             android:label="Trip Planner"
             android:parentActivityName=".MainActivity" >
             <meta-data
