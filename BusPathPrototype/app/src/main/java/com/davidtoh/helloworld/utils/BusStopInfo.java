@@ -10,12 +10,14 @@ public class BusStopInfo {
 	double longitude;
 	double latitude;
 
-	public BusStopInfo(String stopName, String stopID, double longitude, double latitude) {
+	public BusStopInfo(String stopName, String stopID, double latitude, double longitude) {
 		this.stopName = stopName;
 		this.stopID = stopID;
 		this.longitude = longitude;
 		this.latitude = latitude;
 	}
+
+	public BusStopInfo() {}
 
 	public String getStopName() {
 		return this.stopName;
@@ -31,5 +33,21 @@ public class BusStopInfo {
 
 	public double getLatitude(){
 		return latitude;
+	}
+
+	public void setStopName(String name) {
+		this.stopName = name;
+	}
+
+	public void setStopID(String ID) {
+		this.stopID = ID;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 }

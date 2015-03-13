@@ -40,8 +40,8 @@ public class NearbyBusStopsTest extends ActivityInstrumentationTestCase2<NearbyB
         double longitude = loc.getLongitude();
         double latitude = loc.getLatitude();
         String stop = loc.getStopName();
-        assertEquals(latitude,6.1);
-        assertEquals(longitude,0.1);
+        assertEquals(longitude,6.1);
+        assertEquals(latitude,0.1);
         assertTrue("Dummy Place".equals(stop));
     }
 }
