@@ -57,9 +57,11 @@ public class BusStopsDAO {
 		List<BusStopInfo> busStops = new ArrayList<>();
 
 		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
-				allColumns, null, null, null, null, null);
+				allColumns, null, null, null, null, SQLiteHelper.COLUMN_NAME + " ASC");
 
-		cursor.moveToFirst();
+        if(cursor != null) {
+            cursor.moveToFirst();
+        }
 		while (!cursor.isAfterLast()) {
 			BusStopInfo stop = cursorToStop(cursor);
 			busStops.add(stop);
