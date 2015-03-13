@@ -47,9 +47,10 @@ public class BusStopStatisticsActivity extends Activity{
 		setContentView(R.layout.bus_stop_statistics);
 
 		Intent intent = getIntent();
-		//int position = intent.getIntExtra("position", 0);
-		String name = intent.getStringExtra("busStopName");
-		Log.d("STOP_NAME", name);
+		int position = intent.getIntExtra("position", 0);
+        String[] myKeys = getResources().getStringArray(R.array.stops);
+        String name = myKeys[position];
+		//String name = intent.getStringExtra("busStopName");
 		//make dataBase call with this name
 		BusStopsDAO busStopsDAO = new BusStopsDAO(this);
 		busStopsDAO.open();

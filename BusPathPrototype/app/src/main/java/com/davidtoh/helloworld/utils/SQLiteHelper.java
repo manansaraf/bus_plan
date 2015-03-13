@@ -29,12 +29,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 			COLUMN_ID + " text not null primary key);";
 
 	public SQLiteHelper(Context context) {
+
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase database) {
-		database.execSQL(DATABASE_CREATE);
+        database.execSQL("DROP TABLE IF EXISTS " + TABLE_BUSSTOPS + ", " + TABLE_FAVORITES + ";");
+        database.execSQL(DATABASE_CREATE);
 	}
 
 	@Override

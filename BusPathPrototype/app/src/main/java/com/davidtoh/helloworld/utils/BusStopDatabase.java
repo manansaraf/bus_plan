@@ -24,9 +24,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Elee on 2015-03-13.
- */
 public class BusStopDatabase{
     Context context;
     public void populate(Context context) {
@@ -34,7 +31,7 @@ public class BusStopDatabase{
         // Log.e("DATABASE is Exist","DATABASE");
         //boolean check_database = doesDatabaseExist(context,"bus_plan.db");
         boolean check_database = checkDataBase();
-        if (check_database) {
+        if (check_database && false) {
             Log.e("DATABASE is Exist", "DATABASE");
             //if database is exists, do nothing
             return;
@@ -90,6 +87,7 @@ public class BusStopDatabase{
         List<BusStopInfo> busStopList = buildBusStopJSON(JSONstring);
         BusStopsDAO busStopsDAO = new BusStopsDAO(this.context);
         busStopsDAO.open();
+        busStopsDAO.drop();
         for(BusStopInfo busStop : busStopList){
             busStopsDAO.createStop(busStop.getStopName(), busStop.getStopID(), busStop.getLatitude(), busStop.getLongitude());
         }

@@ -33,6 +33,7 @@ public class BusStopsDAO {
 		dbHelper.close();
 	}
 
+    public void drop() { database.delete(SQLiteHelper.TABLE_BUSSTOPS,null,null);}
 	public BusStopInfo createStop(String stopName, String stopID, double latitude, double longitude) {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_NAME, stopName);
@@ -71,15 +72,14 @@ public class BusStopsDAO {
 
 	public BusStopInfo getStop(String stopName) {
 		BusStopInfo stop;
-
 		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
-				new String[] {"stop_id"}, "stop_name = ?", new String[] {"\""+stopName+"\""},
-				null, null, null);
-
-		cursor.moveToFirst();
+				allColumns, SQLiteHelper.COLUMN_NAME +"=?", new String[] {stopName},
+				null, null, null,null);
+        if(cursor != null) {
+            cursor.moveToFirst();
+        }
 		stop = cursorToStop(cursor);
-		cursor.close();
-
+		//cursor.close();
 		if(stop == null)
 			Log.e("STOP_ERROR", "stop is null");
 		return stop;
