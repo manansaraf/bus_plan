@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.utils.BusRouteInfo;
 import com.davidtoh.helloworld.utils.BusStopInfo;
+import com.davidtoh.helloworld.utils.BusStopsDAO;
 import com.davidtoh.helloworld.utils.ExpandableListAdapter;
 
 import org.json.JSONArray;
@@ -46,12 +47,17 @@ public class BusStopStatisticsActivity extends Activity{
 		setContentView(R.layout.bus_stop_statistics);
 
 		Intent intent = getIntent();
-		int position = intent.getIntExtra("position", 0);
+		//int position = intent.getIntExtra("position", 0);
 		String name = intent.getStringExtra("busStopName");
+		Log.d("STOP_NAME", name);
 		//make dataBase call with this name
+		BusStopsDAO busStopsDAO = new BusStopsDAO(this);
+		busStopsDAO.open();
+		BusStopInfo busStopInfo = busStopsDAO.getStop(name);
+
 		//TODO change once database gets implemented
-		String[] myKeys = getResources().getStringArray(R.array.stops);
-		String stopID = myKeys[position];
+		//String[] myKeys = getResources().getStringArray(R.array.stops);
+		String stopID = busStopInfo.getStopID();
 
 		TextView textView = (TextView) findViewById(R.id.statisticsStatusView);
 		textView.setVisibility(View.GONE);

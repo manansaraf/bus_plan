@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +13,13 @@ import java.util.List;
  * Created by dylan on 3/13/15.
  * this class interacts with the database and passes back objects to the caller
  */
-public class BusStopsDAO {
+public class FavoriteStopsDAO {
 
 	private SQLiteDatabase database;
 	private SQLiteHelper dbHelper;
-	private String[] allColumns = { SQLiteHelper.COLUMN_NAME, SQLiteHelper.COLUMN_ID,
-			SQLiteHelper.COLUMN_LAT, SQLiteHelper.COLUMN_LONG };
+	private String[] allColumns = { SQLiteHelper.COLUMN_NAME, SQLiteHelper.COLUMN_ID};
 
-	public BusStopsDAO(Context context) {
+	public FavoriteStopsDAO(Context context) {
 		dbHelper = new SQLiteHelper(context);
 	}
 
@@ -33,18 +31,16 @@ public class BusStopsDAO {
 		dbHelper.close();
 	}
 
-	public BusStopInfo createStop(String stopName, String stopID, double latitude, double longitude) {
+	public BusStopInfo createFavoriteStop(String stopName, String stopID) {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_NAME, stopName);
 		values.put(SQLiteHelper.COLUMN_ID, stopID);
-		values.put(SQLiteHelper.COLUMN_LAT, latitude);
-		values.put(SQLiteHelper.COLUMN_LONG, longitude);
 
-		database.insert(SQLiteHelper.TABLE_BUSSTOPS, null,
+		database.insert(SQLiteHelper.TABLE_FAVORITES, null,
 				values);
 
-		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
-				allColumns, SQLiteHelper.COLUMN_ID + " = " + "\"" + stopID + "\"", null, null, null, null);
+		Cursor cursor = database.query(SQLiteHelper.TABLE_FAVORITES,
+				allColumns, SQLiteHelper.COLUMN_ID + " = " + stopID, null, null, null, null);
 		cursor.moveToFirst();
 
 		BusStopInfo newStop = cursorToStop(cursor);
@@ -52,10 +48,10 @@ public class BusStopsDAO {
 		return newStop;
 	}
 
-	public List<BusStopInfo> getAllStops() {
+	public List<BusStopInfo> getAllFavoriteStops() {
 		List<BusStopInfo> busStops = new ArrayList<>();
 
-		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
+		Cursor cursor = database.query(SQLiteHelper.TABLE_FAVORITES,
 				allColumns, null, null, null, null, null);
 
 		cursor.moveToFirst();
@@ -69,20 +65,9 @@ public class BusStopsDAO {
 		return busStops;
 	}
 
-	public BusStopInfo getStop(String stopName) {
-		BusStopInfo stop;
-
-		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
-				new String[] {"stop_id"}, "stop_name = ?", new String[] {"\""+stopName+"\""},
-				null, null, null);
-
-		cursor.moveToFirst();
-		stop = cursorToStop(cursor);
-		cursor.close();
-
-		if(stop == null)
-			Log.e("STOP_ERROR", "stop is null");
-		return stop;
+	public void deleteFavoriteStop(String stopName) {
+		database.delete(SQLiteHelper.TABLE_FAVORITES, SQLiteHelper.COLUMN_NAME +
+		" = " + stopName, null);
 	}
 
 	private BusStopInfo cursorToStop(Cursor cursor) {

@@ -1,15 +1,12 @@
 package com.davidtoh.helloworld.utils;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 import com.davidtoh.helloworld.R;
 
@@ -54,8 +51,6 @@ public class BusStopDatabase{
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             new getStops().execute(URL);
-        } else {
-
         }
     }
     private boolean checkDataBase() {
@@ -95,8 +90,7 @@ public class BusStopDatabase{
         List<BusStopInfo> busStopList = buildBusStopJSON(JSONstring);
         BusStopsDAO busStopsDAO = new BusStopsDAO(this.context);
         busStopsDAO.open();
-        for(int i =0; i< busStopList.size(); i++){
-            BusStopInfo busStop = busStopList.get(i);
+        for(BusStopInfo busStop : busStopList){
             busStopsDAO.createStop(busStop.getStopName(), busStop.getStopID(), busStop.getLatitude(), busStop.getLongitude());
         }
     }
@@ -141,11 +135,12 @@ public class BusStopDatabase{
                 JObject = JArray.getJSONObject(i);
                 String Stop_id = JObject.getString("stop_id");
                 String Stop_name = JObject.getString("stop_name");
-                JSONArray JArray_child = JObject.getJSONArray("stops_points");
+                JSONArray JArray_child = JObject.getJSONArray("stop_points");
+				JObject = JArray_child.getJSONObject(0);
                 String Stop_lat = JObject.getString("stop_lat");
                 String Stop_lon = JObject.getString("stop_lon");
 
-                BusStopInfo stopInfo = new BusStopInfo(Stop_id, Stop_name, Double.parseDouble(Stop_lat), Double.parseDouble(Stop_lon));
+                BusStopInfo stopInfo = new BusStopInfo(Stop_name, Stop_id, Double.parseDouble(Stop_lat), Double.parseDouble(Stop_lon));
                 BusList.add(stopInfo);
             }
         }catch (JSONException e) {
