@@ -40,7 +40,8 @@ public class FavoriteStopsDAO {
 				values);
 
 		Cursor cursor = database.query(SQLiteHelper.TABLE_FAVORITES,
-				allColumns, SQLiteHelper.COLUMN_ID + " = " + stopID, null, null, null, null);
+				allColumns, SQLiteHelper.COLUMN_ID + " = " + "\"" + stopID + "\"",
+				null, null, null, null);
 		cursor.moveToFirst();
 
 		BusStopInfo newStop = cursorToStop(cursor);
@@ -52,7 +53,7 @@ public class FavoriteStopsDAO {
 		List<BusStopInfo> busStops = new ArrayList<>();
 
 		Cursor cursor = database.query(SQLiteHelper.TABLE_FAVORITES,
-				allColumns, null, null, null, null, null);
+				allColumns, null, null, null, null, SQLiteHelper.COLUMN_NAME + " ASC");
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
@@ -67,15 +68,15 @@ public class FavoriteStopsDAO {
 
 	public void deleteFavoriteStop(String stopName) {
 		database.delete(SQLiteHelper.TABLE_FAVORITES, SQLiteHelper.COLUMN_NAME +
-		" = " + stopName, null);
+		" = " + "\"" + stopName + "\"", null);
 	}
 
 	private BusStopInfo cursorToStop(Cursor cursor) {
 		BusStopInfo busStopInfo = new BusStopInfo();
 		busStopInfo.setStopName(cursor.getString(0));
 		busStopInfo.setStopID(cursor.getString(1));
-		busStopInfo.setLatitude(cursor.getDouble(2));
-		busStopInfo.setLongitude(cursor.getDouble(3));
+		busStopInfo.setLatitude(0);
+		busStopInfo.setLongitude(0);
 		return busStopInfo;
 	}
 }

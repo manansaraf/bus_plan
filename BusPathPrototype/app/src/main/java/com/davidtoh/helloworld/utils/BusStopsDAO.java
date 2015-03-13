@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,8 @@ public class BusStopsDAO {
 				values);
 
 		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
-				allColumns, SQLiteHelper.COLUMN_ID + " = " + "\"" + stopID + "\"", null, null, null, null);
+				allColumns, SQLiteHelper.COLUMN_ID + " = " + "\"" + stopID + "\"",
+				null, null, null, null);
 		cursor.moveToFirst();
 
 		BusStopInfo newStop = cursorToStop(cursor);
@@ -59,9 +59,7 @@ public class BusStopsDAO {
 		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
 				allColumns, null, null, null, null, SQLiteHelper.COLUMN_NAME + " ASC");
 
-        if(cursor != null) {
-            cursor.moveToFirst();
-        }
+		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			BusStopInfo stop = cursorToStop(cursor);
 			busStops.add(stop);
@@ -73,17 +71,13 @@ public class BusStopsDAO {
 	}
 
 	public BusStopInfo getStop(String stopName) {
-		BusStopInfo stop;
 		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
-				allColumns, SQLiteHelper.COLUMN_NAME +"=?", new String[] {stopName},
+				allColumns, SQLiteHelper.COLUMN_NAME + " = " + "\"" + stopName + "\"",
 				null, null, null,null);
-        if(cursor != null) {
-            cursor.moveToFirst();
-        }
-		stop = cursorToStop(cursor);
-		//cursor.close();
-		if(stop == null)
-			Log.e("STOP_ERROR", "stop is null");
+        cursor.moveToFirst();
+
+		BusStopInfo stop = cursorToStop(cursor);
+		cursor.close();
 		return stop;
 	}
 
