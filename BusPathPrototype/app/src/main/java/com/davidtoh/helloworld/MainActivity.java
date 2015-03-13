@@ -14,6 +14,7 @@ import com.davidtoh.helloworld.core_activities.NearbyBusStopsActivity;
 import com.davidtoh.helloworld.core_activities.SchedulerActivity;
 import com.davidtoh.helloworld.core_activities.SearchStopsActivity;
 import com.davidtoh.helloworld.core_activities.TripPlannerActivity;
+import com.davidtoh.helloworld.utils.BusStopDatabase;
 
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener{
 
@@ -24,6 +25,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
 		ListView listview = (ListView) findViewById(R.id.listView);
 		listview.setOnItemClickListener(this);
+        BusStopDatabase busStopDatabase = new BusStopDatabase();
+        busStopDatabase.populate(this);
     }
 
     @Override
