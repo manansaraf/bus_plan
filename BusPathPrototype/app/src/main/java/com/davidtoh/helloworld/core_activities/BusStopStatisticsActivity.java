@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.utils.BusRouteInfo;
 import com.davidtoh.helloworld.utils.BusStopInfo;
-import com.davidtoh.helloworld.utils.BusStopsDAO;
+import com.davidtoh.helloworld.database.BusStopsDAO;
 import com.davidtoh.helloworld.utils.ExpandableListAdapter;
 
 import org.json.JSONArray;

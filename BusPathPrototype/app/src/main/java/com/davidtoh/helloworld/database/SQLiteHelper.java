@@ -1,4 +1,4 @@
-package com.davidtoh.helloworld.utils;
+package com.davidtoh.helloworld.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

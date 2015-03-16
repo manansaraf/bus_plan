@@ -17,10 +17,18 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.davidtoh.helloworld" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54e6a57c-b941-4287-877c-84bbffe23464" name="Default" comment="the database will now only update if it is behind the version gotten form the cumtd api">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/BusStopDatabase.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/BusStopDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/SQLiteHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/SQLiteHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/VersionDAO.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/VersionDAO.java" />
+    <list default="true" id="54e6a57c-b941-4287-877c-84bbffe23464" name="Default" comment="moved database files to new package">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/Alarm.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/Alarm.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/SchedulerAddReminder.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/SchedulerAddReminder.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/BusStopDatabase.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/BusStopDatabase.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/BusStopsDAO.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/BusStopsDAO.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/FavoriteStopsDAO.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/FavoriteStopsDAO.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/SQLiteHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/SQLiteHelper.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/VersionDAO.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/VersionDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/core_activities/BusStopStatisticsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/core_activities/BusStopStatisticsActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/core_activities/SchedulerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/core_activities/SchedulerActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BusPathPrototype.iws" />
@@ -45,56 +53,101 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="BusStopsDAO.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/BusStopsDAO.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/BusStopsDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="1566">
-              <caret line="27" column="50" selection-start-line="27" selection-start-column="50" selection-end-line="27" selection-end-column="50" />
+              <caret line="29" column="50" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
               <folding>
-                <element signature="e#757#758#0" expanded="true" />
-                <element signature="e#805#806#0" expanded="true" />
+                <element signature="e#811#812#0" expanded="true" />
+                <element signature="e#859#860#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="VersionDAO.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/VersionDAO.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/VersionDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.33187774" vertical-offset="280" max-vertical-offset="1008">
               <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#530#531#0" expanded="true" />
-                <element signature="e#573#574#0" expanded="true" />
-                <element signature="e#688#689#0" expanded="true" />
-                <element signature="e#711#712#0" expanded="true" />
+                <element signature="e#533#534#0" expanded="true" />
+                <element signature="e#576#577#0" expanded="true" />
+                <element signature="e#691#692#0" expanded="true" />
+                <element signature="e#714#715#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="FavoriteStopsDAO.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/FavoriteStopsDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="172" max-vertical-offset="1422">
+              <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+              <folding>
+                <element signature="e#680#681#0" expanded="true" />
+                <element signature="e#723#724#0" expanded="true" />
+                <element signature="e#766#767#0" expanded="true" />
+                <element signature="e#814#815#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SchedulerAddReminder.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/SchedulerAddReminder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1332">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SchedulerActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/core_activities/SchedulerActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1134">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Alarm.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/Alarm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1044">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="SQLiteHelper.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/SQLiteHelper.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/SQLiteHelper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-2.6666667" vertical-offset="0" max-vertical-offset="1134">
               <caret line="4" column="48" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
               <folding>
-                <element signature="e#1462#1463#0" expanded="true" />
-                <element signature="e#1522#1523#0" expanded="true" />
+                <element signature="e#1465#1466#0" expanded="true" />
+                <element signature="e#1525#1526#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="BusStopDatabase.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/BusStopDatabase.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/BusStopDatabase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="358" max-vertical-offset="3222">
-              <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="376" max-vertical-offset="3240">
+              <caret line="67" column="45" selection-start-line="67" selection-start-column="45" selection-end-line="67" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#755#804#0" expanded="true" />
-                <element signature="e#1997#2046#0" expanded="true" />
+                <element signature="e#808#857#0" expanded="true" />
+                <element signature="e#2050#2099#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1233,6 +1286,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/BusStopDatabase.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/VersionDAO.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/SQLiteHelper.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/VersionDAO.java" />
       </list>
     </option>
   </component>
@@ -1384,66 +1438,6 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="davidtoh" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="helloworld" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="utils" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BusPathPrototype" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="davidtoh" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="helloworld" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core_activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BusPathPrototype" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="manifests" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
             </PATH_ELEMENT>
@@ -1472,13 +1466,14 @@
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.davidtoh.helloworld.utils" />
+      <recent name="com.davidtoh.helloworld.database" />
+      <recent name="com.davidtoh.helloworld.core_activities" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/res/xml" />
       <recent name="$PROJECT_DIR$/app/src/main/res/searchable" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.davidtoh.helloworld.core_activities" />
-      <recent name="com.davidtoh.helloworld.utils" />
     </key>
   </component>
   <component name="RestoreUpdateTree">
@@ -1911,7 +1906,11 @@
       <created>1426529197241</created>
       <updated>1426529197241</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="the database will now only update if it is behind the version gotten form the cumtd api">
+      <created>1426533632228</created>
+      <updated>1426533632228</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView" selected-index="5">
@@ -1948,7 +1947,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32825485" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22934233" sideWeight="0.5011287" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32825485" sideWeight="0.49964157" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32825485" sideWeight="0.49964157" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23130193" sideWeight="0.637276" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1998,7 +1997,8 @@
     <MESSAGE value="created version control for database" />
     <MESSAGE value="checking cursor in versionDAO" />
     <MESSAGE value="the database will now only update if it is behind the version gotten form the cumtd api" />
-    <option name="LAST_COMMIT_MESSAGE" value="the database will now only update if it is behind the version gotten form the cumtd api" />
+    <MESSAGE value="moved database files to new package" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved database files to new package" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2265,27 +2265,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/SchedulerAddReminder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1332">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/core_activities/SchedulerActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1134">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/Alarm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1044">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/core_activities/SearchStopsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12903225" vertical-offset="362" max-vertical-offset="1242">
@@ -2363,14 +2342,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/FavoriteStopsDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="687" max-vertical-offset="1350">
-          <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="70" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/core_activities/NearbyBusStopsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40582526" vertical-offset="2113" max-vertical-offset="2898">
@@ -2387,50 +2358,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/BusStopsDAO.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/BusStopsDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="1566">
-          <caret line="27" column="50" selection-start-line="27" selection-start-column="50" selection-end-line="27" selection-end-column="50" />
+          <caret line="29" column="50" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
           <folding>
-            <element signature="e#757#758#0" expanded="true" />
-            <element signature="e#805#806#0" expanded="true" />
+            <element signature="e#811#812#0" expanded="true" />
+            <element signature="e#859#860#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/BusStopDatabase.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/BusStopDatabase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="358" max-vertical-offset="3222">
-          <caret line="66" column="45" selection-start-line="66" selection-start-column="45" selection-end-line="66" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="376" max-vertical-offset="3240">
+          <caret line="67" column="45" selection-start-line="67" selection-start-column="45" selection-end-line="67" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#755#804#0" expanded="true" />
-            <element signature="e#1997#2046#0" expanded="true" />
+            <element signature="e#808#857#0" expanded="true" />
+            <element signature="e#2050#2099#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/SQLiteHelper.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/SQLiteHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.6666667" vertical-offset="0" max-vertical-offset="1134">
           <caret line="4" column="48" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
           <folding>
-            <element signature="e#1462#1463#0" expanded="true" />
-            <element signature="e#1522#1523#0" expanded="true" />
+            <element signature="e#1465#1466#0" expanded="true" />
+            <element signature="e#1525#1526#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/VersionDAO.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/SchedulerAddReminder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1332">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/core_activities/SchedulerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1134">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/utils/Alarm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1044">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/FavoriteStopsDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="172" max-vertical-offset="1422">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding>
+            <element signature="e#680#681#0" expanded="true" />
+            <element signature="e#723#724#0" expanded="true" />
+            <element signature="e#766#767#0" expanded="true" />
+            <element signature="e#814#815#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/davidtoh/helloworld/database/VersionDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33187774" vertical-offset="280" max-vertical-offset="1008">
           <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
-            <element signature="e#573#574#0" expanded="true" />
-            <element signature="e#688#689#0" expanded="true" />
-            <element signature="e#711#712#0" expanded="true" />
+            <element signature="e#533#534#0" expanded="true" />
+            <element signature="e#576#577#0" expanded="true" />
+            <element signature="e#691#692#0" expanded="true" />
+            <element signature="e#714#715#0" expanded="true" />
           </folding>
         </state>
       </provider>

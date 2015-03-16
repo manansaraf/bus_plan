@@ -1,10 +1,12 @@
-package com.davidtoh.helloworld.utils;
+package com.davidtoh.helloworld.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.davidtoh.helloworld.utils.BusStopInfo;
 
 import java.util.ArrayList;
 import java.util.List;

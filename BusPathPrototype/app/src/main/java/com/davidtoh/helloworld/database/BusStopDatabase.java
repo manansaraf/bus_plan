@@ -1,4 +1,4 @@
-package com.davidtoh.helloworld.utils;
+package com.davidtoh.helloworld.database;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.davidtoh.helloworld.R;
+import com.davidtoh.helloworld.utils.BusStopInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;

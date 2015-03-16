@@ -1,4 +1,8 @@
-package com.davidtoh.helloworld;
+package com.davidtoh.helloworld.utils;
+
+/**
+ * Created by davidtoh on 2/21/15.
+ */
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,22 +11,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
+import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.core_activities.BusStopStatisticsActivity;
 
-/**
- * Created by Steve on 2/21/2015.
- */
-public class Alarm extends Activity implements AdapterView.OnItemClickListener {
+public class SchedulerAddReminder extends Activity implements AdapterView.OnItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.alarm);
+        setContentView(R.layout.scheduler_add_reminder);
 
-        ListView listview = (ListView) findViewById(R.id.listView5);
-        listview.setOnItemClickListener(this);
+        Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
+                R.array.stops, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner1.setAdapter(adapter1);
+
+        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
+                R.array.stops, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        spinner2.setAdapter(adapter2);
     }
 
     @Override
@@ -57,5 +75,5 @@ public class Alarm extends Activity implements AdapterView.OnItemClickListener {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }
+

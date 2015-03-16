@@ -1,4 +1,4 @@
-package com.davidtoh.helloworld.utils;
+package com.davidtoh.helloworld.database;
 
 import android.content.ContentValues;
 import android.content.Context;
