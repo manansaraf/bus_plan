@@ -18,15 +18,19 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 	public static final String TABLE_FAVORITES = "favorite_stops";
 
+	public static final String TABLE_VERSION = "version";
+	public static final String COLUMN_DATE = "version_date";
+
 	private static final String DATABASE_NAME = "bus_plan.db";
 	private static final int DATABASE_VERSION = 1;
 
 	// Database creation sql statement
-	private static final String DATABASE_CREATE = "create table "
+	private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS "
 			+ TABLE_BUSSTOPS + "(" + COLUMN_NAME + " text not null, " + COLUMN_ID +
-			" text not null primary key, " + COLUMN_LAT + " real, " + COLUMN_LONG + " real);" +
-			" create table " + TABLE_FAVORITES + "(" + COLUMN_NAME + " text not null, " +
-			COLUMN_ID + " text not null primary key);";
+			" TEXT NOT NULL PRIMARY KEY, " + COLUMN_LAT + " REAL, " + COLUMN_LONG + " REAL);" +
+			" CREATE TABLE IF NOT EXISTS " + TABLE_FAVORITES + "(" + COLUMN_NAME + " TEXT NOT NULL, " +
+			COLUMN_ID + " TEXT NOT NULL PRIMARY KEY);" + " CREATE TABLE IF NOT EXISTS " +
+			TABLE_VERSION + "(" + COLUMN_DATE + "TEXT);";
 
 	public SQLiteHelper(Context context) {
 
@@ -35,7 +39,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase database) {
-        database.execSQL("DROP TABLE IF EXISTS " + TABLE_BUSSTOPS + ", " + TABLE_FAVORITES + ";");
         database.execSQL(DATABASE_CREATE);
 	}
 
@@ -44,7 +47,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 		Log.w(SQLiteHelper.class.getName(),
 				"Upgrading database from version " + oldVersion + " to "
 						+ newVersion + ", which will destroy all old data");
-		db.execSQL("DROP TABLE IF EXISTS " + TABLE_BUSSTOPS + ", " + TABLE_FAVORITES + ";");
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_BUSSTOPS + ";");
 		onCreate(db);
 	}
 }
