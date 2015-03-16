@@ -45,9 +45,14 @@ public class BusStopStatisticsActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bus_stop_statistics);
-
 		Intent intent = getIntent();
-        String name = intent.getStringExtra("busStopName");
+		if(intent.hasExtra("busStopName")) {
+			String name = intent.getStringExtra("busStopName");
+			makeAPICalls(name);
+		}
+	}
+
+	private void makeAPICalls(String name) {
 
 		BusStopsDAO busStopsDAO = new BusStopsDAO(this);
 		busStopsDAO.open();
@@ -57,7 +62,6 @@ public class BusStopStatisticsActivity extends Activity{
 
 		TextView textView = (TextView) findViewById(R.id.statisticsStatusView);
 		textView.setVisibility(View.GONE);
-
 		//check connection
 		ConnectivityManager connMgr = (ConnectivityManager)
 				getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -68,16 +72,15 @@ public class BusStopStatisticsActivity extends Activity{
 		String stopURL = "https://developer.cumtd.com/api/v2.2/JSON/GetStop?key="
 				+ getResources().getString(R.string.apiKey) + "&stop_id=" + stopID;
 
-        spinner = (ProgressBar)findViewById(R.id.progressBar1);
-        spinner.setVisibility(View.GONE);
+		spinner = (ProgressBar)findViewById(R.id.progressBar1);
+		spinner.setVisibility(View.GONE);
 		if (networkInfo != null && networkInfo.isConnected()) {
-            ShowProgressBar();
+			ShowProgressBar();
 			new getDeparturesByStop().execute(departureURL, stopURL);
 		} else {
 			textView.setVisibility(View.VISIBLE);
 			textView.setText("No network connection available.");
 		}
-
 	}
 
 	/* most of the networking code from basic android developers website
