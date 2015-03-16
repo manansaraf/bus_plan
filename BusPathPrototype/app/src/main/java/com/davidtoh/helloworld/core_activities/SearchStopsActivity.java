@@ -4,21 +4,18 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.davidtoh.helloworld.R;
-import com.davidtoh.helloworld.utils.BusStopsDAO;
+import com.davidtoh.helloworld.database.BusStopsDAO;
 
 /**
  * Created by dylan on 2/17/15.
@@ -105,8 +102,7 @@ public class SearchStopsActivity extends Activity implements AdapterView.OnItemC
     @Override
     public boolean onQueryTextChange(String newText) {
         mAdapter.clear();
-        //mAdapter.addAll(bstopsDAO.searchStops(newText));
-        Log.d("", "TEST VALUE1");
+        mAdapter.addAll(bstopsDAO.searchStops(newText));
         mAdapter.notifyDataSetChanged();
         return false;
     }
