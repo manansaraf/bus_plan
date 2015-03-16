@@ -21,7 +21,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BusStopDatabase{
@@ -36,18 +41,19 @@ public class BusStopDatabase{
             //if database is exists, do nothing
             return;
         }
+        String URL = "https://developer.cumtd.com/api/v2.2/JSON/GetLastFeedUpdate?key="
+                + context.getResources().getString(R.string.apiKey);
+
         // if database is not exists, create new database and populate it.
         //TODO check existence of database
         Log.e("DATABASE is NOT Exist", "DATABASE");
-        String URL = "https://developer.cumtd.com/api/v2.2/JSON/GetStops?key="
-                + context.getResources().getString(R.string.apiKey);
 
         //check connection
         ConnectivityManager connMgr = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
-            new getStops().execute(URL);
+            new getDate().execute(URL);
         }
     }
     private boolean checkDataBase() {
@@ -65,6 +71,37 @@ public class BusStopDatabase{
             // database doesn't exist yet.
         }
         return checkDB != null;
+    }
+    private class getDate extends AsyncTask<String, Void, String>{
+        @Override
+        protected String doInBackground(String... urls) {
+            try {
+                checkUpdateDate(urls[0]);
+                return "";
+            } catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+
+        }
+
+    }
+    public void checkUpdateDate(String url)throws IOException{
+        VersionDAO versionDAO = new VersionDAO(this.context);
+        String JSONString = makeConnection(url);
+        String newFeedDate = buildLastFeedJSON(JSONString);
+        String lastUpdatedDate = versionDAO.getDate();
+        if(!newFeedDate.equals(lastUpdatedDate)){
+            versionDAO.setDate(newFeedDate);
+            String URL = "https://developer.cumtd.com/api/v2.2/JSON/GetStops?key="
+                    + context.getResources().getString(R.string.apiKey);
+            new getStops().execute(URL);
+        }
+
+
     }
     private class getStops extends AsyncTask<String, Void, String> {
         @Override
@@ -145,5 +182,17 @@ public class BusStopDatabase{
             Log.e("JSON ERROR: ", e.getMessage());
         }
         return BusList;
+    }
+    private String buildLastFeedJSON(String str) throws IOException{
+        JSONObject JObject;
+        String lastFeedDate = "";
+        try {
+            JObject = new JSONObject(str);
+            lastFeedDate = JObject.getString("last_updated");
+
+        }catch (JSONException e) {
+            Log.e("JSON ERROR: ", e.getMessage());
+        }
+        return lastFeedDate;
     }
 }
