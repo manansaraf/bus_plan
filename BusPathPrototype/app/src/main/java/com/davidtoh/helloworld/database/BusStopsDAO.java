@@ -67,7 +67,6 @@ public class BusStopsDAO {
 			busStops.add(stop);
 			cursor.moveToNext();
 		}
-		// make sure to close the cursor
 		cursor.close();
 		return busStops;
 	}
@@ -81,6 +80,23 @@ public class BusStopsDAO {
 		BusStopInfo stop = cursorToStop(cursor);
 		cursor.close();
 		return stop;
+	}
+
+	public List<BusStopInfo> searchStops(String stopSubString) {
+		List<BusStopInfo> busStops = new ArrayList<>();
+
+		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
+				allColumns, SQLiteHelper.COLUMN_NAME + " LIKE " + "\'%" + stopSubString + "%\'",
+				null, null, null, SQLiteHelper.COLUMN_NAME + " ASC");
+
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			BusStopInfo stop = cursorToStop(cursor);
+			busStops.add(stop);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return busStops;
 	}
 
 	private BusStopInfo cursorToStop(Cursor cursor) {
