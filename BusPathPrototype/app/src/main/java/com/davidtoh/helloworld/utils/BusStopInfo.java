@@ -23,6 +23,9 @@ public class BusStopInfo {
 		return this.stopName;
 	}
 
+    @Override
+    public String toString() { return this.getStopName(); }
+
 	public String getStopID(){
 		return this.stopID;
 	}
