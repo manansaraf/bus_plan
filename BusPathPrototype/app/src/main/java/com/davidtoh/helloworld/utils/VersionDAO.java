@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 /**
  * Created by dylan on 3/16/15.
+ * this DAO is for keeping track of the database version from CUMTD API
  */
 public class VersionDAO {
 
@@ -30,9 +31,9 @@ public class VersionDAO {
 	public String getDate() {
 		Cursor cursor = database.query(SQLiteHelper.TABLE_VERSION,
 				allColumns, null, null, null, null,null);
-		if(cursor == null) {
+
+		if(cursor.getCount() == 0)
 			return "";
-		}
 		cursor.moveToFirst();
 
 		String date = cursor.getString(0);
@@ -46,6 +47,6 @@ public class VersionDAO {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_DATE, newDate);
 
-		database.insert(SQLiteHelper.TABLE_BUSSTOPS, null,values);
+		database.insert(SQLiteHelper.TABLE_VERSION, null,values);
 	}
 }
