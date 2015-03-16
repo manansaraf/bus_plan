@@ -30,6 +30,9 @@ public class VersionDAO {
 	public String getDate() {
 		Cursor cursor = database.query(SQLiteHelper.TABLE_VERSION,
 				allColumns, null, null, null, null,null);
+		if(cursor == null) {
+			return "";
+		}
 		cursor.moveToFirst();
 
 		String date = cursor.getString(0);
