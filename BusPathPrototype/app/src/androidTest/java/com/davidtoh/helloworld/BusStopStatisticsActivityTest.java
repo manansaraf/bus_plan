@@ -37,7 +37,7 @@ public class BusStopStatisticsActivityTest extends ActivityInstrumentationTestCa
 	public void testBuildDepartJSON() {
 		Resources res = getInstrumentation().getTargetContext().getResources();
 		try {
-			List<BusRouteInfo> stops =  busStopStatisticsActivity.buildDepartJSON(res.getString(R.string.iuBusStop));
+			List<BusRouteInfo> stops = busStopStatisticsActivity.buildDepartJSON(res.getString(R.string.iuBusStop));
 			assertNotNull("stops is null", stops);
 			assertEquals("13N Silver", stops.get(0).getBusName());
 			assertEquals(0, stops.get(0).getTimeExpected());
@@ -51,7 +51,7 @@ public class BusStopStatisticsActivityTest extends ActivityInstrumentationTestCa
 	public void testBuildStopJSON() {
 		Resources res = getInstrumentation().getTargetContext().getResources();
 		try {
-			List<BusStopInfo> children =  busStopStatisticsActivity.buildStopJSON(res.getString(R.string.childTest));
+			List<BusStopInfo> children = busStopStatisticsActivity.buildStopJSON(res.getString(R.string.childTest));
 			assertNotNull("children is null", children);
 			assertEquals("Illini Union (South Side Shelter)", children.get(0).getStopName());
 			assertEquals("IU:1", children.get(0).getStopID());

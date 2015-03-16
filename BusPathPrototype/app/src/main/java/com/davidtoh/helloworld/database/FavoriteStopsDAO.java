@@ -19,7 +19,7 @@ public class FavoriteStopsDAO {
 
 	private SQLiteDatabase database;
 	private SQLiteHelper dbHelper;
-	private String[] allColumns = { SQLiteHelper.COLUMN_NAME, SQLiteHelper.COLUMN_ID};
+	private String[] allColumns = {SQLiteHelper.COLUMN_NAME, SQLiteHelper.COLUMN_ID};
 
 	public FavoriteStopsDAO(Context context) {
 		dbHelper = new SQLiteHelper(context);
@@ -70,7 +70,7 @@ public class FavoriteStopsDAO {
 
 	public void deleteFavoriteStop(String stopName) {
 		database.delete(SQLiteHelper.TABLE_FAVORITES, SQLiteHelper.COLUMN_NAME +
-		" = " + "\"" + stopName + "\"", null);
+				" = " + "\"" + stopName + "\"", null);
 	}
 
 	private BusStopInfo cursorToStop(Cursor cursor) {

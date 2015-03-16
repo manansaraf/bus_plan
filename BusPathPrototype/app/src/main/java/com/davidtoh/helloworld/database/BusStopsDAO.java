@@ -19,8 +19,8 @@ public class BusStopsDAO {
 
 	private SQLiteDatabase database;
 	private SQLiteHelper dbHelper;
-	private String[] allColumns = { SQLiteHelper.COLUMN_NAME, SQLiteHelper.COLUMN_ID,
-			SQLiteHelper.COLUMN_LAT, SQLiteHelper.COLUMN_LONG };
+	private String[] allColumns = {SQLiteHelper.COLUMN_NAME, SQLiteHelper.COLUMN_ID,
+			SQLiteHelper.COLUMN_LAT, SQLiteHelper.COLUMN_LONG};
 
 	public BusStopsDAO(Context context) {
 		dbHelper = new SQLiteHelper(context);
@@ -34,7 +34,10 @@ public class BusStopsDAO {
 		dbHelper.close();
 	}
 
-    public void drop() { database.delete(SQLiteHelper.TABLE_BUSSTOPS,null,null);}
+	public void drop() {
+		database.delete(SQLiteHelper.TABLE_BUSSTOPS, null, null);
+	}
+
 	public BusStopInfo createStop(String stopName, String stopID, double latitude, double longitude) {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_NAME, stopName);
@@ -74,8 +77,8 @@ public class BusStopsDAO {
 	public BusStopInfo getStop(String stopName) {
 		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
 				allColumns, SQLiteHelper.COLUMN_NAME + " = " + "\"" + stopName + "\"",
-				null, null, null,null);
-        cursor.moveToFirst();
+				null, null, null, null);
+		cursor.moveToFirst();
 
 		BusStopInfo stop = cursorToStop(cursor);
 		cursor.close();

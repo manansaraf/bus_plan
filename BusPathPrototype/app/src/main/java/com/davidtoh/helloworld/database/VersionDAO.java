@@ -14,7 +14,7 @@ public class VersionDAO {
 
 	private SQLiteDatabase database;
 	private SQLiteHelper dbHelper;
-	private String[] allColumns = { SQLiteHelper.COLUMN_DATE};
+	private String[] allColumns = {SQLiteHelper.COLUMN_DATE};
 
 	public VersionDAO(Context context) {
 		dbHelper = new SQLiteHelper(context);
@@ -30,9 +30,9 @@ public class VersionDAO {
 
 	public String getDate() {
 		Cursor cursor = database.query(SQLiteHelper.TABLE_VERSION,
-				allColumns, null, null, null, null,null);
+				allColumns, null, null, null, null, null);
 
-		if(cursor.getCount() == 0)
+		if (cursor.getCount() == 0)
 			return "";
 		cursor.moveToFirst();
 
@@ -47,6 +47,6 @@ public class VersionDAO {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_DATE, newDate);
 
-		database.insert(SQLiteHelper.TABLE_VERSION, null,values);
+		database.insert(SQLiteHelper.TABLE_VERSION, null, values);
 	}
 }

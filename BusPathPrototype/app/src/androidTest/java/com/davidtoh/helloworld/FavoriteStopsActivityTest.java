@@ -8,7 +8,6 @@ import com.davidtoh.helloworld.core_activities.FavoriteStopsActivity;
 
 /**
  * Created by dylan on 2/20/15.
- *
  */
 public class FavoriteStopsActivityTest extends ActivityInstrumentationTestCase2<FavoriteStopsActivity> {
 
