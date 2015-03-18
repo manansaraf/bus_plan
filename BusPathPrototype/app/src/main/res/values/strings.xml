@@ -5,6 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
+    <string name="action_favorite">Favorite</string>
     <string name="button_nearby">Nearby Stops</string>
     <string name="favorite_stops">Favorite Stops</string>
     <string name="search_title">Test</string>

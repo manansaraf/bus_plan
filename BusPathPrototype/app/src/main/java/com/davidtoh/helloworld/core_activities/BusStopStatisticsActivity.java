@@ -41,21 +41,21 @@ import java.util.List;
  * Created by dylan on 2/19/15.
  * activity to display routes coming to each child stop of stop selected
  */
-public class BusStopStatisticsActivity extends Activity{
+public class BusStopStatisticsActivity extends Activity {
 
-    private ProgressBar spinner;
-    private FavoriteStopsDAO fstopsDAO;
-    private CheckBox mCheckBox;
-    private String name;
-    private String stopID;
-    private BusStopInfo busStopInfo;
+	private ProgressBar spinner;
+	private FavoriteStopsDAO fstopsDAO;
+	private CheckBox mCheckBox;
+	private String name;
+	private String stopID;
+	private BusStopInfo busStopInfo;
 
-    @Override
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bus_stop_statistics);
 		Intent intent = getIntent();
-		if(intent.hasExtra("busStopName")) {
+		if (intent.hasExtra("busStopName")) {
 			name = intent.getStringExtra("busStopName");
 			makeAPICalls(name);
 		}
@@ -66,8 +66,8 @@ public class BusStopStatisticsActivity extends Activity{
 		busStopsDAO.open();
 		busStopInfo = busStopsDAO.getStop(stopName);
 
-        fstopsDAO = new FavoriteStopsDAO(this);
-        fstopsDAO.open();
+		fstopsDAO = new FavoriteStopsDAO(this);
+		fstopsDAO.open();
 
 		stopID = busStopInfo.getStopID();
 
@@ -83,7 +83,7 @@ public class BusStopStatisticsActivity extends Activity{
 		String stopURL = "https://developer.cumtd.com/api/v2.2/JSON/GetStop?key="
 				+ getResources().getString(R.string.apiKey) + "&stop_id=" + stopID;
 
-		spinner = (ProgressBar)findViewById(R.id.progressBar1);
+		spinner = (ProgressBar) findViewById(R.id.progressBar1);
 		spinner.setVisibility(View.GONE);
 		if (networkInfo != null && networkInfo.isConnected()) {
 			showProgressBar();
@@ -107,19 +107,20 @@ public class BusStopStatisticsActivity extends Activity{
 				return "Unable to retrieve web page. URL may be invalid.";
 			}
 		}
+
 		// onPostExecute displays the results of the AsyncTask.
 		@Override
 		protected void onPostExecute(String result) {
 			TextView textView = (TextView) findViewById(R.id.statisticsStatusView);
-			if(!result.equals("")) {
+			if (!result.equals("")) {
 				textView.setVisibility(View.VISIBLE);
 				textView.setText(result);
 			}
-            closeProgressBar();
+			closeProgressBar();
 		}
 	}
 
-	public String makeConnection(String urlString) throws IOException{
+	public String makeConnection(String urlString) throws IOException {
 		InputStream inputStream = null;
 		try {
 			URL url = new URL(urlString);
@@ -150,8 +151,8 @@ public class BusStopStatisticsActivity extends Activity{
 
 		for (BusStopInfo stop : ChildList) {
 			List<String> busStopInfoList = new ArrayList<>();
-			for(BusRouteInfo route : BusList){
-				if(route.getStopID().equals(stop.getStopID())) {
+			for (BusRouteInfo route : BusList) {
+				if (route.getStopID().equals(stop.getStopID())) {
 					busStopInfoList.add(route.getBusName() + ":"
 							+ route.getTimeExpected());
 				}
@@ -168,7 +169,7 @@ public class BusStopStatisticsActivity extends Activity{
 			public void run() {
 				expListView.setAdapter(listAdapter);
 				int count = listAdapter.getGroupCount();
-				for(int pos = 0; pos < count; pos++) {
+				for (int pos = 0; pos < count; pos++) {
 					expListView.expandGroup(pos);
 				}
 			}
@@ -182,32 +183,32 @@ public class BusStopStatisticsActivity extends Activity{
 		StringBuilder JSONResult = new StringBuilder();
 		String line;
 		while ((line = reader.readLine()) != null) {
-            JSONResult.append(line);
+			JSONResult.append(line);
 		}
 		reader.close();
 		return JSONResult.toString();
 	}
 
-    public List<BusRouteInfo> buildDepartJSON(String str) throws IOException{
-        JSONObject JObject;
-        List<BusRouteInfo> BusList = null;
-        try {
-            JObject = new JSONObject(str);
-            JSONArray JArray = JObject.getJSONArray("departures");
-            BusList = new ArrayList<>();
-            for (int i = 0; i < JArray.length(); i++) {
-                JObject = JArray.getJSONObject(i);
-                BusRouteInfo routeInfo = new BusRouteInfo(JObject.getString("headsign"),
-                        Integer.parseInt(JObject.getString("expected_mins")), JObject.getString("stop_id"));
-                BusList.add(routeInfo);
-            }
-        }catch (JSONException e) {
-            Log.e("JSON ERROR: ", e.getMessage());
-        }
-        return BusList;
-    }
+	public List<BusRouteInfo> buildDepartJSON(String str) throws IOException {
+		JSONObject JObject;
+		List<BusRouteInfo> BusList = null;
+		try {
+			JObject = new JSONObject(str);
+			JSONArray JArray = JObject.getJSONArray("departures");
+			BusList = new ArrayList<>();
+			for (int i = 0; i < JArray.length(); i++) {
+				JObject = JArray.getJSONObject(i);
+				BusRouteInfo routeInfo = new BusRouteInfo(JObject.getString("headsign"),
+						Integer.parseInt(JObject.getString("expected_mins")), JObject.getString("stop_id"));
+				BusList.add(routeInfo);
+			}
+		} catch (JSONException e) {
+			Log.e("JSON ERROR: ", e.getMessage());
+		}
+		return BusList;
+	}
 
-	public List<BusStopInfo> buildStopJSON(String str) throws IOException{
+	public List<BusStopInfo> buildStopJSON(String str) throws IOException {
 		JSONObject JObject;
 		List<BusStopInfo> ChildList = null;
 		try {
@@ -219,27 +220,29 @@ public class BusStopStatisticsActivity extends Activity{
 				BusStopInfo childStop = new BusStopInfo(JObject.getString("stop_name"), JObject.getString("stop_id"), 0, 0);
 				ChildList.add(childStop);
 			}
-		}catch (JSONException e) {
+		} catch (JSONException e) {
 			Log.e("JSON ERROR: ", e.getMessage());
 		}
 		return ChildList;
 	}
-    public void showProgressBar(){
-        spinner.setVisibility(View.VISIBLE);
-    }
-    public void closeProgressBar(){
-        spinner.setVisibility(View.GONE);
-    }
+
+	public void showProgressBar() {
+		spinner.setVisibility(View.VISIBLE);
+	}
+
+	public void closeProgressBar() {
+		spinner.setVisibility(View.GONE);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_stats, menu);
 
-        mCheckBox = (CheckBox)menu.findItem(R.id.favorite).getActionView().findViewById(R.id.favoriteCB);
-        mCheckBox.setChecked(getFavoriteStatus());
+		mCheckBox = (CheckBox) menu.findItem(R.id.favorite).getActionView().findViewById(R.id.favoriteCB);
+		mCheckBox.setChecked(getFavoriteStatus());
 
-        mCheckBox.setOnClickListener(new View.OnClickListener() {
+		mCheckBox.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if (mCheckBox.isChecked()) {
 					fstopsDAO.createFavoriteStop(name, stopID);
@@ -251,15 +254,15 @@ public class BusStopStatisticsActivity extends Activity{
 		return true;
 	}
 
-    public boolean getFavoriteStatus() {
-        List<BusStopInfo> allFavorites = fstopsDAO.getAllFavoriteStops();
-        boolean isFavorite = false;
-        for(int i = 0;i < allFavorites.size();i++) {
-            if (allFavorites.get(i).getStopName().equals(busStopInfo.getStopName()))
-                isFavorite = true;
-        }
-        return isFavorite;
-    }
+	public boolean getFavoriteStatus() {
+		List<BusStopInfo> allFavorites = fstopsDAO.getAllFavoriteStops();
+		boolean isFavorite = false;
+		for (int i = 0; i < allFavorites.size(); i++) {
+			if (allFavorites.get(i).getStopName().equals(busStopInfo.getStopName()))
+				isFavorite = true;
+		}
+		return isFavorite;
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

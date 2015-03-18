@@ -65,7 +65,6 @@ public class BusStopDatabase {
 		String newFeedDate = buildLastFeedJSON(JSONString);
 		String lastUpdatedDate = versionDAO.getDate();
 		if (!newFeedDate.equals(lastUpdatedDate)) {
-			Log.d("VER", "Datebase updated");
 			versionDAO.setDate(newFeedDate);
 			String URL = "https://developer.cumtd.com/api/v2.2/JSON/GetStops?key="
 					+ context.getResources().getString(R.string.apiKey);

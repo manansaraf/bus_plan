@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".BusStopStatisticsActivity">
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".BusStopStatisticsActivity">
 
     <item
         android:id="@+id/favorite"
-        android:title="Favorite"
+        android:title="@string/action_favorite"
         android:actionLayout="@layout/favorite_button"
-        android:showAsAction="always" />
+        android:showAsAction="always"/>
 
-    <item android:id="@+id/action_refresh"
-          android:title="@string/action_refresh"
-          android:orderInCategory="100"
-          app:showAsAction="never" />
+    <item
+        android:id="@+id/action_refresh"
+        android:title="@string/action_refresh"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
 
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
-          android:orderInCategory="100"
-          app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
 </menu>

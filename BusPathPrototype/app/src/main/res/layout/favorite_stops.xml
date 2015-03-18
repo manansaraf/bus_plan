@@ -14,13 +14,14 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Favorite Bus Stops"
         android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"/>
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:entries="@array/stops" >
+        android:entries="@array/stops">
     </ListView>
 </LinearLayout>

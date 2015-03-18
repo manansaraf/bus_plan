@@ -85,7 +85,7 @@ public class DatabaseTest extends ActivityInstrumentationTestCase2<MainActivity>
 		//add stop and see if numFavorites increased
 		favoriteStopsDAO.createFavoriteStop("THIS IS A TEST STOP", "TEST STOP TEST");
 		stops = favoriteStopsDAO.getAllFavoriteStops();
-		assertTrue(numFavorites+1 == stops.size());
+		assertTrue(numFavorites + 1 == stops.size());
 		//removed stop and see if numFavorites decreased
 		favoriteStopsDAO.deleteFavoriteStop("THIS IS A TEST STOP");
 		stops = favoriteStopsDAO.getAllFavoriteStops();

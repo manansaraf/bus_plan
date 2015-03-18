@@ -23,5 +23,7 @@ public class BusRouteInfo {
 		return timeExpected;
 	}
 
-	public String getStopID() { return stopID; }
+	public String getStopID() {
+		return stopID;
+	}
 }

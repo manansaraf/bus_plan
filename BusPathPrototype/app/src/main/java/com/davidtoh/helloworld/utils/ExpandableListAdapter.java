@@ -57,9 +57,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 		TextView routeTextView = (TextView) convertView.findViewById(R.id.routeLabel);
 		TextView timeTextView = (TextView) convertView.findViewById(R.id.timeLabel);
 
-		routeTextView.setText(childText.substring(0,splitPosition));
+		routeTextView.setText(childText.substring(0, splitPosition));
 
-		String time = childText.substring(splitPosition+1);
+		String time = childText.substring(splitPosition + 1);
 		switch (time) {
 			case "0":
 				time = "DUE";

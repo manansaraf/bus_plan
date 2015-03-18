@@ -17,24 +17,27 @@ public class BusStopInfo {
 		this.latitude = latitude;
 	}
 
-	public BusStopInfo() {}
+	public BusStopInfo() {
+	}
 
 	public String getStopName() {
 		return this.stopName;
 	}
 
-    @Override
-    public String toString() { return this.getStopName(); }
+	@Override
+	public String toString() {
+		return this.getStopName();
+	}
 
-	public String getStopID(){
+	public String getStopID() {
 		return this.stopID;
 	}
 
-	public double getLongitude(){
+	public double getLongitude() {
 		return longitude;
 	}
 
-	public double getLatitude(){
+	public double getLatitude() {
 		return latitude;
 	}
 

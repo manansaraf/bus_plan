@@ -22,10 +22,10 @@ import com.davidtoh.helloworld.utils.BusStopInfo;
  * BusStopStatisticsActivity
  */
 public class SearchStopsActivity extends Activity implements AdapterView.OnItemClickListener,
-        SearchView.OnQueryTextListener {
+		SearchView.OnQueryTextListener {
 
-    private ArrayAdapter<BusStopInfo> mAdapter;
-    private BusStopsDAO bstopsDAO;
+	private ArrayAdapter<BusStopInfo> mAdapter;
+	private BusStopsDAO bstopsDAO;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +34,14 @@ public class SearchStopsActivity extends Activity implements AdapterView.OnItemC
 		ListView listview = (ListView) findViewById(R.id.listView);
 		listview.setOnItemClickListener(this);
 
-        bstopsDAO = new BusStopsDAO(this);
-        bstopsDAO.open();
+		bstopsDAO = new BusStopsDAO(this);
+		bstopsDAO.open();
 
-        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, bstopsDAO.getAllStops());
-        listview.setAdapter(mAdapter);
+		mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, bstopsDAO.getAllStops());
+		listview.setAdapter(mAdapter);
 	}
 
-    @Override
+	@Override
 	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 		Intent intent = new Intent();
 		intent.setClass(this, BusStopStatisticsActivity.class);
@@ -51,15 +51,15 @@ public class SearchStopsActivity extends Activity implements AdapterView.OnItemC
 		startActivity(intent);
 	}
 
-    @Override
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu items for use in the action bar
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_search, menu);
 
-		SearchView mSearch = (SearchView)menu.findItem(R.id.action_search).getActionView();
-        mSearch.setOnQueryTextListener(this);
-        return true;
+		SearchView mSearch = (SearchView) menu.findItem(R.id.action_search).getActionView();
+		mSearch.setOnQueryTextListener(this);
+		return true;
 		//return super.onCreateOptionsMenu(menu);
 	}
 
@@ -79,17 +79,17 @@ public class SearchStopsActivity extends Activity implements AdapterView.OnItemC
 		}
 	}
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        onQueryTextChange(query);
-        return false;
-    }
+	@Override
+	public boolean onQueryTextSubmit(String query) {
+		onQueryTextChange(query);
+		return false;
+	}
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        mAdapter.clear();
-        mAdapter.addAll(bstopsDAO.searchStops(newText));
-        mAdapter.notifyDataSetChanged();
-        return false;
-    }
+	@Override
+	public boolean onQueryTextChange(String newText) {
+		mAdapter.clear();
+		mAdapter.addAll(bstopsDAO.searchStops(newText));
+		mAdapter.notifyDataSetChanged();
+		return false;
+	}
 }
