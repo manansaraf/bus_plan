@@ -113,7 +113,7 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 					mMap.moveCamera(cameraUpdate);
 				} else if (provider.equals("gps") && status == LocationProvider.AVAILABLE) {
 
-					loc.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 10, this);
+					loc.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, this);
 				}
 			}
 
@@ -137,7 +137,7 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 				}
 			}
 		};
-		loc.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 10, listener);
+		loc.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, listener);
 		createBusStopLocation();
 	}
 
@@ -165,20 +165,10 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 			@Override
 			public void onInfoWindowClick(Marker marker) {
 				Intent intent = new Intent(NearbyBusStopsActivity.this, BusStopStatisticsActivity.class);
-				//TODO Send a stop id from the database
 				intent.putExtra("busStopName", marker.getTitle());
 				startActivity(intent);
 
 			}
 		});
 	}
-
-	public List<BusStopInfo> getLocationOfMarkers() {
-        return list;
-	}
-
-	public BusStopInfo[] getMarkers() {
-		return markers;
-	}
-
 }

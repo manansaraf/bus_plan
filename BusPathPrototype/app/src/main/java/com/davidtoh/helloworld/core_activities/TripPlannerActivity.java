@@ -81,20 +81,25 @@ public class TripPlannerActivity extends FragmentActivity {
         Intent intent = new Intent(TripPlannerActivity.this, TripPlannerResultActivity.class);
         //TODO Send a stop id from the database
         EditText editText = (EditText) findViewById(R.id.sourceDest);
-        intent.putExtra("startStopName",editText.getText().toString());
-        EditText editText2 = (EditText) findViewById(R.id.endDest);
-        intent.putExtra("endStopName",editText2.getText().toString());
-        EditText time = (EditText) findViewById(R.id.time);
-        String Time = time.getText().toString();
-        if(!Time.equals("")){
-            intent.putExtra("time",Time);
-        }
-        EditText date = (EditText) findViewById(R.id.date);
-        String Date = date.getText().toString();
-        if(!Date.equals("")){
-            intent.putExtra("date",Date);
-        }
-        startActivity(intent);
+		EditText editText2 = (EditText) findViewById(R.id.endDest);
+        String start = editText.getText().toString();
+		String end = editText2.getText().toString();
+
+		if(start.length()>0 && end.length()>0) {
+			intent.putExtra("startStopName", editText.getText().toString());
+			intent.putExtra("endStopName", editText2.getText().toString());
+			EditText time = (EditText) findViewById(R.id.time);
+			String Time = time.getText().toString();
+			if (!Time.equals("")) {
+				intent.putExtra("time", Time);
+			}
+			EditText date = (EditText) findViewById(R.id.date);
+			String Date = date.getText().toString();
+			if (!Date.equals("")) {
+				intent.putExtra("date", Date);
+			}
+			startActivity(intent);
+		}
     }
 
     public void showDatePickerDialog(View v) {

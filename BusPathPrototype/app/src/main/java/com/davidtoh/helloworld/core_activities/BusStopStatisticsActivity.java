@@ -75,7 +75,7 @@ public class BusStopStatisticsActivity extends Activity{
 		spinner = (ProgressBar)findViewById(R.id.progressBar1);
 		spinner.setVisibility(View.GONE);
 		if (networkInfo != null && networkInfo.isConnected()) {
-			ShowProgressBar();
+			showProgressBar();
 			new getDeparturesByStop().execute(departureURL, stopURL);
 		} else {
 			textView.setVisibility(View.VISIBLE);
@@ -104,7 +104,7 @@ public class BusStopStatisticsActivity extends Activity{
 				textView.setVisibility(View.VISIBLE);
 				textView.setText(result);
 			}
-            CloseProgressBar();
+            closeProgressBar();
 		}
 	}
 
@@ -212,10 +212,10 @@ public class BusStopStatisticsActivity extends Activity{
 		}
 		return ChildList;
 	}
-    public void ShowProgressBar(){
+    public void showProgressBar(){
         spinner.setVisibility(View.VISIBLE);
     }
-    public void CloseProgressBar(){
+    public void closeProgressBar(){
         spinner.setVisibility(View.GONE);
     }
 

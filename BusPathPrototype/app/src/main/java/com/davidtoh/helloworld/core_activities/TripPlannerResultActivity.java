@@ -60,7 +60,6 @@ public class TripPlannerResultActivity extends Activity {
             timeAndDate+="&time="+time;
         }
         makeAPICalls(start_name,end_name,timeAndDate);
-
     }
 
 
@@ -110,7 +109,7 @@ public class TripPlannerResultActivity extends Activity {
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
         spinner.setVisibility(View.GONE);
         if (networkInfo != null && networkInfo.isConnected()) {
-            ShowProgressBar();
+            showProgressBar();
             new getTrip().execute(tripPlannerURL);
         } else {
             textView.setVisibility(View.VISIBLE);
@@ -151,8 +150,7 @@ public class TripPlannerResultActivity extends Activity {
         @Override
         protected String doInBackground(String... urls) {
             try {
-                createLists(urls[0]);
-                return "";
+                return createLists(urls[0]);
 
             } catch (IOException e) {
                 return "Unable to retrieve web page. URL may be invalid.";
@@ -167,10 +165,10 @@ public class TripPlannerResultActivity extends Activity {
                 textView.setVisibility(View.VISIBLE);
                 textView.setText(result);
             }
-            CloseProgressBar();
+            closeProgressBar();
         }
     }
-    private void createLists(String tripPlannerURL) throws IOException {
+    private String createLists(String tripPlannerURL) throws IOException {
         String tripJSON = makeConnection(tripPlannerURL);
         List<List<TripInfo>> TripList = buildTripJSON(tripJSON);
 
@@ -213,11 +211,15 @@ public class TripPlannerResultActivity extends Activity {
                 }
             }
         });
+		if(listAdapter.getGroupCount() == 0)
+			return "No trips available at this time";
+		else
+			return "";
     }
-    public void ShowProgressBar(){
+    public void showProgressBar(){
         spinner.setVisibility(View.VISIBLE);
     }
-    public void CloseProgressBar(){
+    public void closeProgressBar(){
         spinner.setVisibility(View.GONE);
     }
     public List<List<TripInfo>> buildTripJSON(String str) throws IOException{
