@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.davidtoh.helloworld.R;
+import com.davidtoh.helloworld.database.BusStopsDAO;
 import com.davidtoh.helloworld.utils.BusStopInfo;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -20,17 +21,22 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
 public class NearbyBusStopsActivity extends FragmentActivity {
 
 	private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 	public BusStopInfo[] markers;
+    List<BusStopInfo> list;
+    BusStopsDAO busStops;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nearby_bus_stops);
 		setUpMapIfNeeded();
-
+        if(list==null)
+            Log.v("Android","HI");
 	}
 
 	@Override
@@ -63,6 +69,7 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 			// Check if we were successful in obtaining the map.
 			if (mMap != null) {
 				setUpMap();
+
 			}
 		}
 	}
@@ -77,13 +84,12 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 		final LocationManager loc = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		final Location lastKnown = loc.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		if (lastKnown != null) {
-			Log.v("Android", "Hi");
 			LatLng latLng = new LatLng(lastKnown.getLatitude(), lastKnown.getLongitude());
-			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15.0f);
+			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16.0f);
 			mMap.moveCamera(cameraUpdate);
 		} else {
 			LatLng latLng = new LatLng(40.1094, -88.2272);
-			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10.0f);
+			CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 13.0f);
 			mMap.moveCamera(cameraUpdate);
 		}
 		mMap.setMyLocationEnabled(true);
@@ -93,7 +99,7 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 				//mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(),location.getLongitude())).title("Marker1"));
 				Log.v("android", "enter1");
 				LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-				CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15.0f);
+				CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16.0f);
 				mMap.moveCamera(cameraUpdate);
 			}
 
@@ -103,7 +109,7 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 					LocationManager loc = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 					Location lastKnown = loc.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 					LatLng latLng = new LatLng(lastKnown.getLatitude(), lastKnown.getLongitude());
-					CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15.0f);
+					CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16.0f);
 					mMap.moveCamera(cameraUpdate);
 				} else if (provider.equals("gps") && status == LocationProvider.AVAILABLE) {
 
@@ -136,17 +142,20 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 	}
 
 	private void createBusStopLocation() {
-		BusStopInfo[] marker = getLocationOfMarkers();
-		markers = new BusStopInfo[marker.length];
-		for (int i = 0; i < marker.length; i++) {
-			mMap.addMarker(new MarkerOptions().position(new LatLng(marker[i].getLatitude(), marker[i].getLongitude())).title(marker[i].getStopName()));
-			markers[i] = marker[i];
+        busStops = new BusStopsDAO(this);
+        busStops.open();
+        list = busStops.getAllStops();
+		List<BusStopInfo> marker = list;
+		markers = new BusStopInfo[list.size()];
+		for (int i = 0; i < marker.size(); i++) {
+			mMap.addMarker(new MarkerOptions().position(new LatLng(marker.get(i).getLatitude(), marker.get(i).getLongitude())).title(marker.get(i).getStopName()));
+			markers[i] = marker.get(i);
 		}
 		mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 			@Override
 			public boolean onMarkerClick(Marker marker) {
 				LatLng latLng = marker.getPosition();
-				CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 18.0f);
+				CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17.0f);
 				mMap.moveCamera(cameraUpdate);
 				marker.showInfoWindow();
 				return true;
@@ -157,21 +166,15 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 			public void onInfoWindowClick(Marker marker) {
 				Intent intent = new Intent(NearbyBusStopsActivity.this, BusStopStatisticsActivity.class);
 				//TODO Send a stop id from the database
-				intent.putExtra("busStopName", 1);
+				intent.putExtra("busStopName", marker.getTitle());
 				startActivity(intent);
 
 			}
 		});
 	}
 
-	public BusStopInfo[] getLocationOfMarkers() {
-		BusStopInfo[] marker = new BusStopInfo[5];
-		marker[0] = new BusStopInfo("White and Wright", "", 40.114455, -88.229298);
-		marker[1] = new BusStopInfo("White and Sixth", "" , 40.114452, -88.230285);
-		marker[2] = new BusStopInfo("Wright and Stoughton", "", 40.113428, -88.228877);
-		marker[3] = new BusStopInfo("Wright and Springfield", "", 40.112852, -88.229020);
-		marker[4] = new BusStopInfo("Transit Plaza", "", 40.108590, -88.228847);
-		return marker;
+	public List<BusStopInfo> getLocationOfMarkers() {
+        return list;
 	}
 
 	public BusStopInfo[] getMarkers() {
