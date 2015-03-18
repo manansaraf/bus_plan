@@ -57,8 +57,7 @@ public class BusStopStatisticsActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bus_stop_statistics);
 
-		Intent intent = getIntent();
-        name = intent.getStringExtra("busStopName");
+        name = getIntent().getStringExtra("busStopName");
 
 		BusStopsDAO busStopsDAO = new BusStopsDAO(this);
 		busStopsDAO.open();
@@ -197,7 +196,8 @@ public class BusStopStatisticsActivity extends Activity{
             BusList = new ArrayList<>();
             for (int i = 0; i < JArray.length(); i++) {
                 JObject = JArray.getJSONObject(i);
-                BusRouteInfo routeInfo = new BusRouteInfo(JObject.getString("headsign"),Integer.parseInt(JObject.getString("expected_mins")), JObject.getString("stop_id"));
+                BusRouteInfo routeInfo = new BusRouteInfo(JObject.getString("headsign"),
+                        Integer.parseInt(JObject.getString("expected_mins")), JObject.getString("stop_id"));
                 BusList.add(routeInfo);
             }
         }catch (JSONException e) {
@@ -235,16 +235,8 @@ public class BusStopStatisticsActivity extends Activity{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_stats, menu);
 
-        List<BusStopInfo> allFavorites = fstopsDAO.getAllFavoriteStops();
-
-        boolean isFavorite = false;
-        for(int i = 0;i < allFavorites.size();i++){
-            if(allFavorites.get(i).getStopName().equals(busStopInfo.getStopName()))
-                isFavorite = true;
-        }
         mCheckBox = (CheckBox)menu.findItem(R.id.favorite).getActionView().findViewById(R.id.favoriteCB);
-        mCheckBox.setChecked(isFavorite);
-        Log.v("",""+isFavorite);
+        mCheckBox.setChecked(getFavoriteStatus());
 
         mCheckBox.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -257,6 +249,17 @@ public class BusStopStatisticsActivity extends Activity{
         });
 		return true;
 	}
+
+    public boolean getFavoriteStatus() {
+        List<BusStopInfo> allFavorites = fstopsDAO.getAllFavoriteStops();
+        boolean isFavorite = false;
+        for(int i = 0;i < allFavorites.size();i++) {
+            if (allFavorites.get(i).getStopName().equals(busStopInfo.getStopName()))
+                isFavorite = true;
+        }
+        return isFavorite;
+    }
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
