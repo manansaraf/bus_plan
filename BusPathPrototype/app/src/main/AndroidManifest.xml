@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.davidtoh.helloworld" >
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -105,6 +106,22 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity
+            android:parentActivityName=".core_activities.TripPlannerActivity"
+            android:name=".core_activities.TripPlannerResultActivity"
+            android:label="Trip Planner" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidtoh.helloworld.core_activities.TripPlannerActivity" />
+        </activity>
+        <activity
+            android:parentActivityName=".core_activities.TripPlannerActivity"
+            android:name=".core_activities.SearchStopsTripPlannerActivity"
+            android:label="Search" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidtoh.helloworld.core_activities.TripPlannerActivity" />
+        </activity>
     </application>
 
 </manifest>
