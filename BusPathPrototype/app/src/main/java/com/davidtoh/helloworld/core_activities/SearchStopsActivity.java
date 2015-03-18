@@ -41,8 +41,6 @@ public class SearchStopsActivity extends Activity implements AdapterView.OnItemC
         mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, bstopsDAO.getAllStops());
         listview.setAdapter(mAdapter);
 
-
-
         // Get the intent, verify the action and get the query
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {

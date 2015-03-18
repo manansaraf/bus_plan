@@ -68,7 +68,6 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/stops"
         android:layout_below="@+id/textView6">
     </ListView>
 

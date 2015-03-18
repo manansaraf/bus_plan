@@ -11,11 +11,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.davidtoh.helloworld.R;
+import com.davidtoh.helloworld.database.FavoriteStopsDAO;
 import com.davidtoh.helloworld.utils.BusRouteInfo;
 import com.davidtoh.helloworld.utils.BusStopInfo;
 import com.davidtoh.helloworld.database.BusStopsDAO;
@@ -40,11 +44,19 @@ import java.util.List;
  * activity to display routes coming to each child stop of stop selected
  */
 public class BusStopStatisticsActivity extends Activity{
+
     private ProgressBar spinner;
+    private FavoriteStopsDAO fstopsDAO;
+    private CheckBox mCheckBox;
+    private String name;
+    private String stopID;
+    private BusStopInfo busStopInfo;
+
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bus_stop_statistics);
+<<<<<<< HEAD
 		Intent intent = getIntent();
 		if(intent.hasExtra("busStopName")) {
 			String name = intent.getStringExtra("busStopName");
@@ -53,12 +65,19 @@ public class BusStopStatisticsActivity extends Activity{
 	}
 
 	private void makeAPICalls(String name) {
+=======
+
+        name = getIntent().getStringExtra("busStopName");
+>>>>>>> remotes/origin/groupthree
 
 		BusStopsDAO busStopsDAO = new BusStopsDAO(this);
 		busStopsDAO.open();
-		BusStopInfo busStopInfo = busStopsDAO.getStop(name);
+		busStopInfo = busStopsDAO.getStop(name);
 
-		String stopID = busStopInfo.getStopID();
+        fstopsDAO = new FavoriteStopsDAO(this);
+        fstopsDAO.open();
+
+		stopID = busStopInfo.getStopID();
 
 		TextView textView = (TextView) findViewById(R.id.statisticsStatusView);
 		textView.setVisibility(View.GONE);
@@ -186,7 +205,8 @@ public class BusStopStatisticsActivity extends Activity{
             BusList = new ArrayList<>();
             for (int i = 0; i < JArray.length(); i++) {
                 JObject = JArray.getJSONObject(i);
-                BusRouteInfo routeInfo = new BusRouteInfo(JObject.getString("headsign"),Integer.parseInt(JObject.getString("expected_mins")), JObject.getString("stop_id"));
+                BusRouteInfo routeInfo = new BusRouteInfo(JObject.getString("headsign"),
+                        Integer.parseInt(JObject.getString("expected_mins")), JObject.getString("stop_id"));
                 BusList.add(routeInfo);
             }
         }catch (JSONException e) {
@@ -223,8 +243,32 @@ public class BusStopStatisticsActivity extends Activity{
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_stats, menu);
+
+        mCheckBox = (CheckBox)menu.findItem(R.id.favorite).getActionView().findViewById(R.id.favoriteCB);
+        mCheckBox.setChecked(getFavoriteStatus());
+
+        mCheckBox.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (mCheckBox.isChecked()) {
+                    fstopsDAO.createFavoriteStop(name, stopID);
+                } else {
+                    fstopsDAO.deleteFavoriteStop(name);
+                }
+            }
+        });
 		return true;
 	}
+
+    public boolean getFavoriteStatus() {
+        List<BusStopInfo> allFavorites = fstopsDAO.getAllFavoriteStops();
+        boolean isFavorite = false;
+        for(int i = 0;i < allFavorites.size();i++) {
+            if (allFavorites.get(i).getStopName().equals(busStopInfo.getStopName()))
+                isFavorite = true;
+        }
+        return isFavorite;
+    }
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
