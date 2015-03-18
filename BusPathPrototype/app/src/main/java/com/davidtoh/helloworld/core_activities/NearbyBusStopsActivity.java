@@ -8,7 +8,6 @@ import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.database.BusStopsDAO;
@@ -29,14 +28,15 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 	public BusStopInfo[] markers;
     List<BusStopInfo> list;
     BusStopsDAO busStops;
+	LocationManager loc;
+	LocationListener listener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nearby_bus_stops);
+		loc = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		setUpMapIfNeeded();
-        if(list==null)
-            Log.v("Android","HI");
 	}
 
 	@Override
@@ -69,7 +69,6 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 			// Check if we were successful in obtaining the map.
 			if (mMap != null) {
 				setUpMap();
-
 			}
 		}
 	}
@@ -81,7 +80,6 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 	 * This should only be called once and when we are sure that {@link #mMap} is not null.
 	 */
 	private void setUpMap() {
-		final LocationManager loc = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		final Location lastKnown = loc.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		if (lastKnown != null) {
 			LatLng latLng = new LatLng(lastKnown.getLatitude(), lastKnown.getLongitude());
@@ -93,11 +91,9 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 			mMap.moveCamera(cameraUpdate);
 		}
 		mMap.setMyLocationEnabled(true);
-		LocationListener listener = new LocationListener() {
+		listener = new LocationListener() {
 			@Override
 			public void onLocationChanged(Location location) {
-				//mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(),location.getLongitude())).title("Marker1"));
-				Log.v("android", "enter1");
 				LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 				CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16.0f);
 				mMap.moveCamera(cameraUpdate);
@@ -120,7 +116,6 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 			@Override
 			public void onProviderEnabled(String provider) {
 				if (provider.equals("gps")) {
-					Log.v("android", "enter2");
 					Intent intent = new Intent(NearbyBusStopsActivity.this, NearbyBusStopsActivity.class);
 					startActivity(intent);
 
@@ -130,7 +125,6 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 			@Override
 			public void onProviderDisabled(String provider) {
 				if (provider.equals("gps")) {
-					Log.v("android", "enter3");
 					LatLng latLng = new LatLng(40.1094, -88.2272);
 					CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 13.0f);
 					mMap.moveCamera(cameraUpdate);
@@ -170,5 +164,11 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 
 			}
 		});
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		loc.removeUpdates(listener);
 	}
 }
