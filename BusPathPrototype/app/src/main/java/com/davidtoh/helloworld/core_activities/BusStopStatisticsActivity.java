@@ -11,10 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -56,23 +54,17 @@ public class BusStopStatisticsActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bus_stop_statistics);
-<<<<<<< HEAD
 		Intent intent = getIntent();
 		if(intent.hasExtra("busStopName")) {
-			String name = intent.getStringExtra("busStopName");
+			name = intent.getStringExtra("busStopName");
 			makeAPICalls(name);
 		}
 	}
 
-	private void makeAPICalls(String name) {
-=======
-
-        name = getIntent().getStringExtra("busStopName");
->>>>>>> remotes/origin/groupthree
-
+	private void makeAPICalls(String stopName) {
 		BusStopsDAO busStopsDAO = new BusStopsDAO(this);
 		busStopsDAO.open();
-		busStopInfo = busStopsDAO.getStop(name);
+		busStopInfo = busStopsDAO.getStop(stopName);
 
         fstopsDAO = new FavoriteStopsDAO(this);
         fstopsDAO.open();
@@ -248,14 +240,14 @@ public class BusStopStatisticsActivity extends Activity{
         mCheckBox.setChecked(getFavoriteStatus());
 
         mCheckBox.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (mCheckBox.isChecked()) {
-                    fstopsDAO.createFavoriteStop(name, stopID);
-                } else {
-                    fstopsDAO.deleteFavoriteStop(name);
-                }
-            }
-        });
+			public void onClick(View v) {
+				if (mCheckBox.isChecked()) {
+					fstopsDAO.createFavoriteStop(name, stopID);
+				} else {
+					fstopsDAO.deleteFavoriteStop(name);
+				}
+			}
+		});
 		return true;
 	}
 

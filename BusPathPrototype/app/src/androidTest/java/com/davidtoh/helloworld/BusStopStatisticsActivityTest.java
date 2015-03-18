@@ -2,7 +2,6 @@ package com.davidtoh.helloworld;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Debug;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.util.Log;
@@ -45,35 +44,6 @@ public class BusStopStatisticsActivityTest extends ActivityInstrumentationTestCa
         assertNotNull("busStopStatistics is null", busStopStatisticsActivity);
     }
 
-<<<<<<< HEAD
-	public void testBuildDepartJSON() {
-		Resources res = getInstrumentation().getTargetContext().getResources();
-		try {
-			List<BusRouteInfo> stops = busStopStatisticsActivity.buildDepartJSON(res.getString(R.string.iuBusStop));
-			assertNotNull("stops is null", stops);
-			assertEquals("13N Silver", stops.get(0).getBusName());
-			assertEquals(0, stops.get(0).getTimeExpected());
-			assertEquals("5W GreenHOPPER", stops.get(1).getBusName());
-			assertEquals(3, stops.get(2).getTimeExpected());
-		} catch (IOException e) {
-			Log.e("TEST_ERROR", e.getMessage());
-		}
-	}
-
-	public void testBuildStopJSON() {
-		Resources res = getInstrumentation().getTargetContext().getResources();
-		try {
-			List<BusStopInfo> children = busStopStatisticsActivity.buildStopJSON(res.getString(R.string.childTest));
-			assertNotNull("children is null", children);
-			assertEquals("Illini Union (South Side Shelter)", children.get(0).getStopName());
-			assertEquals("IU:1", children.get(0).getStopID());
-			assertEquals("Illini Union (Engineering Side)", children.get(1).getStopName());
-			assertEquals("IU:2", children.get(1).getStopID());
-		} catch (IOException e) {
-			Log.e("TEST_ERROR", e.getMessage());
-		}
-	}
-=======
     public void testSetCheckBox() {
         assertEquals(mCheckBox.isChecked(), busStopStatisticsActivity.getFavoriteStatus());
         assertTrue(true);
@@ -92,7 +62,6 @@ public class BusStopStatisticsActivityTest extends ActivityInstrumentationTestCa
             }
         });
     }
->>>>>>> remotes/origin/groupthree
 
     @UiThreadTest
     public void testRemoveFavorite() {

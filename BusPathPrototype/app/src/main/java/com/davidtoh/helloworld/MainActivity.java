@@ -3,7 +3,6 @@ package com.davidtoh.helloworld;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.MenuItem;
@@ -18,10 +17,11 @@ import com.davidtoh.helloworld.core_activities.SearchStopsActivity;
 import com.davidtoh.helloworld.core_activities.TripPlannerActivity;
 import com.davidtoh.helloworld.database.BusStopDatabase;
 import com.davidtoh.helloworld.database.FavoriteStopsDAO;
+import com.davidtoh.helloworld.utils.BusStopInfo;
 
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener{
 
-    private ArrayAdapter mAdapter;
+    private ArrayAdapter<BusStopInfo> mAdapter;
     private FavoriteStopsDAO fstopsDAO;
 
     @Override
@@ -36,7 +36,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
         fstopsDAO = new FavoriteStopsDAO(this);
         fstopsDAO.open();
-        mAdapter = new ArrayAdapter(this,
+        mAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, fstopsDAO.getAllFavoriteStops());
         listview.setAdapter(mAdapter);
 

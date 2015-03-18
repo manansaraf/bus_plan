@@ -1,10 +1,8 @@
 package com.davidtoh.helloworld.core_activities;
 
 import android.app.Activity;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,42 +14,32 @@ import android.widget.SearchView;
 
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.database.BusStopsDAO;
+import com.davidtoh.helloworld.utils.BusStopInfo;
 
 /**
  * Created by dylan on 2/17/15.
+ * this activity lists all of the stops in the database and when clicked, goes to the
+ * BusStopStatisticsActivity
  */
 public class SearchStopsActivity extends Activity implements AdapterView.OnItemClickListener,
         SearchView.OnQueryTextListener {
 
-    private ArrayAdapter mAdapter;
-    private SearchView mSearch;
+    private ArrayAdapter<BusStopInfo> mAdapter;
     private BusStopsDAO bstopsDAO;
-    private ListView listview;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_stops);
-		listview = (ListView) findViewById(R.id.listView);
+		ListView listview = (ListView) findViewById(R.id.listView);
 		listview.setOnItemClickListener(this);
 
         bstopsDAO = new BusStopsDAO(this);
         bstopsDAO.open();
 
-        mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, bstopsDAO.getAllStops());
+        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, bstopsDAO.getAllStops());
         listview.setAdapter(mAdapter);
-
-        // Get the intent, verify the action and get the query
-        Intent intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            doMySearch(query);
-        }
 	}
-
-    private void doMySearch(String query) {
-
-    }
 
     @Override
 	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
@@ -69,7 +57,7 @@ public class SearchStopsActivity extends Activity implements AdapterView.OnItemC
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_search, menu);
 
-        mSearch = (SearchView)menu.findItem(R.id.action_search).getActionView();
+		SearchView mSearch = (SearchView)menu.findItem(R.id.action_search).getActionView();
         mSearch.setOnQueryTextListener(this);
         return true;
 		//return super.onCreateOptionsMenu(menu);
