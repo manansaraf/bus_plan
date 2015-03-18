@@ -18,7 +18,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.davidtoh.helloworld.R;
-import com.davidtoh.helloworld.utils.BusStopsDAO;
+import com.davidtoh.helloworld.database.BusStopsDAO;
 
 /**
  * Created by dylan on 2/17/15.
@@ -43,8 +43,6 @@ public class SearchStopsActivity extends Activity implements AdapterView.OnItemC
 
         mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, bstopsDAO.getAllStops());
         listview.setAdapter(mAdapter);
-
-
 
         // Get the intent, verify the action and get the query
         Intent intent = getIntent();
@@ -105,8 +103,7 @@ public class SearchStopsActivity extends Activity implements AdapterView.OnItemC
     @Override
     public boolean onQueryTextChange(String newText) {
         mAdapter.clear();
-        //mAdapter.addAll(bstopsDAO.searchStops(newText));
-        Log.d("", "TEST VALUE1");
+        mAdapter.addAll(bstopsDAO.searchStops(newText));
         mAdapter.notifyDataSetChanged();
         return false;
     }

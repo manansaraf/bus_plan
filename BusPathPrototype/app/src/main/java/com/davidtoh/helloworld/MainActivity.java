@@ -3,10 +3,12 @@ package com.davidtoh.helloworld;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.davidtoh.helloworld.core_activities.BusStopStatisticsActivity;
@@ -15,8 +17,12 @@ import com.davidtoh.helloworld.core_activities.SchedulerActivity;
 import com.davidtoh.helloworld.core_activities.SearchStopsActivity;
 import com.davidtoh.helloworld.core_activities.TripPlannerActivity;
 import com.davidtoh.helloworld.database.BusStopDatabase;
+import com.davidtoh.helloworld.database.FavoriteStopsDAO;
 
 public class MainActivity extends Activity implements AdapterView.OnItemClickListener{
+
+    private ArrayAdapter mAdapter;
+    private FavoriteStopsDAO fstopsDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,21 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 		listview.setOnItemClickListener(this);
         BusStopDatabase busStopDatabase = new BusStopDatabase();
         busStopDatabase.populate(this);
+
+        fstopsDAO = new FavoriteStopsDAO(this);
+        fstopsDAO.open();
+        mAdapter = new ArrayAdapter(this,
+                android.R.layout.simple_list_item_1, fstopsDAO.getAllFavoriteStops());
+        listview.setAdapter(mAdapter);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mAdapter.clear();
+        mAdapter.addAll(fstopsDAO.getAllFavoriteStops());
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -37,12 +58,12 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
     }
 
 	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-		Intent intent = new Intent();
-		intent.setClass(this, BusStopStatisticsActivity.class);
-		intent.putExtra("position", position);
+        Intent intent = new Intent();
+        intent.setClass(this, BusStopStatisticsActivity.class);
+        intent.putExtra("busStopName", l.getItemAtPosition(position).toString());
 
-		intent.putExtra("id", id);
-		startActivity(intent);
+        intent.putExtra("id", id);
+        startActivity(intent);
 	}
 
     @Override
