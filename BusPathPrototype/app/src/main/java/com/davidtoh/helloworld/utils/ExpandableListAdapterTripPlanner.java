@@ -53,7 +53,7 @@ public class ExpandableListAdapterTripPlanner extends BaseExpandableListAdapter 
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = infalInflater.inflate(R.layout.list_item, null);
 		}
-		int splitPosition = childText.indexOf(':');
+		int splitPosition = childText.indexOf('%');
 		TextView routeTextView = (TextView) convertView.findViewById(R.id.routeLabel);
 		TextView timeTextView = (TextView) convertView.findViewById(R.id.timeLabel);
 

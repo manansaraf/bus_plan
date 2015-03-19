@@ -85,7 +85,7 @@ public class TripPlannerActivity extends FragmentActivity {
 
 	public void submitTripPlan(View view) {
 		Intent intent = new Intent(TripPlannerActivity.this, TripPlannerResultActivity.class);
-		//TODO Send a stop id from the database
+
 		EditText editText = (EditText) findViewById(R.id.sourceDest);
 		EditText editText2 = (EditText) findViewById(R.id.endDest);
 		String start = editText.getText().toString();

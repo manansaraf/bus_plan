@@ -89,7 +89,7 @@ public class DateParser {
 
 	public static String toString(Date date) {
 
-		SimpleDateFormat df = new SimpleDateFormat("h.mm a");
+		SimpleDateFormat df = new SimpleDateFormat("hh:mm a");
 
 		return df.format(date);
 

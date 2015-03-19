@@ -189,14 +189,14 @@ public class TripPlannerResultActivity extends Activity {
 					String inside = "Walk from " + trip.getStartBusStop() + " to " + trip.getEndBusStop() +
 							" for " + trip.getWalk_distance() + " miles";
 					String up = trip.getStartTime();
-					busStopInfoList.add(up + ":" + inside);
+					busStopInfoList.add(up + "%" + inside);
 				} else {
 					String inside = "Board " + trip.getBus_name() + " from " + trip.getStartBusStop();
 					String up = trip.getStartTime();
-					busStopInfoList.add(up + ":" + inside);
+					busStopInfoList.add(up + "%" + inside);
 					inside = "Get off at " + trip.getEndBusStop();
 					up = trip.getEndTime();
-					busStopInfoList.add(up + ":" + inside);
+					busStopInfoList.add(up + "%" + inside);
 				}
 			}
 			fullTripInfoList.put("Trip " + i, busStopInfoList);
