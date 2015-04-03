@@ -1,66 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin">
-
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+    <EditText
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"/>
-
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner1"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"/>
+        android:inputType="textPostalAddress"
+        android:ems="10"
+        android:id="@+id/endDest"
+        android:hint="@string/End"
+        android:paddingTop="16dp"
+        android:onClick="endNameFiller"
+        android:focusableInTouchMode="false"/>
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="time"
-        android:hint="Departure time"
+        android:inputType="datetime"
         android:ems="10"
-        android:id="@+id/editText4"
+        android:id="@+id/time"
+        android:hint="Time(optional)"
         android:paddingTop="16dp"
-        android:layout_below="@+id/spinner2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:hint="Reminder time"
-        android:ems="10"
-        android:id="@+id/editText5"
-        android:paddingTop="16dp"
-        android:layout_below="@+id/editText4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recurring event"
-        android:id="@+id/checkBox"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/editText5"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@+id/dayPicker"
+        android:onClick="showTimePickerDialog"
+        android:focusableInTouchMode="false"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add reminder"
-        android:id="@+id/button6"
-        android:layout_marginTop="16dp"
+        android:text="Add Alarm"
+        android:id="@+id/AlarmSubmit"
+        android:onClick="addAlarm"
         android:layout_below="@+id/checkBox"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true" />
 
+    <TableRow
+        android:id="@+id/dayPicker"
+        android:layout_below="@+id/endDest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ToggleButton
+            android:id="@+id/sunday"
+            android:layout_height="wrap_content"
+            android:textOff="S"
+            android:textOn="S"
+            android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+        <ToggleButton
+            android:id="@+id/monday"
+            android:layout_height="wrap_content"
+            android:textOff="M"
+            android:textOn="M"
+            android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+        <ToggleButton
+            android:id="@+id/tuesday"
+            android:layout_height="wrap_content"
+            android:textOff="T"
+            android:textOn="T"
+            android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+        <ToggleButton
+            android:id="@+id/wendsday"
+            android:layout_height="wrap_content"
+            android:textOff="W"
+            android:textOn="W"
+            android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+
+        <ToggleButton
+            android:id="@+id/thursday"
+            android:layout_height="wrap_content"
+            android:textOff="T"
+            android:textOn="T"
+            android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+        <ToggleButton
+            android:id="@+id/friday"
+            android:layout_height="wrap_content"
+            android:textOff="F"
+            android:textOn="F"
+            android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+
+        <ToggleButton
+            android:id="@+id/saturday"
+            android:layout_height="wrap_content"
+            android:textOff="S"
+            android:textOn="S"
+            android:layout_gravity="right" android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+
+    </TableRow>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Repeat Weekly"
+        android:id="@+id/checkBox"
+        android:layout_below="@+id/time"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="38dp"
+        android:layout_marginStart="38dp" />
 </RelativeLayout>

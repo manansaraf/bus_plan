@@ -2,39 +2,39 @@
 <items version="2" >
 
     <item
-        jar="/Users/manansaraf/AndroidStudioProjects/busPlans/BusPathPrototype/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
-        <dex dex="/Users/manansaraf/AndroidStudioProjects/busPlans/BusPathPrototype/app/build/intermediates/pre-dexed/debug/classes-bf4d7d3fd3ed187d980b905e0d4589b5dee24fe8.jar" />
-    </item>
-    <item
-        jar="/Users/manansaraf/AndroidStudioProjects/busPlans/BusPathPrototype/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/manansaraf/AndroidStudioProjects/busPlans/BusPathPrototype/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-235e47ee03a564607f78ca0f909587bc15fef3bb.jar" />
-    </item>
-    <item
-        jar="/Users/manansaraf/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jar="C:\Users\Elee\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/Users/manansaraf/AndroidStudioProjects/busPlans/BusPathPrototype/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-73d4b59eafd60cf9e8ddd760cc107d8ec65775ca.jar" />
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-88e253b967452355b943f133d06e268d1d8f0ae0.jar" />
     </item>
     <item
-        jar="/Users/manansaraf/AndroidStudioProjects/busPlans/BusPathPrototype/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/Users/manansaraf/AndroidStudioProjects/busPlans/BusPathPrototype/app/build/intermediates/pre-dexed/debug/classes-d33fafae6442f90713775ad6d464aaef0deddb8b.jar" />
-    </item>
-    <item
-        jar="/Users/manansaraf/AndroidStudioProjects/busPlans/BusPathPrototype/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jar="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/Users/manansaraf/AndroidStudioProjects/busPlans/BusPathPrototype/app/build/intermediates/pre-dexed/debug/classes-82d357d8fcf94fdf4771accfc53d7775cd03c059.jar" />
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\debug\classes-f847796f3048fd5762075490f5f7d9abb0ea0f75.jar" />
+    </item>
+    <item
+        jar="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-a17ed11490ae2f4944deef474e8bc7fbfebeaa0e.jar" />
+    </item>
+    <item
+        jar="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\debug\classes-8a827a382273b75ccc805410f6c1b90c9d8f2eca.jar" />
+    </item>
+    <item
+        jar="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\debug\classes-d3c2ebf960c4413339f21f548fddf47357f8498d.jar" />
     </item>
 
 </items>

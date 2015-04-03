@@ -1,28 +1,44 @@
-package com.davidtoh.helloworld.utils;
+package com.davidtoh.helloworld.core_activities;
 
 /**
  * Created by davidtoh on 2/21/15.
  */
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.EditText;
+import android.widget.TimePicker;
 
 import com.davidtoh.helloworld.R;
-import com.davidtoh.helloworld.core_activities.BusStopStatisticsActivity;
 
-public class SchedulerAddReminder extends Activity implements AdapterView.OnItemClickListener {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
+public class SchedulerManageActivity extends Activity implements AdapterView.OnItemClickListener {
+    private TimePickerDialog timePickerDialog;
+    private SimpleDateFormat timeFormatter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.scheduler_add_reminder);
+        setContentView(R.layout.scheduler_add_reminder);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("endStopName")) {
+            EditText editText = (EditText) findViewById(R.id.endDest);
+            editText.setText(intent.getStringExtra("endStopName"));
+        }
+        timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
+        setTimeField();
+
+        /*
 
 		Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
 // Create an ArrayAdapter using the string array and a default spinner layout
@@ -40,7 +56,7 @@ public class SchedulerAddReminder extends Activity implements AdapterView.OnItem
 // Specify the layout to use when the list of choices appears
 		adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
-		spinner2.setAdapter(adapter2);
+		spinner2.setAdapter(adapter2);*/
 	}
 
 	@Override
@@ -75,5 +91,40 @@ public class SchedulerAddReminder extends Activity implements AdapterView.OnItem
 				return super.onOptionsItemSelected(item);
 		}
 	}
+
+
+
+    public void showTimePickerDialog(View v) {
+        timePickerDialog.show();
+    }
+    public void endNameFiller(View view) {
+        Intent intent = new Intent(SchedulerManageActivity.this, SearchStopsTripPlannerActivity.class);
+        EditText editText = (EditText) findViewById(R.id.endDest);
+        intent.putExtra("startStopName", editText.getText().toString());
+        intent.putExtra("stop", 2);
+        intent.putExtra("classname","Scheduler");
+        startActivity(intent);
+
+    }
+    private void setTimeField() {
+        final EditText timeEdit = (EditText) findViewById(R.id.time);
+
+        Calendar newCalendar = Calendar.getInstance();
+
+        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+
+            public void onTimeSet(TimePicker view, int hour, int minute) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(newDate.get(Calendar.YEAR), newDate.get(Calendar.MONTH),
+                        newDate.get(Calendar.DAY_OF_MONTH), hour, minute);
+                timeEdit.setText(timeFormatter.format(newDate.getTime()));
+            }
+
+        }, newCalendar.get(Calendar.HOUR), newCalendar.get(Calendar.MINUTE), false);
+    }
+    public void addAlarm(View view){
+
+
+    }
 }
 

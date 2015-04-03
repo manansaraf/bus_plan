@@ -59,7 +59,14 @@ public class SearchStopsTripPlannerActivity extends Activity implements AdapterV
 	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 
 		Intent intent = new Intent();
-		intent.setClass(this, TripPlannerActivity.class);
+        if(getIntent().hasExtra("classname")){
+            if(getIntent().getStringExtra("classname").equals("Scheduler")){
+                intent.setClass(this, SchedulerManageActivity.class);
+            }
+        }
+        else {
+            intent.setClass(this, TripPlannerActivity.class);
+        }
 		if (stop == 1) {
 			intent.putExtra("startStopName", l.getItemAtPosition(position).toString());
 			intent.putExtra("endStopName", endStopName);

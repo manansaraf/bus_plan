@@ -75,7 +75,7 @@
                 android:value="com.davidtoh.helloworld.MainActivity"/>
         </activity>
         <activity
-            android:name=".utils.SchedulerAddReminder"
+            android:name=".core_activities.SchedulerManageActivity"
             android:label="Add Reminder"
             android:parentActivityName=".core_activities.SchedulerActivity">
             <meta-data

@@ -31,7 +31,7 @@ public class TripPlannerActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.trip_planner);
-		Intent intent = getIntent();
+        Intent intent = getIntent();
 		if (intent.hasExtra("startStopName")) {
 			EditText editText = (EditText) findViewById(R.id.sourceDest);
 			editText.setText(intent.getStringExtra("startStopName"));

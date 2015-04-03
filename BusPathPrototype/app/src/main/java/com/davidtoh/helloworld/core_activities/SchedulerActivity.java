@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.davidtoh.helloworld.R;
-import com.davidtoh.helloworld.utils.SchedulerAddReminder;
 
 public class SchedulerActivity extends Activity implements AdapterView.OnItemClickListener {
 
@@ -35,7 +34,7 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 	}
 
 	public void toSchedulerAddReminder(View view) {
-		Intent changeToScheduler = new Intent(view.getContext(), SchedulerAddReminder.class);
+		Intent changeToScheduler = new Intent(view.getContext(), SchedulerManageActivity.class);
 		startActivityForResult(changeToScheduler, 0);
 	}
 
