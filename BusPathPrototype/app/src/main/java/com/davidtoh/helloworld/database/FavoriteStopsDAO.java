@@ -33,22 +33,13 @@ public class FavoriteStopsDAO {
 		dbHelper.close();
 	}
 
-	public BusStopInfo createFavoriteStop(String stopName, String stopID) {
+	public void createFavoriteStop(String stopName, String stopID) {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_NAME, stopName);
 		values.put(SQLiteHelper.COLUMN_ID, stopID);
 
 		database.insert(SQLiteHelper.TABLE_FAVORITES, null,
 				values);
-
-		Cursor cursor = database.query(SQLiteHelper.TABLE_FAVORITES,
-				allColumns, SQLiteHelper.COLUMN_ID + " = " + "\"" + stopID + "\"",
-				null, null, null, null);
-		cursor.moveToFirst();
-
-		BusStopInfo newStop = cursorToStop(cursor);
-		cursor.close();
-		return newStop;
 	}
 
 	public List<BusStopInfo> getAllFavoriteStops() {
