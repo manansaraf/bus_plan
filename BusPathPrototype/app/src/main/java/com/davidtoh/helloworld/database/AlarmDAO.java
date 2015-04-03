@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.davidtoh.helloworld.utils.BusStopInfo;
+import com.davidtoh.helloworld.utils.AlarmInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class AlarmDAO {
 	private SQLiteDatabase database;
 	private SQLiteHelper dbHelper;
 	private String[] allColumns = {SQLiteHelper.COLUMN_DESTINATION, SQLiteHelper.COLUMN_TIME,
-			SQLiteHelper.COLUMN_DEPART_DATE, SQLiteHelper.COLUMN_RECURRING};
+			SQLiteHelper.COLUMN_REMIND_DAY, SQLiteHelper.COLUMN_REPEAT};
 
 	public AlarmDAO(Context context) {
 		dbHelper = new SQLiteHelper(context);
@@ -37,79 +37,53 @@ public class AlarmDAO {
 	public void drop() {
 		database.delete(SQLiteHelper.TABLE_ALARM, null, null);
 	}
-/*
 
-	public BusStopInfo createAlarm(String destination, String time, String date, String recurirng) {
+	public void createAlarm(String destination, String time, String day, String repeat) {
 		ContentValues values = new ContentValues();
-		values.put(SQLiteHelper.COLUMN_NAME, destination);
-		values.put(SQLiteHelper.COLUMN_ID, time);
-		values.put(SQLiteHelper.COLUMN_LAT, date);
-		values.put(SQLiteHelper.COLUMN_LONG, recurirng);
+		values.put(SQLiteHelper.COLUMN_DESTINATION, destination);
+		values.put(SQLiteHelper.COLUMN_TIME, time);
+		values.put(SQLiteHelper.COLUMN_REMIND_DAY, day);
+		values.put(SQLiteHelper.COLUMN_REPEAT, repeat);
 
-		database.insert(SQLiteHelper.TABLE_BUSSTOPS, null,
+		database.insert(SQLiteHelper.TABLE_ALARM, null,
 				values);
-
-		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
-				allColumns, SQLiteHelper.COLUMN_ID + " = " + "\"" + stopID + "\"",
-				null, null, null, null);
-		cursor.moveToFirst();
-
-		BusStopInfo newStop = cursorToStop(cursor);
-		cursor.close();
-		return newStop;
 	}
-*/
 
-	public List<BusStopInfo> getAllStops() {
-		List<BusStopInfo> busStops = new ArrayList<>();
+	public List<AlarmInfo> getAllAlarms() {
+		List<AlarmInfo> alarms = new ArrayList<>();
 
-		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
-				allColumns, null, null, null, null, SQLiteHelper.COLUMN_NAME + " ASC");
+		Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
+				allColumns, null, null, null, null, null);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			BusStopInfo stop = cursorToStop(cursor);
-			busStops.add(stop);
+			AlarmInfo alarmInfo = cursorToAlarm(cursor);
+			alarms.add(alarmInfo);
 			cursor.moveToNext();
 		}
 		cursor.close();
-		return busStops;
+		return alarms;
 	}
 
-	public BusStopInfo getStop(String stopName) {
-		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
-				allColumns, SQLiteHelper.COLUMN_NAME + " = " + "\"" + stopName + "\"",
-				null, null, null, null);
-		cursor.moveToFirst();
+	public void editAlarm(String id, String destination, String time, String day,
+						  String repeat) {
+		ContentValues values = new ContentValues();
+		values.put(SQLiteHelper.COLUMN_DESTINATION, destination);
+		values.put(SQLiteHelper.COLUMN_TIME, time);
+		values.put(SQLiteHelper.COLUMN_REMIND_DAY, day);
+		values.put(SQLiteHelper.COLUMN_REPEAT, repeat);
 
-		BusStopInfo stop = cursorToStop(cursor);
-		cursor.close();
-		return stop;
+		database.update(SQLiteHelper.TABLE_ALARM, values, SQLiteHelper.COLUMN_ALARM_ID + " = " +
+				id, null);
 	}
 
-	public List<BusStopInfo> searchStops(String stopSubString) {
-		List<BusStopInfo> busStops = new ArrayList<>();
-
-		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
-				allColumns, SQLiteHelper.COLUMN_NAME + " LIKE " + "\'%" + stopSubString + "%\'",
-				null, null, null, SQLiteHelper.COLUMN_NAME + " ASC");
-
-		cursor.moveToFirst();
-		while (!cursor.isAfterLast()) {
-			BusStopInfo stop = cursorToStop(cursor);
-			busStops.add(stop);
-			cursor.moveToNext();
-		}
-		cursor.close();
-		return busStops;
-	}
-
-	private BusStopInfo cursorToStop(Cursor cursor) {
-		BusStopInfo busStopInfo = new BusStopInfo();
-		busStopInfo.setStopName(cursor.getString(0));
-		busStopInfo.setStopID(cursor.getString(1));
-		busStopInfo.setLatitude(cursor.getDouble(2));
-		busStopInfo.setLongitude(cursor.getDouble(3));
-		return busStopInfo;
+	private AlarmInfo cursorToAlarm(Cursor cursor) {
+		AlarmInfo alarmInfo = new AlarmInfo();
+		alarmInfo.setId(cursor.getInt(0));
+		alarmInfo.setDestination(cursor.getString(1));
+		alarmInfo.setTime(cursor.getString(2));
+		alarmInfo.setDay(cursor.getString(3));
+		alarmInfo.setRepeat(cursor.getString(4));
+		return alarmInfo;
 	}
 }

@@ -19,10 +19,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	public static final String TABLE_FAVORITES = "favorite_stops";
 
 	public static final String TABLE_ALARM = "alarms";
+	public static final String COLUMN_ALARM_ID = "alarm_id";
 	public static final String COLUMN_DESTINATION = "destination";
 	public static final String COLUMN_TIME = "time";
-	public static final String COLUMN_DEPART_DATE = "depart_date";
-	public static final String COLUMN_RECURRING = "is_recurring";
+	public static final String COLUMN_REMIND_DAY = "remind_day";
+	public static final String COLUMN_REPEAT = "repeat";
 
 
 	public static final String TABLE_VERSION = "version";
@@ -43,9 +44,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 			COLUMN_DATE + " TEXT);";
 
 	private static final String ALARM_CREATE = "CREATE TABLE IF NOT EXISTS " + TABLE_ALARM +
-			"(" + COLUMN_DESTINATION + " TEXT NOT NULL, " + COLUMN_TIME + " TEXT NOT NULL, " +
-			COLUMN_DEPART_DATE + " TEXT NOT NULL, " + COLUMN_RECURRING + " TEXT NOT NULL " +
-			"DEFAULT \'false\', " + "PRIMARY KEY (" + COLUMN_DESTINATION + ", " + COLUMN_TIME + "));";
+			"(" + COLUMN_ALARM_ID + " INTEGER PRIMARY KEY, " + COLUMN_DESTINATION + " TEXT NOT NULL, " +
+			"" + COLUMN_TIME + " TEXT NOT NULL, " + COLUMN_REMIND_DAY + " TEXT NOT NULL, " +
+			COLUMN_REPEAT + " TEXT NOT NULL DEFAULT \'false\');";
 
 	public SQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
