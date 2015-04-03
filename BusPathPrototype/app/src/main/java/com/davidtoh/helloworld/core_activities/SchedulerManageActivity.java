@@ -5,20 +5,21 @@ package com.davidtoh.helloworld.core_activities;
  */
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.ToggleButton;
 
 import com.davidtoh.helloworld.R;
-
 import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -32,7 +33,7 @@ public class SchedulerManageActivity extends Activity implements AdapterView.OnI
 
         Intent intent = getIntent();
         if (intent.hasExtra("endStopName")) {
-            EditText editText = (EditText) findViewById(R.id.endDest);
+            EditText editText = (EditText) findViewById(R.id.dest);
             editText.setText(intent.getStringExtra("endStopName"));
         }
         timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
@@ -99,7 +100,7 @@ public class SchedulerManageActivity extends Activity implements AdapterView.OnI
     }
     public void endNameFiller(View view) {
         Intent intent = new Intent(SchedulerManageActivity.this, SearchStopsTripPlannerActivity.class);
-        EditText editText = (EditText) findViewById(R.id.endDest);
+        EditText editText = (EditText) findViewById(R.id.dest);
         intent.putExtra("startStopName", editText.getText().toString());
         intent.putExtra("stop", 2);
         intent.putExtra("classname","Scheduler");
@@ -107,7 +108,7 @@ public class SchedulerManageActivity extends Activity implements AdapterView.OnI
 
     }
     private void setTimeField() {
-        final EditText timeEdit = (EditText) findViewById(R.id.time);
+        final EditText timeEdit = (EditText) findViewById(R.id.arrivetime);
 
         Calendar newCalendar = Calendar.getInstance();
 
@@ -124,7 +125,40 @@ public class SchedulerManageActivity extends Activity implements AdapterView.OnI
     }
     public void addAlarm(View view){
 
+        EditText destination = (EditText) findViewById(R.id.dest);
+        String end = destination.getText().toString();
+        EditText time = (EditText) findViewById(R.id.arrivetime);
+        String Time = time.getText().toString();
+        makeDayString();
 
+        if (end.length() > 0 && Time.length() >0 ) {
+
+
+
+
+        }
+
+    }
+    private String makeDayString(){
+        ToggleButton sunday = (ToggleButton)findViewById(R.id.sunday);
+        ToggleButton monday = (ToggleButton)findViewById(R.id.monday);
+        ToggleButton tuesday = (ToggleButton)findViewById(R.id.tuesday);
+        ToggleButton wednesday = (ToggleButton)findViewById(R.id.wednesday);
+        ToggleButton thursday = (ToggleButton)findViewById(R.id.thursday);
+        ToggleButton friday = (ToggleButton)findViewById(R.id.friday);
+        ToggleButton saturday = (ToggleButton)findViewById(R.id.saturday);
+        ToggleButton[] dayArray = new ToggleButton[] {sunday, monday,tuesday, wednesday, thursday,
+                friday, saturday};
+        String dayString = "";
+        for(ToggleButton day : dayArray){
+            if(day.isChecked()){
+                dayString += day.getHint();
+                Log.d("check string", dayString);
+            }
+
+        }
+
+        return dayString;
     }
 }
 

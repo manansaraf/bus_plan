@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPostalAddress"
         android:ems="10"
-        android:id="@+id/endDest"
+        android:id="@+id/dest"
         android:hint="@string/End"
         android:paddingTop="16dp"
         android:onClick="endNameFiller"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:inputType="datetime"
         android:ems="10"
-        android:id="@+id/time"
+        android:id="@+id/arrivetime"
         android:hint="Time(optional)"
         android:paddingTop="16dp"
         android:layout_below="@+id/dayPicker"
@@ -39,12 +39,13 @@
 
     <TableRow
         android:id="@+id/dayPicker"
-        android:layout_below="@+id/endDest"
+        android:layout_below="@+id/dest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <ToggleButton
             android:id="@+id/sunday"
             android:layout_height="wrap_content"
+            android:hint = "sunday"
             android:textOff="S"
             android:textOn="S"
             android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
@@ -53,18 +54,21 @@
             android:layout_height="wrap_content"
             android:textOff="M"
             android:textOn="M"
+            android:hint = "monday"
             android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
         <ToggleButton
             android:id="@+id/tuesday"
             android:layout_height="wrap_content"
+            android:hint = "tuesday"
             android:textOff="T"
             android:textOn="T"
             android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
         <ToggleButton
-            android:id="@+id/wendsday"
+            android:id="@+id/wednesday"
             android:layout_height="wrap_content"
             android:textOff="W"
             android:textOn="W"
+            android:hint = "wednesday"
             android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
 
         <ToggleButton
@@ -72,12 +76,14 @@
             android:layout_height="wrap_content"
             android:textOff="T"
             android:textOn="T"
+            android:hint = "thursday"
             android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
         <ToggleButton
             android:id="@+id/friday"
             android:layout_height="wrap_content"
             android:textOff="F"
             android:textOn="F"
+            android:hint = "friday"
             android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
 
         <ToggleButton
@@ -85,6 +91,7 @@
             android:layout_height="wrap_content"
             android:textOff="S"
             android:textOn="S"
+            android:hint = "saturday"
             android:layout_gravity="right" android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
 
     </TableRow>
@@ -94,7 +101,7 @@
         android:layout_height="wrap_content"
         android:text="Repeat Weekly"
         android:id="@+id/checkBox"
-        android:layout_below="@+id/time"
+        android:layout_below="@+id/arrivetime"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="38dp"
