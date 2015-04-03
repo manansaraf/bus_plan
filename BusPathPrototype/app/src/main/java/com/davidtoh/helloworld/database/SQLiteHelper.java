@@ -18,6 +18,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 	public static final String TABLE_FAVORITES = "favorite_stops";
 
+	public static final String TABLE_ALARM = "alarms";
+	public static final String COLUMN_DESTINATION = "destination";
+	public static final String COLUMN_TIME = "time";
+	public static final String COLUMN_DEPART_DATE = "depart_date";
+	public static final String COLUMN_RECURRING = "is_recurring";
+
+
 	public static final String TABLE_VERSION = "version";
 	public static final String COLUMN_DATE = "version_date";
 
@@ -35,6 +42,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	private static final String VERSION_CREATE = " CREATE TABLE " + TABLE_VERSION + "(" +
 			COLUMN_DATE + " TEXT);";
 
+	private static final String ALARM_CREATE = "CREATE TABLE IF NOT EXISTS " + TABLE_ALARM +
+			"(" + COLUMN_DESTINATION + " TEXT NOT NULL, " + COLUMN_TIME + " TEXT NOT NULL, " +
+			COLUMN_DEPART_DATE + " TEXT NOT NULL, " + COLUMN_RECURRING + " TEXT NOT NULL " +
+			"DEFAULT \'false\', " + "PRIMARY KEY (" + COLUMN_DESTINATION + ", " + COLUMN_TIME + "));";
+
 	public SQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
@@ -44,6 +56,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 		database.execSQL(STOPS_CREATE);
 		database.execSQL(FAVORITE_CREATE);
 		database.execSQL(VERSION_CREATE);
+		database.execSQL(ALARM_CREATE);
 	}
 
 	@Override
