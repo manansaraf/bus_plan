@@ -19,8 +19,8 @@ public class AlarmDAO {
 
 	private SQLiteDatabase database;
 	private SQLiteHelper dbHelper;
-	private String[] allColumns = {SQLiteHelper.COLUMN_DESTINATION, SQLiteHelper.COLUMN_TIME,
-			SQLiteHelper.COLUMN_REMIND_DAY, SQLiteHelper.COLUMN_REPEAT};
+	private String[] allColumns = {SQLiteHelper.COLUMN_ALARM_ID, SQLiteHelper.COLUMN_DESTINATION,
+			SQLiteHelper.COLUMN_TIME, SQLiteHelper.COLUMN_REMIND_DAY, SQLiteHelper.COLUMN_REPEAT};
 
 	public AlarmDAO(Context context) {
 		dbHelper = new SQLiteHelper(context);
@@ -65,7 +65,19 @@ public class AlarmDAO {
 		return alarms;
 	}
 
-	public void editAlarm(String id, String destination, String time, String day,
+	public AlarmInfo getAlarm(String destination, String time) {
+		Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
+				allColumns, SQLiteHelper.COLUMN_DESTINATION + " = " + "\'" + destination + "\' AND "
+						+ SQLiteHelper.COLUMN_TIME + " = " + "\'" + time + "\'",
+				null, null, null, null);
+
+		cursor.moveToFirst();
+		AlarmInfo alarm = cursorToAlarm(cursor);
+		cursor.close();
+		return alarm;
+	}
+
+	public void editAlarm(int id, String destination, String time, String day,
 						  String repeat) {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_DESTINATION, destination);
@@ -75,6 +87,11 @@ public class AlarmDAO {
 
 		database.update(SQLiteHelper.TABLE_ALARM, values, SQLiteHelper.COLUMN_ALARM_ID + " = " +
 				id, null);
+	}
+
+	public void deleteAlarm(int id) {
+		database.delete(SQLiteHelper.TABLE_ALARM, SQLiteHelper.COLUMN_ALARM_ID +
+				" = " + "\"" + id + "\"", null);
 	}
 
 	private AlarmInfo cursorToAlarm(Cursor cursor) {

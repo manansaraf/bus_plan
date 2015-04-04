@@ -11,61 +11,41 @@
         android:inputType="textPostalAddress"
         android:ems="10"
         android:id="@+id/dest"
-        android:hint="@string/End"
-        android:paddingTop="16dp"
+        android:hint="@string/Dest"
+        android:paddingTop="12dp"
         android:onClick="endNameFiller"
         android:focusableInTouchMode="false"/>
 
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="datetime"
-        android:ems="10"
-        android:id="@+id/arrivetime"
-        android:hint="Time(optional)"
-        android:paddingTop="16dp"
-        android:layout_below="@+id/dayPicker"
-        android:onClick="showTimePickerDialog"
-        android:focusableInTouchMode="false"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Alarm"
-        android:id="@+id/AlarmSubmit"
-        android:onClick="addAlarm"
-        android:layout_below="@+id/checkBox"
-        android:layout_centerHorizontal="true" />
-
     <TableRow
         android:id="@+id/dayPicker"
+        android:paddingTop="16dp"
         android:layout_below="@+id/dest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <ToggleButton
             android:id="@+id/sunday"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:hint = "sunday"
             android:textOff="S"
             android:textOn="S"
             android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
         <ToggleButton
             android:id="@+id/monday"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:textOff="M"
             android:textOn="M"
             android:hint = "monday"
             android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
         <ToggleButton
             android:id="@+id/tuesday"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:hint = "tuesday"
             android:textOff="T"
             android:textOn="T"
             android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
         <ToggleButton
             android:id="@+id/wednesday"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:textOff="W"
             android:textOn="W"
             android:hint = "wednesday"
@@ -73,14 +53,14 @@
 
         <ToggleButton
             android:id="@+id/thursday"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:textOff="T"
             android:textOn="T"
             android:hint = "thursday"
             android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
         <ToggleButton
             android:id="@+id/friday"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:textOff="F"
             android:textOn="F"
             android:hint = "friday"
@@ -88,13 +68,25 @@
 
         <ToggleButton
             android:id="@+id/saturday"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:textOff="S"
             android:textOn="S"
             android:hint = "saturday"
             android:layout_gravity="right" android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
 
     </TableRow>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="datetime"
+        android:ems="10"
+        android:id="@+id/arrivetime"
+        android:hint="@string/Arrive"
+        android:paddingTop="14dp"
+        android:layout_below="@+id/dayPicker"
+        android:onClick="showTimePickerDialog"
+        android:focusableInTouchMode="false"/>
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -104,6 +96,18 @@
         android:layout_below="@+id/arrivetime"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="38dp"
-        android:layout_marginStart="38dp" />
+        android:layout_margin="15dp"
+        android:textSize="18sp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Alarm"
+        android:id="@+id/AlarmSubmit"
+        android:onClick="addAlarm"
+        android:layout_below="@+id/checkBox"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="15dp"
+        style="@style/custom_btn"/>
+
 </RelativeLayout>

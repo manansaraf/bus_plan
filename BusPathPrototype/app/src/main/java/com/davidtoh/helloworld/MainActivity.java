@@ -36,10 +36,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
 		fstopsDAO = new FavoriteStopsDAO(this);
 		fstopsDAO.open();
-		mAdapter = new ArrayAdapter<>(this,
-				android.R.layout.simple_list_item_1, fstopsDAO.getAllFavoriteStops());
+		mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+				fstopsDAO.getAllFavoriteStops());
 		listview.setAdapter(mAdapter);
-
 	}
 
 	@Override
@@ -62,7 +61,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 		intent.setClass(this, BusStopStatisticsActivity.class);
 		intent.putExtra("busStopName", l.getItemAtPosition(position).toString());
 
-		intent.putExtra("id", id);
 		startActivity(intent);
 	}
 
@@ -101,9 +99,4 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 		Intent changeToTripPlanner = new Intent(view.getContext(), TripPlannerActivity.class);
 		startActivityForResult(changeToTripPlanner, 0);
 	}
-
-    /*public void toAlarm(View view) {
-		Intent changeToFavorites = new Intent(view.getContext(), Alarm.class);
-        startActivityForResult(changeToFavorites, 0);
-    }*/
 }

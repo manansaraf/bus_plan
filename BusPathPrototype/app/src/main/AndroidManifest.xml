@@ -36,14 +36,6 @@
                 android:value="com.davidtoh.helloworld.MainActivity"/>
         </activity>
         <activity
-            android:name=".core_activities.FavoriteStopsActivity"
-            android:label="Favorites"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.MainActivity"/>
-        </activity>
-        <activity
             android:name=".core_activities.SearchStopsActivity"
             android:label="Search"
             android:parentActivityName=".MainActivity">
@@ -61,7 +53,7 @@
         <activity
             android:name=".core_activities.BusStopStatisticsActivity"
             android:label="Stop Statistics"
-            android:parentActivityName=".core_activities.FavoriteStopsActivity">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.MainActivity"/>

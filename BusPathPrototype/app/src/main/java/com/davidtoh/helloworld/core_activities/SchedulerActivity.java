@@ -1,29 +1,54 @@
 package com.davidtoh.helloworld.core_activities;
 
 /**
- * Created by davidtoh on 2/21/15.
+ * Created by dylan on 4/03/15.
+ * main scheduler activity where alarms are listed
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.davidtoh.helloworld.R;
+import com.davidtoh.helloworld.database.AlarmDAO;
+import com.davidtoh.helloworld.utils.AlarmInfo;
 
-public class SchedulerActivity extends Activity implements AdapterView.OnItemClickListener {
+public class SchedulerActivity extends Activity implements AdapterView.OnItemClickListener,
+		AdapterView.OnItemLongClickListener {
+
+	private ArrayAdapter<AlarmInfo> mAdapter;
+	private AlarmDAO alarmDAO;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.scheduler);
 
-		ListView listview = (ListView) findViewById(R.id.listView2);
+		ListView listview = (ListView) findViewById(R.id.alarmListView);
 		listview.setOnItemClickListener(this);
+		listview.setOnItemLongClickListener(this);
+
+		alarmDAO = new AlarmDAO(this);
+		alarmDAO.open();
+		mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+				alarmDAO.getAllAlarms());
+		listview.setAdapter(mAdapter);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		mAdapter.clear();
+		mAdapter.addAll(alarmDAO.getAllAlarms());
+		mAdapter.notifyDataSetChanged();
 	}
 
 	@Override
@@ -38,14 +63,44 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 		startActivityForResult(changeToScheduler, 0);
 	}
 
-	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-
+	public void onItemClick(AdapterView<?> av, View v, int position, long id) {
 		Intent intent = new Intent();
-		intent.setClass(this, BusStopStatisticsActivity.class);
-		intent.putExtra("position", position);
+		intent.setClass(this, SchedulerManageActivity.class);
+		intent.putExtra("alarm", av.getItemAtPosition(position).toString());
 
-		intent.putExtra("id", id);
 		startActivity(intent);
+	}
+
+	public boolean onItemLongClick(final AdapterView<?> av, View v, final int pos, final long id) {
+
+		final AlertDialog.Builder b = new AlertDialog.Builder(SchedulerActivity.this);
+		b.setIcon(android.R.drawable.ic_dialog_alert);
+		b.setMessage("Delete selected reminder?");
+		b.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				deleteAlarm(av, pos);
+			}
+		});
+		b.setNegativeButton("No", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+			}
+		});
+
+		b.show();
+		return true;
+	}
+
+	private void deleteAlarm(AdapterView<?> av, int position) {
+		String alarm = av.getItemAtPosition(position).toString();
+		int pos = alarm.indexOf("|");
+		String destination = alarm.substring(0, pos-2);
+		String time = alarm.substring(pos + 3, alarm.length());
+		alarmDAO = new AlarmDAO(this);
+		alarmDAO.open();
+		AlarmInfo alarmInfo = alarmDAO.getAlarm(destination, time);
+		alarmDAO.deleteAlarm(alarmInfo.getID());
+		finish();
+		startActivity(getIntent());
 	}
 
 	@Override

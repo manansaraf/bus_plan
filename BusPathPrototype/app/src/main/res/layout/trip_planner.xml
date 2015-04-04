@@ -37,10 +37,23 @@
         android:inputType="datetime"
         android:ems="10"
         android:id="@+id/time"
-        android:hint="Time(optional)"
+        android:hint="Time (optional)"
         android:paddingTop="16dp"
         android:layout_below="@+id/endDest"
         android:onClick="showTimePickerDialog"
+        android:focusableInTouchMode="false"/>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="datetime"
+        android:ems="10"
+        android:id="@+id/date"
+        android:hint="Date (optional)"
+        android:paddingTop="16dp"
+        android:layout_below="@+id/time"
+        android:layout_centerHorizontal="true"
+        android:onClick="showDatePickerDialog"
         android:focusableInTouchMode="false"/>
 
     <Button
@@ -50,19 +63,8 @@
         android:id="@+id/TripSubmit"
         android:onClick="submitTripPlan"
         android:layout_below="@+id/date"
-        android:layout_centerHorizontal="true"/>
-
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:inputType="datetime"
-        android:ems="10"
-        android:id="@+id/date"
-        android:hint="Date(optional)"
-        android:paddingTop="16dp"
-        android:layout_below="@+id/time"
+        android:layout_margin="15dp"
         android:layout_centerHorizontal="true"
-        android:onClick="showDatePickerDialog"
-        android:focusableInTouchMode="false"/>
+        style="@style/custom_btn"/>
 
 </RelativeLayout>

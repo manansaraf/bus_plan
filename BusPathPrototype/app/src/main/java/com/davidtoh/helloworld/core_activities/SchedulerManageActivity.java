@@ -1,7 +1,8 @@
 package com.davidtoh.helloworld.core_activities;
 
 /**
- * Created by davidtoh on 2/21/15.
+ * Created by dylan on 3/03/15.
+ * class that adds the input of an alarm to the database
  */
 
 import android.app.Activity;
@@ -12,20 +13,25 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
 import com.davidtoh.helloworld.R;
+import com.davidtoh.helloworld.database.AlarmDAO;
+import com.davidtoh.helloworld.utils.AlarmInfo;
+
 import java.text.SimpleDateFormat;
 
 import java.util.Calendar;
 import java.util.Locale;
 
-public class SchedulerManageActivity extends Activity implements AdapterView.OnItemClickListener {
+public class SchedulerManageActivity extends Activity {
     private TimePickerDialog timePickerDialog;
     private SimpleDateFormat timeFormatter;
+	private AlarmDAO alarmDAO;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,29 +41,13 @@ public class SchedulerManageActivity extends Activity implements AdapterView.OnI
         if (intent.hasExtra("endStopName")) {
             EditText editText = (EditText) findViewById(R.id.dest);
             editText.setText(intent.getStringExtra("endStopName"));
+			getIntent().removeExtra("endStopName");
         }
+		if (intent.hasExtra("alarm")) {
+			populateFields();
+		}
         timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
         setTimeField();
-
-        /*
-
-		Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
-// Create an ArrayAdapter using the string array and a default spinner layout
-		ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
-				R.array.stops, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-		adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-		spinner1.setAdapter(adapter1);
-
-		Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
-// Create an ArrayAdapter using the string array and a default spinner layout
-		ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
-				R.array.stops, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-		adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-		spinner2.setAdapter(adapter2);*/
 	}
 
 	@Override
@@ -65,16 +55,6 @@ public class SchedulerManageActivity extends Activity implements AdapterView.OnI
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_main, menu);
 		return true;
-	}
-
-	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-
-		Intent intent = new Intent();
-		intent.setClass(this, BusStopStatisticsActivity.class);
-		intent.putExtra("position", position);
-
-		intent.putExtra("id", id);
-		startActivity(intent);
 	}
 
 	@Override
@@ -93,11 +73,10 @@ public class SchedulerManageActivity extends Activity implements AdapterView.OnI
 		}
 	}
 
-
-
     public void showTimePickerDialog(View v) {
         timePickerDialog.show();
     }
+
     public void endNameFiller(View view) {
         Intent intent = new Intent(SchedulerManageActivity.this, SearchStopsTripPlannerActivity.class);
         EditText editText = (EditText) findViewById(R.id.dest);
@@ -105,8 +84,8 @@ public class SchedulerManageActivity extends Activity implements AdapterView.OnI
         intent.putExtra("stop", 2);
         intent.putExtra("classname","Scheduler");
         startActivity(intent);
-
     }
+
     private void setTimeField() {
         final EditText timeEdit = (EditText) findViewById(R.id.arrivetime);
 
@@ -123,42 +102,97 @@ public class SchedulerManageActivity extends Activity implements AdapterView.OnI
 
         }, newCalendar.get(Calendar.HOUR), newCalendar.get(Calendar.MINUTE), false);
     }
+
     public void addAlarm(View view){
 
-        EditText destination = (EditText) findViewById(R.id.dest);
-        String end = destination.getText().toString();
-        EditText time = (EditText) findViewById(R.id.arrivetime);
-        String Time = time.getText().toString();
-        makeDayString();
+        EditText destText = (EditText) findViewById(R.id.dest);
+        String destination = destText.getText().toString();
+        EditText timeText = (EditText) findViewById(R.id.arrivetime);
+        String time = timeText.getText().toString();
+        String days = makeDayString();
+		CheckBox repeatBox = (CheckBox) findViewById(R.id.checkBox);
+		Boolean repeat = repeatBox.isChecked();
 
-        if (end.length() > 0 && Time.length() >0 ) {
-
-
-
-
+        if (destination.length() > 0 && time.length() > 0 && days.length() > 0) {
+			alarmDAO = new AlarmDAO(this);
+			alarmDAO.open();
+			if (!getIntent().hasExtra("alarm")) {
+				alarmDAO.createAlarm(destination, time, days, String.valueOf(repeat));
+			}
+			else {
+				int id = getIntent().getIntExtra("id", 0);
+				alarmDAO.editAlarm(id, destination, time, days, String.valueOf(repeat));
+				getIntent().removeExtra("alarm");
+			}
+			finish();
+			startActivity(getIntent());
         }
-
+		else {
+			Log.d("Alarm:", "missing input field");
+			//TODO pop up user notification
+		}
     }
+
     private String makeDayString(){
-        ToggleButton sunday = (ToggleButton)findViewById(R.id.sunday);
-        ToggleButton monday = (ToggleButton)findViewById(R.id.monday);
-        ToggleButton tuesday = (ToggleButton)findViewById(R.id.tuesday);
-        ToggleButton wednesday = (ToggleButton)findViewById(R.id.wednesday);
-        ToggleButton thursday = (ToggleButton)findViewById(R.id.thursday);
-        ToggleButton friday = (ToggleButton)findViewById(R.id.friday);
-        ToggleButton saturday = (ToggleButton)findViewById(R.id.saturday);
-        ToggleButton[] dayArray = new ToggleButton[] {sunday, monday,tuesday, wednesday, thursday,
-                friday, saturday};
+        ToggleButton[] dayArray = new ToggleButton[] {
+				(ToggleButton)findViewById(R.id.sunday),
+				(ToggleButton)findViewById(R.id.monday),
+				(ToggleButton)findViewById(R.id.tuesday),
+				(ToggleButton)findViewById(R.id.wednesday),
+				(ToggleButton)findViewById(R.id.thursday),
+				(ToggleButton)findViewById(R.id.friday),
+				(ToggleButton)findViewById(R.id.saturday)};
+
         String dayString = "";
         for(ToggleButton day : dayArray){
             if(day.isChecked()){
-                dayString += day.getHint();
-                Log.d("check string", dayString);
+                dayString += day.getHint()+" ";
             }
-
         }
-
         return dayString;
     }
+
+	private void populateFields() {
+		String alarm = getIntent().getStringExtra("alarm");
+		int pos = alarm.indexOf("|");
+		String destination = alarm.substring(0, pos-2);
+		String time = alarm.substring(pos + 3, alarm.length());
+		Log.d("alarm field:", "|"+destination+"|" + "   " + "|"+time+"|");
+		alarmDAO = new AlarmDAO(this);
+		alarmDAO.open();
+		AlarmInfo alarmInfo = alarmDAO.getAlarm(destination, time);
+
+		EditText destinationText = (EditText) findViewById(R.id.dest);
+		destinationText.setText(alarmInfo.getDestination());
+		EditText timeText = (EditText) findViewById(R.id.arrivetime);
+		timeText.setText(alarmInfo.getTime());
+		CheckBox repeatBox = (CheckBox) findViewById(R.id.checkBox);
+		repeatBox.setChecked(Boolean.valueOf(alarmInfo.getRepeat()));
+
+		ToggleButton sunday = (ToggleButton)findViewById(R.id.sunday);
+		ToggleButton monday = (ToggleButton)findViewById(R.id.monday);
+		ToggleButton tuesday = (ToggleButton)findViewById(R.id.tuesday);
+		ToggleButton wednesday = (ToggleButton)findViewById(R.id.wednesday);
+		ToggleButton thursday = (ToggleButton)findViewById(R.id.thursday);
+		ToggleButton friday = (ToggleButton)findViewById(R.id.friday);
+		ToggleButton saturday = (ToggleButton)findViewById(R.id.saturday);
+		String days = alarmInfo.getDay();
+
+		if (days.contains("sunday"))
+			sunday.setChecked(true);
+		if (days.contains("monday"))
+			monday.setChecked(true);
+		if (days.contains("tuesday"))
+			tuesday.setChecked(true);
+		if (days.contains("wednesday"))
+			wednesday.setChecked(true);
+		if (days.contains("thursday"))
+			thursday.setChecked(true);
+		if (days.contains("friday"))
+			friday.setChecked(true);
+		if (days.contains("saturday"))
+			saturday.setChecked(true);
+		getIntent().putExtra("id", alarmInfo.getID());
+	}
 }
 

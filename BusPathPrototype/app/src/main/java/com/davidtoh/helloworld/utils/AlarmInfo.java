@@ -11,15 +11,12 @@ public class AlarmInfo {
 	String day;
 	String repeat;
 
-	public AlarmInfo(int id, String destination, String time, String day, String repeat) {
-		this.id = id;
-		this.destination = destination;
-		this.time = time;
-		this.day = day;
-		this.repeat = repeat;
+	public AlarmInfo() {
 	}
 
-	public AlarmInfo() {
+	@Override
+	public String toString() {
+		return this.getDestination() + "  |  " + this.getTime();
 	}
 
 	public void setId(int id) {
