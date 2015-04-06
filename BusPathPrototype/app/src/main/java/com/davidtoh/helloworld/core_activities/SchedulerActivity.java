@@ -66,7 +66,9 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 	public void onItemClick(AdapterView<?> av, View v, int position, long id) {
 		Intent intent = new Intent();
 		intent.setClass(this, SchedulerManageActivity.class);
-		intent.putExtra("alarm", av.getItemAtPosition(position).toString());
+        intent.putExtra("alarm", position);
+		//intent.putExtra("alarm", av.getItemAtPosition(position).toString());
+
 
 		startActivity(intent);
 	}
@@ -91,13 +93,13 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 	}
 
 	private void deleteAlarm(AdapterView<?> av, int position) {
-		String alarm = av.getItemAtPosition(position).toString();
-		int pos = alarm.indexOf("|");
-		String destination = alarm.substring(0, pos-2);
-		String time = alarm.substring(pos + 3, alarm.length());
+		//String alarm = av.getItemAtPosition(position).toString();
+		//int pos = alarm.indexOf("|");
+		//String destination = alarm.substring(0, pos-2);
+		//String time = alarm.substring(pos + 3, alarm.length());
 		alarmDAO = new AlarmDAO(this);
 		alarmDAO.open();
-		AlarmInfo alarmInfo = alarmDAO.getAlarm(destination, time);
+		AlarmInfo alarmInfo = alarmDAO.getAlarm(position);
 		alarmDAO.deleteAlarm(alarmInfo.getID());
 		finish();
 		startActivity(getIntent());
