@@ -28,8 +28,8 @@ public class BusStopWidgetProvider extends AppWidgetProvider {
 
                 // Get the layout for the App Widget and attach an on-click listener
                 // to the button
-                RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.shortcut_widget);
-                views.setOnClickPendingIntent(R.id.button, pendingIntent);
+                RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.shortcut_provider);
+                views.setOnClickPendingIntent(R.id.button5, pendingIntent);
 
                 // Tell the AppWidgetManager to perform an update on the current app widget
                 appWidgetManager.updateAppWidget(appWidgetId, views);

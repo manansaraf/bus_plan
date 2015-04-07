@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:initialLayout="@layout/shortcut_widget"
+android:minWidth="40dp"
+android:minHeight="40dp"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:updatePeriodMillis="0"
+android:previewImage="@drawable/ic_menu_search"
+android:resizeMode="none" >
+</appwidget-provider>

@@ -122,6 +122,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.core_activities.TripPlannerActivity"/>
         </activity>
+        <receiver android:name=".widgets.BusStopWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@layout/shortcut_provider" />
+        </receiver>
     </application>
 
 </manifest>
