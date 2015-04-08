@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.davidtoh.helloworld.R;
 
@@ -105,6 +106,15 @@ public class TripPlannerActivity extends FragmentActivity {
 				intent.putExtra("date", Date);
 			}
 			startActivity(intent);
+		}
+		else {
+			String message = "Missing ";
+			if(start.length() == 0)
+				message += "start stop, ";
+			if(end.length() == 0)
+				message += "end stop, ";
+			message = message.substring(0, message.length()-2);
+			Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 		}
 	}
 

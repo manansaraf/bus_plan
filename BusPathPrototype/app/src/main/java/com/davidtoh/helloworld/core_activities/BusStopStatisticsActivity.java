@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.database.FavoriteStopsDAO;
@@ -246,8 +247,10 @@ public class BusStopStatisticsActivity extends Activity {
 			public void onClick(View v) {
 				if (mCheckBox.isChecked()) {
 					fstopsDAO.createFavoriteStop(name, stopID);
+					Toast.makeText(getApplicationContext(), "Favorite added", Toast.LENGTH_LONG).show();
 				} else {
 					fstopsDAO.deleteFavoriteStop(name);
+					Toast.makeText(getApplicationContext(), "Favorite removed", Toast.LENGTH_LONG).show();
 				}
 			}
 		});

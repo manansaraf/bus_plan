@@ -27,7 +27,7 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 	private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 	public BusStopInfo[] markers;
 	List<BusStopInfo> list;
-	BusStopsDAO busStops;
+	BusStopsDAO busStopsDAO;
 	LocationManager loc;
 	LocationListener listener;
 
@@ -43,6 +43,12 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 	protected void onResume() {
 		super.onResume();
 		setUpMapIfNeeded();
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		loc.removeUpdates(listener);
 	}
 
 	/**
@@ -136,9 +142,9 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 	}
 
 	private void createBusStopLocation() {
-		busStops = new BusStopsDAO(this);
-		busStops.open();
-		list = busStops.getAllStops();
+		busStopsDAO = new BusStopsDAO(this);
+		busStopsDAO.open();
+		list = busStopsDAO.getAllStops();
 		List<BusStopInfo> marker = list;
 		markers = new BusStopInfo[list.size()];
 		for (int i = 0; i < marker.size(); i++) {
@@ -164,11 +170,5 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 
 			}
 		});
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
-		loc.removeUpdates(listener);
 	}
 }

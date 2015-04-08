@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.davidtoh.helloworld.R;
@@ -118,18 +119,27 @@ public class SchedulerManageActivity extends Activity {
 			alarmDAO.open();
 			if (!getIntent().hasExtra("alarm")) {
 				alarmDAO.createAlarm(destination, time, days, String.valueOf(repeat));
+				Toast.makeText(getApplicationContext(), "Alarm added", Toast.LENGTH_LONG).show();
 			}
 			else {
 				int id = getIntent().getIntExtra("id", 0);
 				alarmDAO.editAlarm(id, destination, time, days, String.valueOf(repeat));
+				Toast.makeText(getApplicationContext(), "Alarm edited", Toast.LENGTH_LONG).show();
 				getIntent().removeExtra("alarm");
 			}
 			finish();
 			startActivity(getIntent());
         }
 		else {
-			Log.d("Alarm:", "missing input field");
-			//TODO pop up user notification
+			String message = "Missing ";
+			if(destination.length() == 0)
+				message += "destination, ";
+			if(time.length() == 0)
+				message += "arrive time, ";
+			if(days.length() == 0)
+				message += "days, ";
+			message = message.substring(0, message.length()-2);
+			Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 		}
     }
 

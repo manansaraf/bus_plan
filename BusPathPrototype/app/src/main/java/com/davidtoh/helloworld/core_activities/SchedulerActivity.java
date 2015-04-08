@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.database.AlarmDAO;
@@ -99,6 +100,7 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 		alarmDAO.open();
 		AlarmInfo alarmInfo = alarmDAO.getAlarm(destination, time);
 		alarmDAO.deleteAlarm(alarmInfo.getID());
+		Toast.makeText(getApplicationContext(), "Alarm deleted", Toast.LENGTH_LONG).show();
 		finish();
 		startActivity(getIntent());
 	}
