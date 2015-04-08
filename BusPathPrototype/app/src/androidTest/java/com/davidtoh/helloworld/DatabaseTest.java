@@ -5,8 +5,10 @@ import android.database.sqlite.SQLiteException;
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
 
+import com.davidtoh.helloworld.database.AlarmDAO;
 import com.davidtoh.helloworld.database.BusStopsDAO;
 import com.davidtoh.helloworld.database.FavoriteStopsDAO;
+import com.davidtoh.helloworld.utils.AlarmInfo;
 import com.davidtoh.helloworld.utils.BusStopInfo;
 
 import java.io.File;
@@ -90,5 +92,25 @@ public class DatabaseTest extends ActivityInstrumentationTestCase2<MainActivity>
 		favoriteStopsDAO.deleteFavoriteStop("THIS IS A TEST STOP");
 		stops = favoriteStopsDAO.getAllFavoriteStops();
 		assertEquals(numFavorites, stops.size());
+	}
+
+	/* tests for AlarmDAO */
+	public void testAlarms() {
+		AlarmDAO alarmDAO = new AlarmDAO(mainActivity);
+		alarmDAO.open();
+		List<AlarmInfo> alarms = alarmDAO.getAllAlarms();
+		int numAlarms = alarms.size();
+		//add custom alarm
+		alarmDAO.createAlarm("Test", "00:00", "monday ", "false");
+		alarms = alarmDAO.getAllAlarms();
+		assertEquals(numAlarms+1, alarms.size());
+		//check that alarm was added
+		assertEquals("Test", alarms.get(alarms.size()-1).getDestination());
+		//delete alarm
+		alarmDAO.deleteAlarm(alarms.get(alarms.size()-1).getID());
+		alarms = alarmDAO.getAllAlarms();
+		assertEquals(numAlarms, alarms.size());
+		if (alarms.size() > 0)
+			assertNotSame("Test", alarms.get(alarms.size()-1).getDestination());
 	}
 }

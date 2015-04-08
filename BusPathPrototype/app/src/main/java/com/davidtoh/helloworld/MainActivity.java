@@ -42,7 +42,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 		mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
 				fstopsDAO.getAllFavoriteStops());
 		listview.setAdapter(mAdapter);
-
+/*
 
 		Intent intent = new Intent(this, SearchStopsActivity.class);
 		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
@@ -61,7 +61,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 		NotificationManager notificationManager =
 				(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-		notificationManager.notify(0, n);
+		notificationManager.notify(0, n);*/
 	}
 
 	@Override
