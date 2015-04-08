@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -164,10 +163,6 @@ public class SchedulerManageActivity extends Activity {
 
 	private void populateFields() {
 		int alarmpos = getIntent().getIntExtra("alarm",0);
-		/*int pos = alarm.indexOf("|");
-		String destination = alarm.substring(0, pos-2);
-		String time = alarm.substring(pos + 3, alarm.length());
-		Log.d("alarm field:", "|"+destination+"|" + "   " + "|"+time+"|");*/
 
 		alarmDAO = new AlarmDAO(this);
 		alarmDAO.open();

@@ -81,7 +81,7 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 		b.setMessage("Delete selected reminder?");
 		b.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
-				deleteAlarm(av, pos);
+				deleteAlarm(pos);
 			}
 		});
 		b.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -93,11 +93,7 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 		return true;
 	}
 
-	private void deleteAlarm(AdapterView<?> av, int position) {
-		//String alarm = av.getItemAtPosition(position).toString();
-		//int pos = alarm.indexOf("|");
-		//String destination = alarm.substring(0, pos-2);
-		//String time = alarm.substring(pos + 3, alarm.length());
+	private void deleteAlarm(int position) {
 		alarmDAO = new AlarmDAO(this);
 		alarmDAO.open();
 		AlarmInfo alarmInfo = alarmDAO.getAlarm(position);
