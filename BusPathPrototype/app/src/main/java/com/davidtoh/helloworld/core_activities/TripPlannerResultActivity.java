@@ -222,11 +222,11 @@ public class TripPlannerResultActivity extends Activity {
 			return "";
 	}
 
-	public void showProgressBar() {
+	private void showProgressBar() {
 		spinner.setVisibility(View.VISIBLE);
 	}
 
-	public void closeProgressBar() {
+	private void closeProgressBar() {
 		spinner.setVisibility(View.GONE);
 	}
 

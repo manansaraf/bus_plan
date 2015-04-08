@@ -66,15 +66,8 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 
 	public void onItemClick(AdapterView<?> av, View v, int position, long id) {
 		Intent intent = new Intent();
-		/*intent.setClass(this, SchedulerManageActivity.class);
+		intent.setClass(this, SchedulerManageActivity.class);
         intent.putExtra("alarm", position);
-        */
-        intent.setClass(this,SchedulerPlannerActivity.class);
-        intent.putExtra("position",alarmDAO.getAlarm(position).getID());
-
-		//intent.putExtra("alarm", av.getItemAtPosition(position).toString());
-
-
 		startActivity(intent);
 	}
 

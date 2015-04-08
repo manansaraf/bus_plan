@@ -1,6 +1,9 @@
 package com.davidtoh.helloworld;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,6 +42,26 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 		mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
 				fstopsDAO.getAllFavoriteStops());
 		listview.setAdapter(mAdapter);
+
+
+		Intent intent = new Intent(this, SearchStopsActivity.class);
+		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+		// build notification
+		// the addAction re-use the same intent to keep the example short
+		Notification n  = new Notification.Builder(this)
+				.setContentTitle("New mail from " + "test@gmail.com")
+				.setContentText("Subject")
+				.setSmallIcon(R.drawable.ic_action_search)
+				.setContentIntent(pIntent)
+				.setAutoCancel(true)
+				.build();
+
+
+		NotificationManager notificationManager =
+				(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+		notificationManager.notify(0, n);
 	}
 
 	@Override

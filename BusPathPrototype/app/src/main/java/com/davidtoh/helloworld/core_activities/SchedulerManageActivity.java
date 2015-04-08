@@ -134,9 +134,9 @@ public class SchedulerManageActivity extends Activity {
 			if(destination.length() == 0)
 				message += "destination, ";
 			if(time.length() == 0)
-				message += "arrive time, ";
+				message += "a time, ";
 			if(days.length() == 0)
-				message += "days, ";
+				message += "days of the week, ";
 			message = message.substring(0, message.length()-2);
 			Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 		}

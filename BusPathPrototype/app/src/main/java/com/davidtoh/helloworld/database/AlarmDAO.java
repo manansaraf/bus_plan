@@ -67,9 +67,9 @@ public class AlarmDAO {
 	}
 
 	public AlarmInfo getAlarm(int pos) {
-        Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
+		Log.d("pos = ", Integer.toString(pos));
+		Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
                 allColumns, null, null, null, null, SQLiteHelper.COLUMN_ALARM_ID + " ASC",(pos) + ", 1");
-        Log.d("pos = ", Integer.toString(pos));
         cursor.moveToFirst();
 		AlarmInfo alarm = cursorToAlarm(cursor);
 		cursor.close();

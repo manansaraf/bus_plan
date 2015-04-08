@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.davidtoh.helloworld.R;
@@ -44,7 +45,8 @@ import java.util.List;
  * This activity will make api calls and return ideal trip plan
  */
 public class SchedulerPlannerActivity  extends Activity {
-    private AlarmDAO alarmDAO;
+	private ProgressBar spinner;
+	private AlarmDAO alarmDAO;
     private BusStopsDAO busStopsDAO;
     LocationManager loc;
 
@@ -53,12 +55,16 @@ public class SchedulerPlannerActivity  extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_planner_result);
         Intent intent = getIntent();
-        int position = intent.getIntExtra("position",0);
+        int position = intent.getIntExtra("position", 0);
+		Log.d("POSITION", position+"");
 
         alarmDAO = new AlarmDAO(this);
         busStopsDAO = new BusStopsDAO(this);
+		alarmDAO.open();
         AlarmInfo alarmInfo = alarmDAO.getAlarm(position);
         loc = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		spinner = (ProgressBar) findViewById(R.id.progressBar1);
+		spinner.setVisibility(View.GONE);
         makeAPICalls(alarmInfo);
     }
     @Override
@@ -85,6 +91,7 @@ public class SchedulerPlannerActivity  extends Activity {
     private void makeAPICalls(AlarmInfo alarmInfo){
         String destination = alarmInfo.getDestination();
         String arriveTime = alarmInfo.getTime();
+		busStopsDAO.open();
         BusStopInfo busStopInfo = busStopsDAO.getStop(destination);
         double dest_lat = busStopInfo.getLatitude();
         double dest_lon = busStopInfo.getLongitude();
@@ -103,7 +110,7 @@ public class SchedulerPlannerActivity  extends Activity {
                 + "&destination_lon=" + dest_lon + "&time=" + arriveTime;
 
         if (networkInfo != null && networkInfo.isConnected()) {
-            //showProgressBar();
+            showProgressBar();
             new getTrip().execute(SchedulerURL);
         } else {
             textView.setVisibility(View.VISIBLE);
@@ -165,7 +172,7 @@ public class SchedulerPlannerActivity  extends Activity {
                 textView.setVisibility(View.VISIBLE);
                 textView.setText(result);
             }
-            //closeProgressBar();
+            closeProgressBar();
         }
     }
 
@@ -279,4 +286,12 @@ public class SchedulerPlannerActivity  extends Activity {
         }
         return trips;
     }
+
+	private void showProgressBar() {
+		spinner.setVisibility(View.VISIBLE);
+	}
+
+	private void closeProgressBar() {
+		spinner.setVisibility(View.GONE);
+	}
 }

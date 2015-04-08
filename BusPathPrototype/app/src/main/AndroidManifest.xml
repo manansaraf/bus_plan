@@ -72,7 +72,7 @@
             android:parentActivityName=".core_activities.SchedulerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.MainActivity"/>
+                android:value="com.davidtoh.helloworld.core_activities.SchedulerActivity"/>
         </activity>
         <activity
             android:name=".core_activities.TripPlannerActivity"
@@ -92,7 +92,7 @@
         <activity
             android:parentActivityName=".core_activities.TripPlannerActivity"
             android:name=".core_activities.TripPlannerResultActivity"
-            android:label="Trip Planner">
+            android:label="Trip Itinerary">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.core_activities.TripPlannerActivity"/>
@@ -104,6 +104,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.core_activities.TripPlannerActivity"/>
+        </activity>
+        <activity
+            android:parentActivityName=".core_activities.SchedulerActivity"
+            android:name=".core_activities.SchedulerPlannerActivity"
+            android:label="Schedule Reminder">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidtoh.helloworld.core_activities.SchedulerActivity"/>
         </activity>
     </application>
 
