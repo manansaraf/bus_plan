@@ -163,14 +163,15 @@ public class SchedulerManageActivity extends Activity {
     }
 
 	private void populateFields() {
-		String alarm = getIntent().getStringExtra("alarm");
-		int pos = alarm.indexOf("|");
+		int alarmpos = getIntent().getIntExtra("alarm",0);
+		/*int pos = alarm.indexOf("|");
 		String destination = alarm.substring(0, pos-2);
 		String time = alarm.substring(pos + 3, alarm.length());
-		Log.d("alarm field:", "|"+destination+"|" + "   " + "|"+time+"|");
+		Log.d("alarm field:", "|"+destination+"|" + "   " + "|"+time+"|");*/
+
 		alarmDAO = new AlarmDAO(this);
 		alarmDAO.open();
-		AlarmInfo alarmInfo = alarmDAO.getAlarm(destination, time);
+		AlarmInfo alarmInfo = alarmDAO.getAlarm(alarmpos);
 
 		EditText destinationText = (EditText) findViewById(R.id.dest);
 		destinationText.setText(alarmInfo.getDestination());

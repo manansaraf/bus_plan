@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.davidtoh.helloworld.utils.AlarmInfo;
 
@@ -53,7 +54,7 @@ public class AlarmDAO {
 		List<AlarmInfo> alarms = new ArrayList<>();
 
 		Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
-				allColumns, null, null, null, null, null);
+				allColumns, null, null, null, null, SQLiteHelper.COLUMN_ALARM_ID + " ASC");
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
@@ -65,13 +66,15 @@ public class AlarmDAO {
 		return alarms;
 	}
 
-	public AlarmInfo getAlarm(String destination, String time) {
-		Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
+	public AlarmInfo getAlarm(int pos) {
+		/*Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
 				allColumns, SQLiteHelper.COLUMN_DESTINATION + " = " + "\'" + destination + "\' AND "
-						+ SQLiteHelper.COLUMN_TIME + " = " + "\'" + time + "\'",
-				null, null, null, null);
-
-		cursor.moveToFirst();
+				        + SQLiteHelper.COLUMN_TIME + " = " + "\'" + time + "\'",
+                null, null, null, null);*/
+        Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
+                allColumns, null, null, null, null, SQLiteHelper.COLUMN_ALARM_ID + " ASC",(pos) + ", 1");
+        Log.d("pos = ", Integer.toString(pos));
+        cursor.moveToFirst();
 		AlarmInfo alarm = cursorToAlarm(cursor);
 		cursor.close();
 		return alarm;
