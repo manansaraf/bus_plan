@@ -21,16 +21,12 @@ import com.davidtoh.helloworld.utils.BusStopInfo;
 import com.davidtoh.helloworld.utils.DateParser;
 import com.davidtoh.helloworld.utils.ExpandableListAdapterTripPlanner;
 import com.davidtoh.helloworld.utils.TripInfo;
+import com.davidtoh.helloworld.utils.connection;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -118,38 +114,6 @@ public class TripPlannerResultActivity extends Activity {
 		}
 	}
 
-	public String makeConnection(String urlString) throws IOException {
-		InputStream inputStream = null;
-		try {
-			URL url = new URL(urlString);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setReadTimeout(10000 /* milliseconds */);
-			conn.setConnectTimeout(15000 /* milliseconds */);
-			conn.setRequestMethod("GET");
-			conn.setDoInput(true);
-			conn.connect();
-			inputStream = conn.getInputStream();
-			return readIt(inputStream);
-		} finally {
-			if (inputStream != null) {
-				inputStream.close();
-			}
-		}
-	}
-
-	public String readIt(InputStream stream) throws IOException {
-		BufferedReader reader;
-		reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
-
-		StringBuilder JSONResult = new StringBuilder();
-		String line;
-		while ((line = reader.readLine()) != null) {
-			JSONResult.append(line);
-		}
-		reader.close();
-		return JSONResult.toString();
-	}
-
 	private class getTrip extends AsyncTask<String, Void, String> {
 		@Override
 		protected String doInBackground(String... urls) {
@@ -175,7 +139,8 @@ public class TripPlannerResultActivity extends Activity {
 	}
 
 	private String createLists(String tripPlannerURL) throws IOException {
-		String tripJSON = makeConnection(tripPlannerURL);
+        connection connect = new connection(tripPlannerURL);
+		String tripJSON = connect.getJSON();
 		List<List<TripInfo>> TripList = buildTripJSON(tripJSON);
 
 		HashMap<String, List<String>> fullTripInfoList = new HashMap<>();

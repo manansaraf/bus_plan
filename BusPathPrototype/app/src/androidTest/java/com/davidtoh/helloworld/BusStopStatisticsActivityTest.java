@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import com.davidtoh.helloworld.core_activities.BusStopStatisticsActivity;
 import com.davidtoh.helloworld.utils.BusRouteInfo;
 import com.davidtoh.helloworld.utils.BusStopInfo;
+import com.davidtoh.helloworld.utils.connection;
 
 import java.io.IOException;
 import java.util.List;
@@ -108,11 +109,9 @@ public class BusStopStatisticsActivityTest extends ActivityInstrumentationTestCa
 	//this test requires network access
 	public void testMakeConnection() {
 		String url = "https://developer.cumtd.com/api/v2.2/JSON/GetDeparturesByStop?key=a6030286b6ed4d609f2178e7cc5a17c9&stop_id=IU";
-		try {
-			String result = busStopStatisticsActivity.makeConnection(url);
+			connection connect = new connection(url);
+            String result = connect.getJSON();
 			assertTrue(result.contains("{\"method\":\"GetDeparturesByStop\",\"params\":{\"stop_id\":\"IU\"}}"));
-		} catch (IOException e) {
-			Log.e("TEST_ERROR", e.getMessage());
-		}
+
 	}
 }
