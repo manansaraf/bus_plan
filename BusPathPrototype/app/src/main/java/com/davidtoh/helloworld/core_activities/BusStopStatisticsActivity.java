@@ -268,6 +268,10 @@ public class BusStopStatisticsActivity extends Activity {
 				finish();
 				startActivity(getIntent());
 				return true;
+			case R.id.action_help:
+				Toast.makeText(getApplicationContext(), "Click a stop to view the route shape",
+						Toast.LENGTH_LONG).show();
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}

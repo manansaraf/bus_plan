@@ -111,6 +111,10 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 			case R.id.action_settings:
 				//openSettings();
 				return true;
+			case R.id.action_help:
+				Toast.makeText(getApplicationContext(), "Click a reminder to edit it, and click " +
+								"and hold a reminder to delete it", Toast.LENGTH_LONG).show();
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}

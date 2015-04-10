@@ -46,23 +46,6 @@ public class TripPlannerActivity extends FragmentActivity {
 		timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
 		setDateField();
 		setTimeField();
-//        Spinner dateSpinner = (Spinner) findViewById(R.id.dates);
-//// Create an ArrayAdapter using the string array and a default spinner layout
-//        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
-//                R.array.stops, android.R.layout.simple_spinner_item);
-//// Specify the layout to use when the list of choices appears
-//        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//// Apply the adapter to the spinner
-//        dateSpinner.setAdapter(adapter1);
-//
-//        Spinner timeSpinner = (Spinner) findViewById(R.id.times);
-//// Create an ArrayAdapter using the string array and a default spinner layout
-//        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
-//                R.array.stops, android.R.layout.simple_spinner_item);
-//// Specify the layout to use when the list of choices appears
-//        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//// Apply the adapter to the spinner
-//        timeSpinner.setAdapter(adapter2);
 	}
 
 	public void startNameFiller(View view) {
