@@ -52,6 +52,7 @@ public class BusStopStatisticsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bus_stop_statistics);
 		Intent intent = getIntent();
+		fstopsDAO = new FavoriteStopsDAO(this);
 		if (intent.hasExtra("busStopName")) {
 			name = intent.getStringExtra("busStopName");
             hash = new HashMap<>();
@@ -63,10 +64,6 @@ public class BusStopStatisticsActivity extends Activity {
 		BusStopsDAO busStopsDAO = new BusStopsDAO(this);
 		busStopsDAO.open();
 		busStopInfo = busStopsDAO.getStop(stopName);
-
-		fstopsDAO = new FavoriteStopsDAO(this);
-		fstopsDAO.open();
-
 		stopID = busStopInfo.getStopID();
 
 		TextView textView = (TextView) findViewById(R.id.statisticsStatusView);
@@ -232,6 +229,7 @@ public class BusStopStatisticsActivity extends Activity {
 
 		mCheckBox.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
+				fstopsDAO.open();
 				if (mCheckBox.isChecked()) {
 					fstopsDAO.createFavoriteStop(name, stopID);
 					Toast.makeText(getApplicationContext(), "Favorite added", Toast.LENGTH_LONG).show();
@@ -245,6 +243,7 @@ public class BusStopStatisticsActivity extends Activity {
 	}
 
 	public boolean getFavoriteStatus() {
+		fstopsDAO.open();
 		List<BusStopInfo> allFavorites = fstopsDAO.getAllFavoriteStops();
 		boolean isFavorite = false;
 		for (int i = 0; i < allFavorites.size(); i++) {

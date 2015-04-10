@@ -1,7 +1,6 @@
 package com.davidtoh.helloworld;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.util.Log;

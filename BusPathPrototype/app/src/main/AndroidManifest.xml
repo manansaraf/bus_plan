@@ -36,17 +36,6 @@
                 android:value="com.davidtoh.helloworld.MainActivity" />
         </activity>
         <activity
-<<<<<<< HEAD
-=======
-            android:name=".core_activities.FavoriteStopsActivity"
-            android:label="Favorites"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.MainActivity" />
-        </activity>
-        <activity
->>>>>>> remotes/origin/UC07_draw_route
             android:name=".core_activities.SearchStopsActivity"
             android:label="Search"
             android:parentActivityName=".MainActivity" >
@@ -64,11 +53,7 @@
         <activity
             android:name=".core_activities.BusStopStatisticsActivity"
             android:label="Stop Statistics"
-<<<<<<< HEAD
             android:parentActivityName=".MainActivity">
-=======
-            android:parentActivityName=".core_activities.FavoriteStopsActivity" >
->>>>>>> remotes/origin/UC07_draw_route
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.MainActivity" />
@@ -87,11 +72,7 @@
             android:parentActivityName=".core_activities.SchedulerActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-<<<<<<< HEAD
                 android:value="com.davidtoh.helloworld.core_activities.SchedulerActivity"/>
-=======
-                android:value="com.davidtoh.helloworld.MainActivity" />
->>>>>>> remotes/origin/UC07_draw_route
         </activity>
         <activity
             android:name=".core_activities.TripPlannerActivity"
@@ -101,44 +82,27 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.MainActivity" />
         </activity>
-<<<<<<< HEAD
-=======
-        <activity
-            android:name=".utils.Alarm"
-            android:label="Alarm"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.MainActivity" />
-        </activity>
-
->>>>>>> remotes/origin/UC07_draw_route
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
-
         <activity
             android:name=".core_activities.TripPlannerResultActivity"
-<<<<<<< HEAD
             android:label="Trip Itinerary">
-=======
-            android:label="Trip Planner"
-            android:parentActivityName=".core_activities.TripPlannerActivity" >
->>>>>>> remotes/origin/UC07_draw_route
+            android:parentActivityName=".core_activities.TripPlannerActivity"
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.core_activities.TripPlannerActivity" />
         </activity>
         <activity
             android:name=".core_activities.SearchStopsTripPlannerActivity"
-            android:label="Search"
-            android:parentActivityName=".core_activities.TripPlannerActivity" >
+            android:label="Search">
+            android:parentActivityName=".core_activities.TripPlannerActivity"
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.core_activities.TripPlannerActivity" />
+                android:value="com.davidtoh.helloworld.core_activities.TripPlannerActivity"/>
         </activity>
         <activity
             android:name=".core_activities.DrawRouteActivity"
@@ -147,14 +111,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.MainActivity" />
-        </activity>
-        <activity
-            android:parentActivityName=".core_activities.SchedulerActivity"
-            android:name=".core_activities.SchedulerPlannerActivity"
-            android:label="Schedule Reminder">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.core_activities.SchedulerActivity"/>
         </activity>
     </application>
 

@@ -15,18 +15,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.ExpandableListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.davidtoh.helloworld.R;
-import com.davidtoh.helloworld.database.BusStopsDAO;
-import com.davidtoh.helloworld.database.FavoriteStopsDAO;
-import com.davidtoh.helloworld.utils.BusRouteInfo;
-import com.davidtoh.helloworld.utils.BusStopInfo;
-import com.davidtoh.helloworld.utils.ExpandableListAdapter;
+
 import com.davidtoh.helloworld.utils.Loc;
 import com.davidtoh.helloworld.utils.connection;
 import com.google.android.gms.maps.CameraUpdate;
@@ -34,9 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONArray;
@@ -50,9 +39,6 @@ import java.util.List;
 public class DrawRouteActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    public BusStopInfo[] markers;
-    List<BusStopInfo> list;
-    BusStopsDAO busStops;
     LocationManager loc;
     LocationListener listener;
     String shape_id;
@@ -212,37 +198,6 @@ public class DrawRouteActivity extends FragmentActivity {
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15.5f);
         mMap.moveCamera(cameraUpdate);
 
-    }
-
-    private void createBusStopLocation() {
-        busStops = new BusStopsDAO(this);
-        busStops.open();
-        list = busStops.getAllStops();
-        List<BusStopInfo> marker = list;
-        markers = new BusStopInfo[list.size()];
-        for (int i = 0; i < marker.size(); i++) {
-            mMap.addMarker(new MarkerOptions().position(new LatLng(marker.get(i).getLatitude(), marker.get(i).getLongitude())).title(marker.get(i).getStopName()));
-            markers[i] = marker.get(i);
-        }
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                LatLng latLng = marker.getPosition();
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17.0f);
-                mMap.moveCamera(cameraUpdate);
-                marker.showInfoWindow();
-                return true;
-            }
-        });
-        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(Marker marker) {
-                Intent intent = new Intent(DrawRouteActivity.this, BusStopStatisticsActivity.class);
-                intent.putExtra("busStopName", marker.getTitle());
-                startActivity(intent);
-
-            }
-        });
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.davidtoh.helloworld.utils;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +18,7 @@ public class connection {
             JSON = makeConnection(connectionURL);
         }
         catch (IOException e) {
+			Log.e("ConnecitonError: ", e.getMessage());
         }
     }
 
