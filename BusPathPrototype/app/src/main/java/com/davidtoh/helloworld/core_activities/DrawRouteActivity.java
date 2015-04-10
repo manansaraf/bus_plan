@@ -59,8 +59,6 @@ public class DrawRouteActivity extends FragmentActivity {
 		route_color = intent.getStringExtra("route_color");
 		points = null;
 		makeAPICalls(vehicle_id, shape_id);
-
-
 	}
 
 	@Override
@@ -86,6 +84,7 @@ public class DrawRouteActivity extends FragmentActivity {
 		String shapeURL = "https://developer.cumtd.com/api/v2.2/JSON/GetShape?key="
 				+ getResources().getString(R.string.apiKey) + "&shape_id=" + shapeID;
 
+		Log.d("VEHICLE", vehicleURL);
 		if (networkInfo != null && networkInfo.isConnected()) {
 			new drawRoute().execute(vehicleURL, shapeURL);
 		}

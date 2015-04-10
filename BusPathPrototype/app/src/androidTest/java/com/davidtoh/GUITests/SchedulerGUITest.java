@@ -1,5 +1,6 @@
-package com.davidtoh.helloworld;
+package com.davidtoh.GUITests;
 
+import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.core_activities.SchedulerActivity;
 import com.davidtoh.helloworld.database.AlarmDAO;
 import com.davidtoh.helloworld.utils.AlarmInfo;
@@ -55,7 +56,7 @@ public class SchedulerGUITest extends ActivityInstrumentationTestCase2<Scheduler
 	public void testAddReminder() {
 		addAlarm();
 		onData(hasToString(startsWith("Illini")))
-				.inAdapterView(withId(R.id.alarmListView)).atPosition(0)
+				.inAdapterView(ViewMatchers.withId(R.id.alarmListView)).atPosition(0)
 				.check(ViewAssertions.matches(
 						ViewMatchers.withText(Matchers.containsString("Illini Union"))));
 

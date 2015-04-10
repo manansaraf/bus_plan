@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * Created by manansaraf on 03/01/15.
- * class to test the basic functions in BusStopStatistics Activity
+ * class to test the basic functions in DrawRouteActivity
  */
 public class DrawRouteActivityTest extends ActivityInstrumentationTestCase2<DrawRouteActivity> {
 
@@ -32,9 +32,9 @@ public class DrawRouteActivityTest extends ActivityInstrumentationTestCase2<Draw
 	protected void setUp() throws Exception {
 		super.setUp();
 		Intent intent = new Intent();
-		intent.putExtra("vehicle_id", 0112);
+		intent.putExtra("vehicle_id", 112);
 		intent.putExtra("shape_id", "SILVER%20NO%EDGE");
-		intent.putExtra("route_color", "cccccc");
+		intent.putExtra("route_color", "#cccccc");
 		setActivityIntent(intent);
 		drawRouteActivity = getActivity();
 	}
@@ -45,7 +45,7 @@ public class DrawRouteActivityTest extends ActivityInstrumentationTestCase2<Draw
 	}
 
 	public void testMakeConnection() {
-		String url = "https://developer.cumtd.com/api/v2.2/JSON/GetVehicle?key=a6030286b6ed4d609f2178e7cc5a17c9&vehicle_id=01112";
+		String url = "https://developer.cumtd.com/api/v2.2/JSON/GetVehicle?key=a6030286b6ed4d609f2178e7cc5a17c9&vehicle_id=0112";
 		connection connect = new connection(url);
 		String result = connect.getJSON();
 		assertTrue(result.contains("{\"method\":\"GetVehicle\",\"params\":{\"vehicle_id\":\"0112\"}}"));
@@ -80,7 +80,7 @@ public class DrawRouteActivityTest extends ActivityInstrumentationTestCase2<Draw
 		drawRouteActivity.drawBusLocation(new Loc(0.1, 0.1));
 		CameraPosition position = map.getCameraPosition();
 		LatLng pos = position.target;
-		assertEquals(pos.latitude, 0.10000007738025568);
+		assertEquals(pos.latitude, 0.10000510651449983);
 		assertEquals(pos.longitude, 0.10000012814998627);
 	}
 
