@@ -15,6 +15,7 @@ import android.widget.SearchView;
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.database.BusStopsDAO;
 import com.davidtoh.helloworld.utils.BusStopInfo;
+import com.davidtoh.helloworld.widgets.BusStopWidgetConfig;
 
 /**
  * Created by dylan on 2/17/15.
@@ -59,7 +60,10 @@ public class SearchStopsTripPlannerActivity extends Activity implements AdapterV
 	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 
 		Intent intent = new Intent();
-		intent.setClass(this, TripPlannerActivity.class);
+        if(intent.hasExtra("stopWidget"))
+            intent.setClass(this, BusStopWidgetConfig.class);
+        else
+		    intent.setClass(this, TripPlannerActivity.class);
 		if (stop == 1) {
 			intent.putExtra("startStopName", l.getItemAtPosition(position).toString());
 			intent.putExtra("endStopName", endStopName);

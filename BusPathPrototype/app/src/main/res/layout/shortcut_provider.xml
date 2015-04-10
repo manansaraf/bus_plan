@@ -7,6 +7,7 @@ android:minHeight="40dp"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:updatePeriodMillis="0"
-android:previewImage="@drawable/ic_menu_search"
-android:resizeMode="none" >
+android:previewImage="@mipmap/bus_widget_shortcut"
+android:resizeMode="none"
+android:configure=".widgets.BusStopWidgetConfig" >
 </appwidget-provider>

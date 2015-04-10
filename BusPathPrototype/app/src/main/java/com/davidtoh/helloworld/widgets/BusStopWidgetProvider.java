@@ -23,13 +23,14 @@ public class BusStopWidgetProvider extends AppWidgetProvider {
                 int appWidgetId = appWidgetIds[i];
 
                 // Create an Intent to launch ExampleActivity
-                Intent intent = new Intent(context, BusStopStatisticsActivity.class);
+                Intent intent = new Intent(context, BusStopWidgetConfig.class);
+                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
                 // Get the layout for the App Widget and attach an on-click listener
                 // to the button
-                RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.shortcut_provider);
-                views.setOnClickPendingIntent(R.id.button5, pendingIntent);
+                RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.shortcut_widget);
+                views.setOnClickPendingIntent(R.id.widgetButton, pendingIntent);
 
                 // Tell the AppWidgetManager to perform an update on the current app widget
                 appWidgetManager.updateAppWidget(appWidgetId, views);

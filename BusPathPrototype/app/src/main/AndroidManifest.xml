@@ -129,6 +129,11 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@layout/shortcut_provider" />
         </receiver>
+        <activity android:name=".widgets.BusStopWidgetConfig">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
