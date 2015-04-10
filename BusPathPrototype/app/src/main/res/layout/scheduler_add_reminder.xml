@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin">
+
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -22,57 +23,77 @@
         android:layout_below="@+id/dest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <ToggleButton
             android:id="@+id/sunday"
             android:layout_height="55dp"
-            android:hint = "sunday"
+            android:hint="sunday"
             android:textOff="S"
             android:textOn="S"
-            android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+            android:layout_weight=".3"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"/>
+
         <ToggleButton
             android:id="@+id/monday"
             android:layout_height="55dp"
             android:textOff="M"
             android:textOn="M"
-            android:hint = "monday"
-            android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+            android:hint="monday"
+            android:layout_weight=".3"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"/>
+
         <ToggleButton
             android:id="@+id/tuesday"
             android:layout_height="55dp"
-            android:hint = "tuesday"
+            android:hint="tuesday"
             android:textOff="T"
             android:textOn="T"
-            android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+            android:layout_weight=".3"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"/>
+
         <ToggleButton
             android:id="@+id/wednesday"
             android:layout_height="55dp"
             android:textOff="W"
             android:textOn="W"
-            android:hint = "wednesday"
-            android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+            android:hint="wednesday"
+            android:layout_weight=".3"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"/>
 
         <ToggleButton
             android:id="@+id/thursday"
             android:layout_height="55dp"
             android:textOff="T"
             android:textOn="T"
-            android:hint = "thursday"
-            android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+            android:hint="thursday"
+            android:layout_weight=".3"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"/>
+
         <ToggleButton
             android:id="@+id/friday"
             android:layout_height="55dp"
             android:textOff="F"
             android:textOn="F"
-            android:hint = "friday"
-            android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+            android:hint="friday"
+            android:layout_weight=".3"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"/>
 
         <ToggleButton
             android:id="@+id/saturday"
             android:layout_height="55dp"
             android:textOff="S"
             android:textOn="S"
-            android:hint = "saturday"
-            android:layout_gravity="right" android:layout_weight=".3" android:layout_width="match_parent" android:gravity="center_horizontal"/>
+            android:hint="saturday"
+            android:layout_gravity="right"
+            android:layout_weight=".3"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"/>
 
     </TableRow>
 

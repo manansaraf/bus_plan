@@ -1,6 +1,7 @@
 package com.davidtoh.helloworld;
 
 import android.test.ActivityInstrumentationTestCase2;
+
 import com.davidtoh.helloworld.core_activities.SchedulerActivity;
 
 /**

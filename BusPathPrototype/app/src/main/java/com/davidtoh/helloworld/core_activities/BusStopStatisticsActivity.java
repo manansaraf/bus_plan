@@ -46,7 +46,8 @@ public class BusStopStatisticsActivity extends Activity {
 	private String name;
 	private String stopID;
 	private BusStopInfo busStopInfo;
-    private HashMap<String,BusRouteInfo> hash;
+	private HashMap<String, BusRouteInfo> hash;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,7 +56,7 @@ public class BusStopStatisticsActivity extends Activity {
 		fstopsDAO = new FavoriteStopsDAO(this);
 		if (intent.hasExtra("busStopName")) {
 			name = intent.getStringExtra("busStopName");
-            hash = new HashMap<>();
+			hash = new HashMap<>();
 			makeAPICalls(name);
 		}
 	}
@@ -114,11 +115,12 @@ public class BusStopStatisticsActivity extends Activity {
 			closeProgressBar();
 		}
 	}
+
 	private void createLists(String departURL, String stopURL) throws IOException {
-	    connection connect = new connection(departURL);
-        String departJSON = connect.getJSON();
-        connect = new connection(stopURL);
-        String stopJSON = connect.getJSON();
+		connection connect = new connection(departURL);
+		String departJSON = connect.getJSON();
+		connect = new connection(stopURL);
+		String stopJSON = connect.getJSON();
 
 		List<BusRouteInfo> BusList = buildDepartJSON(departJSON);
 		List<BusStopInfo> ChildList = buildStopJSON(stopJSON);
@@ -130,9 +132,9 @@ public class BusStopStatisticsActivity extends Activity {
 			List<String> busStopInfoList = new ArrayList<>();
 			for (BusRouteInfo route : BusList) {
 				if (route.getStopID().equals(stop.getStopID())) {
-                    String value=route.getBusName() + ":"
-                            + route.getTimeExpected();
-                    hash.put(value,route);
+					String value = route.getBusName() + ":"
+							+ route.getTimeExpected();
+					hash.put(value, route);
 					busStopInfoList.add(value);
 				}
 			}
@@ -142,21 +144,21 @@ public class BusStopStatisticsActivity extends Activity {
 
 		final ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, listDataHeader, allStopInfoList);
 		final ExpandableListView expListView = (ExpandableListView) findViewById(R.id.expandRouteView);
-        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                String childText = (String)listAdapter.getChild(groupPosition,childPosition);
-                BusRouteInfo route =hash.get(childText);
-                // This is just testing to see what i come up with
-                Intent intent = new Intent(BusStopStatisticsActivity.this, DrawRouteActivity.class);
-                intent.putExtra("vehicle_id",route.getVehicleID());
-                intent.putExtra("shape_id",route.getShape_id());
-                intent.putExtra("route_color",route.getRouteColor());
-                startActivity(intent);
-                return true;
-            }
-        });
+		expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+			@Override
+			public boolean onChildClick(ExpandableListView parent, View v,
+										int groupPosition, int childPosition, long id) {
+				String childText = (String) listAdapter.getChild(groupPosition, childPosition);
+				BusRouteInfo route = hash.get(childText);
+				// This is just testing to see what i come up with
+				Intent intent = new Intent(BusStopStatisticsActivity.this, DrawRouteActivity.class);
+				intent.putExtra("vehicle_id", route.getVehicleID());
+				intent.putExtra("shape_id", route.getShape_id());
+				intent.putExtra("route_color", route.getRouteColor());
+				startActivity(intent);
+				return true;
+			}
+		});
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -168,6 +170,7 @@ public class BusStopStatisticsActivity extends Activity {
 			}
 		});
 	}
+
 	public List<BusRouteInfo> buildDepartJSON(String str) throws IOException {
 		JSONObject JObject;
 		List<BusRouteInfo> BusList = null;
@@ -177,13 +180,13 @@ public class BusStopStatisticsActivity extends Activity {
 			BusList = new ArrayList<>();
 			for (int i = 0; i < JArray.length(); i++) {
 				JObject = JArray.getJSONObject(i);
-                JSONObject color =JObject.getJSONObject("route");
-                JSONObject shape =JObject.getJSONObject("trip");
-                String Shape = shape.getString("shape_id");
-                Shape = Shape.replaceAll(" ","%20");
+				JSONObject color = JObject.getJSONObject("route");
+				JSONObject shape = JObject.getJSONObject("trip");
+				String Shape = shape.getString("shape_id");
+				Shape = Shape.replaceAll(" ", "%20");
 				BusRouteInfo routeInfo = new BusRouteInfo(JObject.getString("headsign"),
 						Integer.parseInt(JObject.getString("expected_mins")), JObject.getString("stop_id")
-                        ,Shape,JObject.getInt("vehicle_id"),"#"+color.getString("route_color"));
+						, Shape, JObject.getInt("vehicle_id"), "#" + color.getString("route_color"));
 
 				BusList.add(routeInfo);
 			}

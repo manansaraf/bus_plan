@@ -139,7 +139,7 @@ public class TripPlannerResultActivity extends Activity {
 	}
 
 	private String createLists(String tripPlannerURL) throws IOException {
-        connection connect = new connection(tripPlannerURL);
+		connection connect = new connection(tripPlannerURL);
 		String tripJSON = connect.getJSON();
 		List<List<TripInfo>> TripList = buildTripJSON(tripJSON);
 
@@ -213,8 +213,8 @@ public class TripPlannerResultActivity extends Activity {
 						trip = getTripInfoWalk(JObject_leg);
 						list.add(trip);
 					} else {
-                        trip = getTripInfoService(JObject_leg);
-                        list.add(trip);
+						trip = getTripInfoService(JObject_leg);
+						list.add(trip);
 					}
 
 
@@ -226,57 +226,57 @@ public class TripPlannerResultActivity extends Activity {
 		}
 		return trips;
 	}
-    public TripInfo getTripInfoWalk(JSONObject JObject_leg){
-        TripInfo trip=null;
-        try {
-            JSONObject walk = JObject_leg.getJSONObject("walk");
-            JSONObject beginStop = walk.getJSONObject("begin");
-            String start_stop = beginStop.getString("name");
-            String start_time = beginStop.getString("time");
-            Date date = DateParser.parse(start_time);
-            start_time = DateParser.toString(date);
-            JSONObject endStop = walk.getJSONObject("end");
-            String end_stop = endStop.getString("name");
-            String end_time = endStop.getString("time");
-            date = DateParser.parse(end_time);
-            end_time = DateParser.toString(date);
-            trip = new TripInfo(start_stop, end_stop, start_time, end_time, walk.getDouble("distance"), null);
 
-        }
-        catch (Exception e) {
-            Log.e("JSON ERROR: ", e.getMessage());
-        }
-        return trip;
-    }
-    public TripInfo getTripInfoService(JSONObject JObject_leg){
-        TripInfo trip=null;
-        try {
-            JSONArray service_array = JObject_leg.getJSONArray("services");
-            for (int k = 0; k < service_array.length(); k++) {
-                JSONObject service = service_array.getJSONObject(k);
-                JSONObject route = service.getJSONObject("route");
-                JSONObject beginStop = service.getJSONObject("begin");
-                String start_stop = beginStop.getString("name");
-                String start_time = beginStop.getString("time");
-                Date date = DateParser.parse(start_time);
-                start_time = DateParser.toString(date);
-                JSONObject endStop = service.getJSONObject("end");
-                String end_stop = endStop.getString("name");
-                String end_time = endStop.getString("time");
-                date = DateParser.parse(end_time);
-                end_time = DateParser.toString(date);
-                JSONObject trip_json = service.getJSONObject("trip");
-                String direction = trip_json.getString("direction");
-                char direct = direction.charAt(0);
-                String bus_name = route.getString("route_short_name") + direct + " " + route.getString("route_id");
-                trip = new TripInfo(start_stop, end_stop, start_time, end_time, 0, bus_name);
-            }
+	public TripInfo getTripInfoWalk(JSONObject JObject_leg) {
+		TripInfo trip = null;
+		try {
+			JSONObject walk = JObject_leg.getJSONObject("walk");
+			JSONObject beginStop = walk.getJSONObject("begin");
+			String start_stop = beginStop.getString("name");
+			String start_time = beginStop.getString("time");
+			Date date = DateParser.parse(start_time);
+			start_time = DateParser.toString(date);
+			JSONObject endStop = walk.getJSONObject("end");
+			String end_stop = endStop.getString("name");
+			String end_time = endStop.getString("time");
+			date = DateParser.parse(end_time);
+			end_time = DateParser.toString(date);
+			trip = new TripInfo(start_stop, end_stop, start_time, end_time, walk.getDouble("distance"), null);
 
-        }
-        catch (Exception e) {
-            Log.e("JSON ERROR: ", e.getMessage());
-        }
-        return trip;
-    }
+		} catch (Exception e) {
+			Log.e("JSON ERROR: ", e.getMessage());
+		}
+		return trip;
+	}
+
+	public TripInfo getTripInfoService(JSONObject JObject_leg) {
+		TripInfo trip = null;
+		try {
+			JSONArray service_array = JObject_leg.getJSONArray("services");
+			for (int k = 0; k < service_array.length(); k++) {
+				JSONObject service = service_array.getJSONObject(k);
+				JSONObject route = service.getJSONObject("route");
+				JSONObject beginStop = service.getJSONObject("begin");
+				String start_stop = beginStop.getString("name");
+				String start_time = beginStop.getString("time");
+				Date date = DateParser.parse(start_time);
+				start_time = DateParser.toString(date);
+				JSONObject endStop = service.getJSONObject("end");
+				String end_stop = endStop.getString("name");
+				String end_time = endStop.getString("time");
+				date = DateParser.parse(end_time);
+				end_time = DateParser.toString(date);
+				JSONObject trip_json = service.getJSONObject("trip");
+				String direction = trip_json.getString("direction");
+				char direct = direction.charAt(0);
+				String bus_name = route.getString("route_short_name") + direct + " " + route.getString("route_id");
+				trip = new TripInfo(start_stop, end_stop, start_time, end_time, 0, bus_name);
+			}
+
+		} catch (Exception e) {
+			Log.e("JSON ERROR: ", e.getMessage());
+		}
+		return trip;
+	}
 
 }

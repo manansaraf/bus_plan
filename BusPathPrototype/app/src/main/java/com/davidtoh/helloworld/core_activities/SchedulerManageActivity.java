@@ -28,26 +28,26 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class SchedulerManageActivity extends Activity {
-    private TimePickerDialog timePickerDialog;
-    private SimpleDateFormat timeFormatter;
+	private TimePickerDialog timePickerDialog;
+	private SimpleDateFormat timeFormatter;
 	private AlarmDAO alarmDAO;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        setContentView(R.layout.scheduler_add_reminder);
+		setContentView(R.layout.scheduler_add_reminder);
 
-        Intent intent = getIntent();
-        if (intent.hasExtra("endStopName")) {
-            EditText editText = (EditText) findViewById(R.id.dest);
-            editText.setText(intent.getStringExtra("endStopName"));
+		Intent intent = getIntent();
+		if (intent.hasExtra("endStopName")) {
+			EditText editText = (EditText) findViewById(R.id.dest);
+			editText.setText(intent.getStringExtra("endStopName"));
 			getIntent().removeExtra("endStopName");
-        }
+		}
 		if (intent.hasExtra("alarm")) {
 			populateFields();
 		}
-        timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
-        setTimeField();
+		timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
+		setTimeField();
 	}
 
 	@Override
@@ -73,98 +73,96 @@ public class SchedulerManageActivity extends Activity {
 		}
 	}
 
-    public void showTimePickerDialog(View v) {
-        timePickerDialog.show();
-    }
+	public void showTimePickerDialog(View v) {
+		timePickerDialog.show();
+	}
 
-    public void endNameFiller(View view) {
-        Intent intent = new Intent(SchedulerManageActivity.this, SearchStopsTripPlannerActivity.class);
-        EditText editText = (EditText) findViewById(R.id.dest);
-        intent.putExtra("startStopName", editText.getText().toString());
-        intent.putExtra("stop", 2);
-        intent.putExtra("classname","Scheduler");
-        startActivity(intent);
-    }
+	public void endNameFiller(View view) {
+		Intent intent = new Intent(SchedulerManageActivity.this, SearchStopsTripPlannerActivity.class);
+		EditText editText = (EditText) findViewById(R.id.dest);
+		intent.putExtra("startStopName", editText.getText().toString());
+		intent.putExtra("stop", 2);
+		intent.putExtra("classname", "Scheduler");
+		startActivity(intent);
+	}
 
-    private void setTimeField() {
-        final EditText timeEdit = (EditText) findViewById(R.id.arrivetime);
+	private void setTimeField() {
+		final EditText timeEdit = (EditText) findViewById(R.id.arrivetime);
 
-        Calendar newCalendar = Calendar.getInstance();
+		Calendar newCalendar = Calendar.getInstance();
 
-        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+		timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
 
-            public void onTimeSet(TimePicker view, int hour, int minute) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(newDate.get(Calendar.YEAR), newDate.get(Calendar.MONTH),
-                        newDate.get(Calendar.DAY_OF_MONTH), hour, minute);
-                timeEdit.setText(timeFormatter.format(newDate.getTime()));
-            }
+			public void onTimeSet(TimePicker view, int hour, int minute) {
+				Calendar newDate = Calendar.getInstance();
+				newDate.set(newDate.get(Calendar.YEAR), newDate.get(Calendar.MONTH),
+						newDate.get(Calendar.DAY_OF_MONTH), hour, minute);
+				timeEdit.setText(timeFormatter.format(newDate.getTime()));
+			}
 
-        }, newCalendar.get(Calendar.HOUR), newCalendar.get(Calendar.MINUTE), false);
-    }
+		}, newCalendar.get(Calendar.HOUR), newCalendar.get(Calendar.MINUTE), false);
+	}
 
-    public void addAlarm(View view){
+	public void addAlarm(View view) {
 
-        EditText destText = (EditText) findViewById(R.id.dest);
-        String destination = destText.getText().toString();
-        EditText timeText = (EditText) findViewById(R.id.arrivetime);
-        String time = timeText.getText().toString();
-        String days = makeDayString();
+		EditText destText = (EditText) findViewById(R.id.dest);
+		String destination = destText.getText().toString();
+		EditText timeText = (EditText) findViewById(R.id.arrivetime);
+		String time = timeText.getText().toString();
+		String days = makeDayString();
 		CheckBox repeatBox = (CheckBox) findViewById(R.id.checkBox);
 		Boolean repeat = repeatBox.isChecked();
 
-        if (destination.length() > 0 && time.length() > 0 && days.length() > 0) {
+		if (destination.length() > 0 && time.length() > 0 && days.length() > 0) {
 			alarmDAO = new AlarmDAO(this);
 			alarmDAO.open();
 			if (!getIntent().hasExtra("alarm")) {
 				alarmDAO.createAlarm(destination, time, days, String.valueOf(repeat));
 				Toast.makeText(getApplicationContext(), "Alarm added", Toast.LENGTH_LONG).show();
-			}
-			else {
+			} else {
 				int id = getIntent().getIntExtra("id", 0);
 				alarmDAO.editAlarm(id, destination, time, days, String.valueOf(repeat));
 				Toast.makeText(getApplicationContext(), "Alarm edited", Toast.LENGTH_LONG).show();
 				getIntent().removeExtra("alarm");
 			}
 			finish();
-            Intent intent = new Intent(SchedulerManageActivity.this, SchedulerActivity.class);
+			Intent intent = new Intent(SchedulerManageActivity.this, SchedulerActivity.class);
 			startActivity(intent);
 
-        }
-		else {
+		} else {
 			String message = "Missing ";
-			if(destination.length() == 0)
+			if (destination.length() == 0)
 				message += "destination, ";
-			if(time.length() == 0)
+			if (time.length() == 0)
 				message += "a time, ";
-			if(days.length() == 0)
+			if (days.length() == 0)
 				message += "days of the week, ";
-			message = message.substring(0, message.length()-2);
+			message = message.substring(0, message.length() - 2);
 			Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 		}
-    }
+	}
 
-    private String makeDayString(){
-        ToggleButton[] dayArray = new ToggleButton[] {
-				(ToggleButton)findViewById(R.id.sunday),
-				(ToggleButton)findViewById(R.id.monday),
-				(ToggleButton)findViewById(R.id.tuesday),
-				(ToggleButton)findViewById(R.id.wednesday),
-				(ToggleButton)findViewById(R.id.thursday),
-				(ToggleButton)findViewById(R.id.friday),
-				(ToggleButton)findViewById(R.id.saturday)};
+	private String makeDayString() {
+		ToggleButton[] dayArray = new ToggleButton[]{
+				(ToggleButton) findViewById(R.id.sunday),
+				(ToggleButton) findViewById(R.id.monday),
+				(ToggleButton) findViewById(R.id.tuesday),
+				(ToggleButton) findViewById(R.id.wednesday),
+				(ToggleButton) findViewById(R.id.thursday),
+				(ToggleButton) findViewById(R.id.friday),
+				(ToggleButton) findViewById(R.id.saturday)};
 
-        String dayString = "";
-        for(ToggleButton day : dayArray){
-            if(day.isChecked()){
-                dayString += day.getHint()+" ";
-            }
-        }
-        return dayString;
-    }
+		String dayString = "";
+		for (ToggleButton day : dayArray) {
+			if (day.isChecked()) {
+				dayString += day.getHint() + " ";
+			}
+		}
+		return dayString;
+	}
 
 	private void populateFields() {
-		int alarmpos = getIntent().getIntExtra("alarm",0);
+		int alarmpos = getIntent().getIntExtra("alarm", 0);
 
 		alarmDAO = new AlarmDAO(this);
 		alarmDAO.open();
@@ -177,13 +175,13 @@ public class SchedulerManageActivity extends Activity {
 		CheckBox repeatBox = (CheckBox) findViewById(R.id.checkBox);
 		repeatBox.setChecked(Boolean.valueOf(alarmInfo.getRepeat()));
 
-		ToggleButton sunday = (ToggleButton)findViewById(R.id.sunday);
-		ToggleButton monday = (ToggleButton)findViewById(R.id.monday);
-		ToggleButton tuesday = (ToggleButton)findViewById(R.id.tuesday);
-		ToggleButton wednesday = (ToggleButton)findViewById(R.id.wednesday);
-		ToggleButton thursday = (ToggleButton)findViewById(R.id.thursday);
-		ToggleButton friday = (ToggleButton)findViewById(R.id.friday);
-		ToggleButton saturday = (ToggleButton)findViewById(R.id.saturday);
+		ToggleButton sunday = (ToggleButton) findViewById(R.id.sunday);
+		ToggleButton monday = (ToggleButton) findViewById(R.id.monday);
+		ToggleButton tuesday = (ToggleButton) findViewById(R.id.tuesday);
+		ToggleButton wednesday = (ToggleButton) findViewById(R.id.wednesday);
+		ToggleButton thursday = (ToggleButton) findViewById(R.id.thursday);
+		ToggleButton friday = (ToggleButton) findViewById(R.id.friday);
+		ToggleButton saturday = (ToggleButton) findViewById(R.id.saturday);
 		String days = alarmInfo.getDay();
 
 		if (days.contains("sunday"))

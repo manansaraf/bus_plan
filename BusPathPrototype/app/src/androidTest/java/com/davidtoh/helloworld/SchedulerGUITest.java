@@ -30,39 +30,39 @@ import static org.hamcrest.Matchers.startsWith;
  */
 public class SchedulerGUITest extends ActivityInstrumentationTestCase2<SchedulerActivity> {
 
-    private SchedulerActivity schedulerActivity;
+	private SchedulerActivity schedulerActivity;
 	private AlarmDAO alarmDAO;
 
-    public SchedulerGUITest() {
+	public SchedulerGUITest() {
 		super(SchedulerActivity.class);
-    }
+	}
 
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
+	@Override
+	public void setUp() throws Exception {
+		super.setUp();
 		if (schedulerActivity == null)
-       		schedulerActivity = getActivity();
+			schedulerActivity = getActivity();
 		else
 			getActivity();
 		alarmDAO = new AlarmDAO(schedulerActivity);
-    }
+	}
 
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
 
-    public void testAddReminder(){
+	public void testAddReminder() {
 		addAlarm();
-        onData(hasToString(startsWith("Illini")))
-                .inAdapterView(withId(R.id.alarmListView)).atPosition(0)
-                .check(ViewAssertions.matches(
-                        ViewMatchers.withText(Matchers.containsString("Illini Union"))));
+		onData(hasToString(startsWith("Illini")))
+				.inAdapterView(withId(R.id.alarmListView)).atPosition(0)
+				.check(ViewAssertions.matches(
+						ViewMatchers.withText(Matchers.containsString("Illini Union"))));
 
 		AlarmInfo alarm = getAlarmFromList();
 		assertEquals("Illini Union", alarm.getDestination());
 		alarmDAO.deleteAlarm(alarm.getID());
-    }
+	}
 
 	public void testEditReminder() {
 		addAlarm();
@@ -88,7 +88,7 @@ public class SchedulerGUITest extends ActivityInstrumentationTestCase2<Scheduler
 				.perform(longClick());
 		onView(withText("Yes")).perform(click());
 		int sizeAfter = alarmDAO.getAllAlarms().size();
-		assertEquals(sizeBefore, sizeAfter+1);
+		assertEquals(sizeBefore, sizeAfter + 1);
 	}
 
 	public void testIncompleteAddReminder() {
@@ -113,7 +113,7 @@ public class SchedulerGUITest extends ActivityInstrumentationTestCase2<Scheduler
 		onView(withId(R.id.AlarmSubmit)).perform(click());
 
 		sizeAfter = alarmDAO.getAllAlarms().size();
-		assertEquals(sizeBefore+1, sizeAfter);
+		assertEquals(sizeBefore + 1, sizeAfter);
 
 		AlarmInfo alarm = getAlarmFromList();
 		alarmDAO.deleteAlarm(alarm.getID());

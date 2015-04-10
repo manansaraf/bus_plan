@@ -45,7 +45,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 	private static final String ALARM_CREATE = "CREATE TABLE IF NOT EXISTS " + TABLE_ALARM +
 			"(" + COLUMN_ALARM_ID + " INTEGER PRIMARY KEY, " + COLUMN_DESTINATION + " TEXT NOT NULL, " +
-			 COLUMN_TIME + " TEXT NOT NULL, " + COLUMN_REMIND_DAY + " TEXT NOT NULL, " +
+			COLUMN_TIME + " TEXT NOT NULL, " + COLUMN_REMIND_DAY + " TEXT NOT NULL, " +
 			COLUMN_REPEAT + " TEXT NOT NULL DEFAULT \'false\');";
 
 	public SQLiteHelper(Context context) {

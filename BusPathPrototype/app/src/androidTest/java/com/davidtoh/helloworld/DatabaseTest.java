@@ -103,14 +103,14 @@ public class DatabaseTest extends ActivityInstrumentationTestCase2<MainActivity>
 		//add custom alarm
 		alarmDAO.createAlarm("Test", "00:00", "monday ", "false");
 		alarms = alarmDAO.getAllAlarms();
-		assertEquals(numAlarms+1, alarms.size());
+		assertEquals(numAlarms + 1, alarms.size());
 		//check that alarm was added
-		assertEquals("Test", alarms.get(alarms.size()-1).getDestination());
+		assertEquals("Test", alarms.get(alarms.size() - 1).getDestination());
 		//delete alarm
-		alarmDAO.deleteAlarm(alarms.get(alarms.size()-1).getID());
+		alarmDAO.deleteAlarm(alarms.get(alarms.size() - 1).getID());
 		alarms = alarmDAO.getAllAlarms();
 		assertEquals(numAlarms, alarms.size());
 		if (alarms.size() > 0)
-			assertNotSame("Test", alarms.get(alarms.size()-1).getDestination());
+			assertNotSame("Test", alarms.get(alarms.size() - 1).getDestination());
 	}
 }

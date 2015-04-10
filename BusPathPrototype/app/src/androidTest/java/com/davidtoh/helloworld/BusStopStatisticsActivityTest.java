@@ -109,9 +109,9 @@ public class BusStopStatisticsActivityTest extends ActivityInstrumentationTestCa
 	//this test requires network access
 	public void testMakeConnection() {
 		String url = "https://developer.cumtd.com/api/v2.2/JSON/GetDeparturesByStop?key=a6030286b6ed4d609f2178e7cc5a17c9&stop_id=IU";
-			connection connect = new connection(url);
-            String result = connect.getJSON();
-			assertTrue(result.contains("{\"method\":\"GetDeparturesByStop\",\"params\":{\"stop_id\":\"IU\"}}"));
+		connection connect = new connection(url);
+		String result = connect.getJSON();
+		assertTrue(result.contains("{\"method\":\"GetDeparturesByStop\",\"params\":{\"stop_id\":\"IU\"}}"));
 
 	}
 }
