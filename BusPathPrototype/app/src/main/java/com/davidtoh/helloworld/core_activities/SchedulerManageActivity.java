@@ -127,7 +127,9 @@ public class SchedulerManageActivity extends Activity {
 				getIntent().removeExtra("alarm");
 			}
 			finish();
-			startActivity(getIntent());
+            Intent intent = new Intent(SchedulerManageActivity.this, SchedulerActivity.class);
+			startActivity(intent);
+
         }
 		else {
 			String message = "Missing ";
