@@ -23,17 +23,13 @@ import com.davidtoh.helloworld.utils.BusRouteInfo;
 import com.davidtoh.helloworld.utils.BusStopInfo;
 import com.davidtoh.helloworld.database.BusStopsDAO;
 import com.davidtoh.helloworld.utils.ExpandableListAdapter;
+import com.davidtoh.helloworld.utils.connection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,7 +46,7 @@ public class BusStopStatisticsActivity extends Activity {
 	private String name;
 	private String stopID;
 	private BusStopInfo busStopInfo;
-
+    private HashMap<String,BusRouteInfo> hash;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,6 +54,7 @@ public class BusStopStatisticsActivity extends Activity {
 		Intent intent = getIntent();
 		if (intent.hasExtra("busStopName")) {
 			name = intent.getStringExtra("busStopName");
+            hash = new HashMap<>();
 			makeAPICalls(name);
 		}
 	}
@@ -120,29 +117,11 @@ public class BusStopStatisticsActivity extends Activity {
 			closeProgressBar();
 		}
 	}
-
-	public String makeConnection(String urlString) throws IOException {
-		InputStream inputStream = null;
-		try {
-			URL url = new URL(urlString);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setReadTimeout(10000 /* milliseconds */);
-			conn.setConnectTimeout(15000 /* milliseconds */);
-			conn.setRequestMethod("GET");
-			conn.setDoInput(true);
-			conn.connect();
-			inputStream = conn.getInputStream();
-			return readIt(inputStream);
-		} finally {
-			if (inputStream != null) {
-				inputStream.close();
-			}
-		}
-	}
-
 	private void createLists(String departURL, String stopURL) throws IOException {
-		String departJSON = makeConnection(departURL);
-		String stopJSON = makeConnection(stopURL);
+	    connection connect = new connection(departURL);
+        String departJSON = connect.getJSON();
+        connect = new connection(stopURL);
+        String stopJSON = connect.getJSON();
 
 		List<BusRouteInfo> BusList = buildDepartJSON(departJSON);
 		List<BusStopInfo> ChildList = buildStopJSON(stopJSON);
@@ -154,8 +133,10 @@ public class BusStopStatisticsActivity extends Activity {
 			List<String> busStopInfoList = new ArrayList<>();
 			for (BusRouteInfo route : BusList) {
 				if (route.getStopID().equals(stop.getStopID())) {
-					busStopInfoList.add(route.getBusName() + ":"
-							+ route.getTimeExpected());
+                    String value=route.getBusName() + ":"
+                            + route.getTimeExpected();
+                    hash.put(value,route);
+					busStopInfoList.add(value);
 				}
 			}
 			allStopInfoList.put(stop.getStopName(), busStopInfoList);
@@ -164,7 +145,21 @@ public class BusStopStatisticsActivity extends Activity {
 
 		final ExpandableListAdapter listAdapter = new ExpandableListAdapter(this, listDataHeader, allStopInfoList);
 		final ExpandableListView expListView = (ExpandableListView) findViewById(R.id.expandRouteView);
-
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                String childText = (String)listAdapter.getChild(groupPosition,childPosition);
+                BusRouteInfo route =hash.get(childText);
+                // This is just testing to see what i come up with
+                Intent intent = new Intent(BusStopStatisticsActivity.this, DrawRouteActivity.class);
+                intent.putExtra("vehicle_id",route.getVehicleID());
+                intent.putExtra("shape_id",route.getShape_id());
+                intent.putExtra("route_color",route.getRouteColor());
+                startActivity(intent);
+                return true;
+            }
+        });
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -176,20 +171,6 @@ public class BusStopStatisticsActivity extends Activity {
 			}
 		});
 	}
-
-	public String readIt(InputStream stream) throws IOException {
-		BufferedReader reader;
-		reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));
-
-		StringBuilder JSONResult = new StringBuilder();
-		String line;
-		while ((line = reader.readLine()) != null) {
-			JSONResult.append(line);
-		}
-		reader.close();
-		return JSONResult.toString();
-	}
-
 	public List<BusRouteInfo> buildDepartJSON(String str) throws IOException {
 		JSONObject JObject;
 		List<BusRouteInfo> BusList = null;
@@ -199,8 +180,14 @@ public class BusStopStatisticsActivity extends Activity {
 			BusList = new ArrayList<>();
 			for (int i = 0; i < JArray.length(); i++) {
 				JObject = JArray.getJSONObject(i);
+                JSONObject color =JObject.getJSONObject("route");
+                JSONObject shape =JObject.getJSONObject("trip");
+                String Shape = shape.getString("shape_id");
+                Shape = Shape.replaceAll(" ","%20");
 				BusRouteInfo routeInfo = new BusRouteInfo(JObject.getString("headsign"),
-						Integer.parseInt(JObject.getString("expected_mins")), JObject.getString("stop_id"));
+						Integer.parseInt(JObject.getString("expected_mins")), JObject.getString("stop_id")
+                        ,Shape,JObject.getInt("vehicle_id"),"#"+color.getString("route_color"));
+
 				BusList.add(routeInfo);
 			}
 		} catch (JSONException e) {

@@ -27,5 +27,7 @@
     <string name="title_activity_nearby_bus_stops">Map</string>
     <string name="title_activity_trip_planner_result">TripPlannerResultActivity</string>
     <string name="title_activity_search_stops_trip_planner">SearchStopsTripPlannerActivity</string>
+    <string name="title_activity_draw_route">Bus Route</string>
+    <string name="title_activity_draw_route_helper">drawRouteHelperActivity</string>
 
 </resources>
