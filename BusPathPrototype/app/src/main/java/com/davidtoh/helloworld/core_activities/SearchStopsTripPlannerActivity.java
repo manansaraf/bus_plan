@@ -3,6 +3,7 @@ package com.davidtoh.helloworld.core_activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -59,8 +60,9 @@ public class SearchStopsTripPlannerActivity extends Activity implements AdapterV
 	@Override
 	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 
-		Intent intent = new Intent();
-        if(intent.hasExtra("stopWidget"))
+        Intent intent = new Intent();
+        //Log.d("stopWidget", Boolean.toString(intent.hasExtra("stopWidget")));
+        if(getIntent().hasExtra("stopWidget"))
             intent.setClass(this, BusStopWidgetConfig.class);
         else
 		    intent.setClass(this, TripPlannerActivity.class);
@@ -73,6 +75,7 @@ public class SearchStopsTripPlannerActivity extends Activity implements AdapterV
 			intent.putExtra("endStopName", l.getItemAtPosition(position).toString());
 			startActivity(intent);
 		}
+        finish();
 	}
 
 	@Override

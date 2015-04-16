@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:initialLayout="@layout/shortcut_widget"
-android:minWidth="40dp"
-android:minHeight="40dp"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:updatePeriodMillis="0"
-android:previewImage="@mipmap/bus_widget_shortcut"
-android:resizeMode="none"
-android:configure=".widgets.BusStopWidgetConfig" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialLayout="@layout/shortcut_widget"
+    android:minWidth="40dp"
+    android:minHeight="40dp"
+    android:updatePeriodMillis="0"
+    android:previewImage="@mipmap/bus_widget_shortcut">
 </appwidget-provider>
