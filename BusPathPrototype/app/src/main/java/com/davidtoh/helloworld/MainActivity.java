@@ -1,9 +1,6 @@
 package com.davidtoh.helloworld;
 
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -67,8 +64,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 	@Override
 	public void onResume() {
 		super.onResume();
-		mAdapter.clear();
-		mAdapter.addAll(fstopsDAO.getAllFavoriteStops());
+		fstopsDAO.open();
+		mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+				fstopsDAO.getAllFavoriteStops());
 		mAdapter.notifyDataSetChanged();
 	}
 

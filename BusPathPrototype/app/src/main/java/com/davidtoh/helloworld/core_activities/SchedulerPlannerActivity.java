@@ -42,7 +42,6 @@ import java.util.List;
  */
 public class SchedulerPlannerActivity extends Activity {
 	private ProgressBar spinner;
-	private AlarmDAO alarmDAO;
 	private BusStopsDAO busStopsDAO;
 	LocationManager loc;
 
@@ -54,7 +53,7 @@ public class SchedulerPlannerActivity extends Activity {
 		int position = intent.getIntExtra("position", 0);
 		Log.d("POSITION", position + "");
 
-		alarmDAO = new AlarmDAO(this);
+		AlarmDAO alarmDAO = new AlarmDAO(this);
 		busStopsDAO = new BusStopsDAO(this);
 		alarmDAO.open();
 		AlarmInfo alarmInfo = alarmDAO.getAlarm(position);

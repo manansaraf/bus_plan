@@ -1,5 +1,6 @@
 package com.davidtoh.helloworld.utils;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -25,21 +26,23 @@ public class AlarmReceiver extends BroadcastReceiver {
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 
 		Intent notificationIntent = new Intent(context, SchedulerPlannerActivity.class);
-		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		notificationIntent.putExtra("position", 1);
 
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
-				notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, 1,
+				notificationIntent,  0);
 
 
 		Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-		NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(
+		Notification note = new NotificationCompat.Builder(
 				context).setSmallIcon(R.drawable.ic_action_search)
-				.setContentTitle("Alaram Fired")
-				.setContentText("Events To be PErformed").setSound(alarmSound)
-				.setAutoCancel(true).setWhen(when)
+				.setContentTitle("Alarm Fired")
+				.setContentText("Events To be Performed")
+				.setSound(alarmSound)
+				.setWhen(when)
+				.setAutoCancel(true)
 				.setContentIntent(pendingIntent)
-				.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
-		notificationManager.notify(0, mNotifyBuilder.build());
+				.build();
+		notificationManager.notify(0, note);
 	}
 }

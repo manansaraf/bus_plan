@@ -136,22 +136,19 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 10);
 		calendar.set(Calendar.SECOND, 0);
-		calendar.setTimeInMillis(System.currentTimeMillis()+15000);
+		calendar.setTimeInMillis(System.currentTimeMillis()+1000);
 		Intent intent = new Intent(this, AlarmReceiver.class);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,intent, 0);
 		AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
 		am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+		Toast.makeText(getApplicationContext(), "Scheduler alarms turned on", Toast.LENGTH_LONG).show();
 	}
 
 	private void cancelAlarm() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 10);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.setTimeInMillis(System.currentTimeMillis()+15000);
 		Intent intent = new Intent(this, AlarmReceiver.class);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,intent, 0);
 		AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
 		am.cancel(pendingIntent);
+		Toast.makeText(getApplicationContext(), "Scheduler alarms turned off", Toast.LENGTH_LONG).show();
 	}
 }

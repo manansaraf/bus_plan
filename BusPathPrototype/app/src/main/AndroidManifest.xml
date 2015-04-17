@@ -76,6 +76,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.davidtoh.helloworld.core_activities.SchedulerActivity"/>
         </activity>
+        <activity android:name=".core_activities.SchedulerPlannerActivity"
+                  android:label="Trip Plan"
+                  android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.davidtoh.helloworld.MainActivity"/>
+        </activity>
         <activity
             android:name=".core_activities.TripPlannerActivity"
             android:label="Trip Planner"
