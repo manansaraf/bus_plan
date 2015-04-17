@@ -75,7 +75,31 @@ public class AlarmDAO {
 		cursor.close();
 		return alarm;
 	}
+    public AlarmInfo getAlarmById(int id){
 
+        Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
+                allColumns, SQLiteHelper.COLUMN_ALARM_ID+" = '"+id+"'", null, null, null, SQLiteHelper.COLUMN_ALARM_ID + " ASC");
+        cursor.moveToFirst();
+        AlarmInfo alarm = cursorToAlarm(cursor);
+        cursor.close();
+        return alarm;
+    }
+
+    public List<AlarmInfo> getAlarmsByDay(String day){
+        List<AlarmInfo> alarms = new ArrayList<>();
+
+        Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
+                allColumns, SQLiteHelper.COLUMN_REMIND_DAY+" Like '%"+day +"%'", null, null, null, SQLiteHelper.COLUMN_ALARM_ID + " ASC");
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            AlarmInfo alarmInfo = cursorToAlarm(cursor);
+            alarms.add(alarmInfo);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return alarms;
+    }
 	public void editAlarm(int id, String destination, String time, String day,
 						  String repeat) {
 		ContentValues values = new ContentValues();

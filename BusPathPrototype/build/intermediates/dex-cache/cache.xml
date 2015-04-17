@@ -2,81 +2,130 @@
 <items version="2" >
 
     <item
-        jar="/home/dylan/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.1/860340562250678d1a344907ac75754e259cdb14/hamcrest-core-1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="860340562250678d1a344907ac75754e259cdb14">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/test/debug/hamcrest-core-1.1-f8183fa06aa8acfdc1aa9d90f82c599acbe0f493.jar" />
-    </item>
-    <item
-        jar="/home/dylan/.gradle/caches/modules-2/files-2.1/junit/junit-dep/4.10/64417b3bafdecd366afa514bd5beeae6c1f85ece/junit-dep-4.10.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="64417b3bafdecd366afa514bd5beeae6c1f85ece">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/test/debug/junit-dep-4.10-a877b476b64721bb7dcfe0c7bd2ea544d081b6f6.jar" />
-    </item>
-    <item
-        jar="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/exploded-aar/com.android.support.test.espresso/espresso-core/2.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="3e2095347aa9c33370eb72fea3969c0a7254e168">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/test/debug/classes-bf59d139e7e5a386e8a5d4fe0b890eaf8b93e375.jar" />
-    </item>
-    <item
-        jar="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/exploded-aar/com.android.support.test/testing-support-lib/0.1/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2700b782e8c78b36636a15b0ed86126a96295de7">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/test/debug/classes-ef4b9179f4d519143994cadcdaed35399f9c327c.jar" />
-    </item>
-    <item
-        jar="/home/dylan/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/2.0.1/516c03b21d50a644d538de0f0369c620989cd8f0/jsr305-2.0.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="516c03b21d50a644d538de0f0369c620989cd8f0">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/test/debug/jsr305-2.0.1-fdd3430c3799bf5da921b9af8409efa0830ab297.jar" />
-    </item>
-    <item
-        jar="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/exploded-aar/com.android.support.test.espresso/espresso-idling-resource/2.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="7cc4b00df8357dabd613998c9229ace9bba26ee2">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/test/debug/classes-9e6c50b19d166de7a6c0c542865b32179fd30470.jar" />
-    </item>
-    <item
-        jar="/home/dylan/.gradle/caches/modules-2/files-2.1/javax.annotation/javax.annotation-api/1.2/479c1e06db31c432330183f5cae684163f186146/javax.annotation-api-1.2.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="479c1e06db31c432330183f5cae684163f186146">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/test/debug/javax.annotation-api-1.2-9c2711f2d86e117c5160714035c35370e955469e.jar" />
-    </item>
-    <item
-        jar="/home/dylan/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-library/1.1/b988c01468e3398d46678a2eb48aeb5bde271e9f/hamcrest-library-1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b988c01468e3398d46678a2eb48aeb5bde271e9f">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/test/debug/hamcrest-library-1.1-e5f668c10ec8d74d66ae082c0b319d6e2f2cd688.jar" />
-    </item>
-    <item
-        jar="/home/dylan/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-integration/1.1/8d47177aa4da0f259fc823a39736bad2f09993d5/hamcrest-integration-1.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="8d47177aa4da0f259fc823a39736bad2f09993d5">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/test/debug/hamcrest-integration-1.1-88d034830763d2825b84eabcbb98616693f870e4.jar" />
-    </item>
-    <item
-        jar="/home/dylan/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jar="C:\Users\Elee\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="6975da39a7040257bd51d21a231b76c915872d38">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/test/debug/javax.inject-1-b0c24be4ccbe4d2ca432324ceab2e008f3da4721.jar" />
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\test\debug\javax.inject-1-2d0f4376d255ea78140c16c3df9a13591fb29292.jar" />
     </item>
     <item
-        jar="/home/dylan/.gradle/caches/modules-2/files-2.1/com.squareup/javawriter/2.1.1/67ff45d9ae02e583d0f9b3432a5ebbe05c30c966/javawriter-2.1.1.jar"
+        jar="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\exploded-aar\com.android.support.test\testing-support-lib\0.1\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2700b782e8c78b36636a15b0ed86126a96295de7">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\test\debug\classes-d2318c840e205ba1a1591a359d842d41f728142f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Elee\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-88e253b967452355b943f133d06e268d1d8f0ae0.jar" />
+    </item>
+    <item
+        jar="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-a17ed11490ae2f4944deef474e8bc7fbfebeaa0e.jar" />
+    </item>
+    <item
+        jar="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\debug\classes-8a827a382273b75ccc805410f6c1b90c9d8f2eca.jar" />
+    </item>
+    <item
+        jar="C:\Users\Elee\.gradle\caches\modules-2\files-2.1\com.squareup\javawriter\2.1.1\67ff45d9ae02e583d0f9b3432a5ebbe05c30c966\javawriter-2.1.1.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="67ff45d9ae02e583d0f9b3432a5ebbe05c30c966">
-        <dex dex="/home/dylan/AndroidProjects/bus_plan/BusPathPrototype/app/build/intermediates/pre-dexed/test/debug/javawriter-2.1.1-5480b2e2591ada1eae015a6a084ebeb28a8a6728.jar" />
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\test\debug\javawriter-2.1.1-92a1f28efcbef590299d49009ee1ad3b93e52a26.jar" />
+    </item>
+    <item
+        jar="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\exploded-aar\com.android.support.test.espresso\espresso-idling-resource\2.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7cc4b00df8357dabd613998c9229ace9bba26ee2">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\test\debug\classes-1e6fdc703e709951647de4562d0cfe703cd23881.jar" />
+    </item>
+    <item
+        jar="C:\Users\Elee\.gradle\caches\modules-2\files-2.1\org.hamcrest\hamcrest-core\1.1\860340562250678d1a344907ac75754e259cdb14\hamcrest-core-1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="860340562250678d1a344907ac75754e259cdb14">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\test\debug\hamcrest-core-1.1-b8e7ea4b4665fc4e4871afbea66a75abca994fb6.jar" />
+    </item>
+    <item
+        jar="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\exploded-aar\com.android.support.test.espresso\espresso-core\2.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3e2095347aa9c33370eb72fea3969c0a7254e168">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\test\debug\classes-58d3467561e1913e8e075feb0f196705b02b4653.jar" />
+    </item>
+    <item
+        jar="C:\Users\Elee\.gradle\caches\modules-2\files-2.1\org.hamcrest\hamcrest-library\1.1\b988c01468e3398d46678a2eb48aeb5bde271e9f\hamcrest-library-1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b988c01468e3398d46678a2eb48aeb5bde271e9f">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\test\debug\hamcrest-library-1.1-e83696103d6afb24ee635b697719b8ee11af017b.jar" />
+    </item>
+    <item
+        jar="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b8945fc23a7461c6fdde15753456d64b0a9358b">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\test\debug\classes-5c45cdac3466dec4a126f6afd61144d78f1f50e8.jar" />
+    </item>
+    <item
+        jar="C:\Users\Elee\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\2.0.1\516c03b21d50a644d538de0f0369c620989cd8f0\jsr305-2.0.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="516c03b21d50a644d538de0f0369c620989cd8f0">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\test\debug\jsr305-2.0.1-c8fbe1803dcf3c585470d18b1f208e364d3295ed.jar" />
+    </item>
+    <item
+        jar="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\debug\classes-f847796f3048fd5762075490f5f7d9abb0ea0f75.jar" />
+    </item>
+    <item
+        jar="C:\Users\Elee\.gradle\caches\modules-2\files-2.1\javax.annotation\javax.annotation-api\1.2\479c1e06db31c432330183f5cae684163f186146\javax.annotation-api-1.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="479c1e06db31c432330183f5cae684163f186146">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\test\debug\javax.annotation-api-1.2-6467499153cb34fff40105e46fb1cf5e39840bb4.jar" />
+    </item>
+    <item
+        jar="C:\Users\Elee\.gradle\caches\modules-2\files-2.1\junit\junit-dep\4.10\64417b3bafdecd366afa514bd5beeae6c1f85ece\junit-dep-4.10.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="64417b3bafdecd366afa514bd5beeae6c1f85ece">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\test\debug\junit-dep-4.10-837e28baca4997c7638cc266e2b347091fb04269.jar" />
+    </item>
+    <item
+        jar="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\exploded-aar\com.android.support.test.espresso\espresso-contrib\2.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e279073d73895166e9c7653a01f6e6f7c266bd2a">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\test\debug\classes-0e1c92322b83866b49d0838bbd8184c95b674c06.jar" />
+    </item>
+    <item
+        jar="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\debug\classes-d3c2ebf960c4413339f21f548fddf47357f8498d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Elee\.gradle\caches\modules-2\files-2.1\org.hamcrest\hamcrest-integration\1.1\8d47177aa4da0f259fc823a39736bad2f09993d5\hamcrest-integration-1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8d47177aa4da0f259fc823a39736bad2f09993d5">
+        <dex dex="D:\cs429\projecct\bus_plan2\BusPathPrototype\app\build\intermediates\pre-dexed\test\debug\hamcrest-integration-1.1-ecb4f7fa69ab2d441e6e05959c02a690c32b2e14.jar" />
     </item>
 
 </items>

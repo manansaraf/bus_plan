@@ -50,13 +50,13 @@ public class SchedulerPlannerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_trip_planner_result);
 		Intent intent = getIntent();
-		int position = intent.getIntExtra("position", 0);
+		int position = intent.getIntExtra("id", 0);
 		Log.d("POSITION", position + "");
 
 		AlarmDAO alarmDAO = new AlarmDAO(this);
 		busStopsDAO = new BusStopsDAO(this);
 		alarmDAO.open();
-		AlarmInfo alarmInfo = alarmDAO.getAlarm(position);
+		AlarmInfo alarmInfo = alarmDAO.getAlarmById(position);
 		loc = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		spinner = (ProgressBar) findViewById(R.id.progressBar1);
 		spinner.setVisibility(View.GONE);

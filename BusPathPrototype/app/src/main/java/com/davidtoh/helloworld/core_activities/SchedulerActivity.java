@@ -138,6 +138,7 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 		calendar.set(Calendar.SECOND, 0);
 		calendar.setTimeInMillis(System.currentTimeMillis()+1000);
 		Intent intent = new Intent(this, AlarmReceiver.class);
+        intent.putExtra("type",0);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,intent, 0);
 		AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
 		am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
@@ -145,6 +146,11 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 	}
 
 	private void cancelAlarm() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 10);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.setTimeInMillis(System.currentTimeMillis()+1000);
 		Intent intent = new Intent(this, AlarmReceiver.class);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,intent, 0);
 		AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
