@@ -6,7 +6,9 @@ package com.davidtoh.helloworld.core_activities;
  */
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +23,9 @@ import android.widget.Toast;
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.database.AlarmDAO;
 import com.davidtoh.helloworld.utils.AlarmInfo;
+import com.davidtoh.helloworld.utils.AlarmReceiver;
+
+import java.util.Calendar;
 
 public class SchedulerActivity extends Activity implements AdapterView.OnItemClickListener,
 		AdapterView.OnItemLongClickListener {
@@ -111,6 +116,12 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 			case R.id.action_settings:
 				//openSettings();
 				return true;
+			case R.id.action_on:
+				setAlarm();
+				return true;
+			case R.id.action_off:
+				cancelAlarm();
+				return true;
 			case R.id.action_help:
 				Toast.makeText(getApplicationContext(), "Click a reminder to edit it, and click " +
 								"and hold a reminder to delete it", Toast.LENGTH_LONG).show();
@@ -118,5 +129,29 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 			default:
 				return super.onOptionsItemSelected(item);
 		}
+	}
+
+	private void setAlarm() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 10);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.setTimeInMillis(System.currentTimeMillis()+15000);
+		Intent intent = new Intent(this, AlarmReceiver.class);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,intent, 0);
+		AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
+		am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+	}
+
+	private void cancelAlarm() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 10);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.setTimeInMillis(System.currentTimeMillis()+15000);
+		Intent intent = new Intent(this, AlarmReceiver.class);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,intent, 0);
+		AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
+		am.cancel(pendingIntent);
 	}
 }
