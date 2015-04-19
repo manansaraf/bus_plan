@@ -34,15 +34,13 @@ public class BusStopWidgetConfig extends Activity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
-            mAppWidgetId = extras.getInt(
-                    AppWidgetManager.EXTRA_APPWIDGET_ID,
-                    AppWidgetManager.INVALID_APPWIDGET_ID);
+            mAppWidgetId = extras.getInt("WIDGET_ID", 1);
             if(intent.hasExtra("startStopName")) {
                 EditText stopName = (EditText) findViewById(R.id.stopWidgetEditText);
                 stopName.setText(intent.getStringExtra("startStopName"));
             }
         }
-
+        Log.d("MYTAG config onCreate", Integer.toString(mAppWidgetId));
 
         Button createButton = (Button) findViewById(R.id.createButton);
         createButton.setOnClickListener(new View.OnClickListener() {
@@ -50,18 +48,15 @@ public class BusStopWidgetConfig extends Activity {
 
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getBaseContext());
 
-                Intent intent = new Intent(BusStopWidgetConfig.this, BusStopWidgetProvider.class);
-                intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
+                Intent intent = new Intent(getApplicationContext(), BusStopStatisticsActivity.class);
                 EditText stopName = (EditText) findViewById(R.id.stopWidgetEditText);
                 intent.putExtra("busStopName", stopName.getText());
-                intent.setAction("WIDGET_CONFIGURED");
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(BusStopWidgetConfig.this, 0, intent, 0);
+                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-                // Get the layout for the App Widget and attach an on-click listener
-                // to the button
-                RemoteViews views = new RemoteViews(BusStopWidgetConfig.this.getPackageName(), R.layout.shortcut_widget);
+                RemoteViews views = new RemoteViews(getApplicationContext().getPackageName(), R.layout.shortcut_widget);
                 views.setOnClickPendingIntent(R.id.widgetButton, pendingIntent);
 
+                Log.d("MYTAG update wid", Integer.toString(mAppWidgetId)+stopName.getText());
                 appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
                 finish();
@@ -75,6 +70,7 @@ public class BusStopWidgetConfig extends Activity {
 
     public void startNameFiller(View view) {
         Intent intent = new Intent(BusStopWidgetConfig.this, SearchStopsTripPlannerActivity.class);
+        intent.putExtra("WIDGET_ID", mAppWidgetId);
         intent.putExtra("stop", 1);
         intent.putExtra("stopWidget", 1);
         startActivity(intent);

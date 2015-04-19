@@ -57,6 +57,7 @@ public class BusStopStatisticsActivity extends Activity {
 		Intent intent = getIntent();
 		if (intent.hasExtra("busStopName")) {
 			name = intent.getStringExtra("busStopName");
+            Log.d("MYTAG BSSact", Boolean.toString(intent.hasExtra("busStopName")) + name);
 			makeAPICalls(name);
 		}
 	}

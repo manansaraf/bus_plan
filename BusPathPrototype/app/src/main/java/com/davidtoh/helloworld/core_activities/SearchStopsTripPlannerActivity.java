@@ -62,8 +62,10 @@ public class SearchStopsTripPlannerActivity extends Activity implements AdapterV
 
         Intent intent = new Intent();
         //Log.d("stopWidget", Boolean.toString(intent.hasExtra("stopWidget")));
-        if(getIntent().hasExtra("stopWidget"))
+        if(getIntent().hasExtra("stopWidget")) {
             intent.setClass(this, BusStopWidgetConfig.class);
+            intent.putExtra("WIDGET_ID", getIntent().getIntExtra("WIDGET_ID", 0));
+        }
         else
 		    intent.setClass(this, TripPlannerActivity.class);
 		if (stop == 1) {
