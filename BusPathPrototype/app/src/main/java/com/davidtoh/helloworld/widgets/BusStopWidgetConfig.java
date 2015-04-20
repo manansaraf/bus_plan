@@ -50,7 +50,7 @@ public class BusStopWidgetConfig extends Activity {
 
                 Intent intent = new Intent(getApplicationContext(), BusStopStatisticsActivity.class);
                 EditText stopName = (EditText) findViewById(R.id.stopWidgetEditText);
-                intent.putExtra("busStopName", stopName.getText());
+                intent.putExtra("busStopName", "" + stopName.getText());
                 PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
                 RemoteViews views = new RemoteViews(getApplicationContext().getPackageName(), R.layout.shortcut_widget);
