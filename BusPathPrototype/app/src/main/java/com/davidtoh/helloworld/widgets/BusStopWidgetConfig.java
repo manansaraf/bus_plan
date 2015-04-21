@@ -3,13 +3,22 @@ package com.davidtoh.helloworld.widgets;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RemoteViews;
+import android.widget.Spinner;
 
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.core_activities.BusStopStatisticsActivity;
@@ -27,7 +36,7 @@ public class BusStopWidgetConfig extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.shortcut_config);
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getBaseContext());
+        final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getBaseContext());
         RemoteViews views = new RemoteViews(getBaseContext().getPackageName(), R.layout.shortcut_widget);
         appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
@@ -40,13 +49,16 @@ public class BusStopWidgetConfig extends Activity {
                 stopName.setText(intent.getStringExtra("startStopName"));
             }
         }
-        Log.d("MYTAG config onCreate", Integer.toString(mAppWidgetId));
+
+        Spinner spinner = (Spinner) findViewById(R.id.colorSpinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.colors, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         Button createButton = (Button) findViewById(R.id.createButton);
         createButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getBaseContext());
 
                 Intent intent = new Intent(getApplicationContext(), BusStopStatisticsActivity.class);
                 EditText stopName = (EditText) findViewById(R.id.stopWidgetEditText);
@@ -56,7 +68,45 @@ public class BusStopWidgetConfig extends Activity {
                 RemoteViews views = new RemoteViews(getApplicationContext().getPackageName(), R.layout.shortcut_widget);
                 views.setOnClickPendingIntent(R.id.widgetButton, pendingIntent);
 
-                Log.d("MYTAG update wid", Integer.toString(mAppWidgetId)+stopName.getText());
+                Spinner colorSpinner = (Spinner) findViewById(R.id.colorSpinner);
+                String color = colorSpinner.getSelectedItem().toString();
+                switch(color) {
+                    case "Blue":
+                        views.setInt(R.id.widgetButton, "setBackgroundColor", Color.BLUE);
+                        break;
+                    case "White":
+                        views.setInt(R.id.widgetButton, "setBackgroundColor", Color.WHITE);
+                        break;
+                    case "Yellow":
+                        views.setInt(R.id.widgetButton, "setBackgroundColor", Color.YELLOW);
+                        break;
+                    case "Red":
+                        views.setInt(R.id.widgetButton, "setBackgroundColor", Color.RED);
+                        break;
+                    case "Green":
+                        views.setInt(R.id.widgetButton, "setBackgroundColor", Color.GREEN);
+                        break;
+                    case "Magenta":
+                        views.setInt(R.id.widgetButton, "setBackgroundColor", Color.MAGENTA);
+                        break;
+                    case "Grey":
+                        views.setInt(R.id.widgetButton, "setBackgroundColor", Color.GRAY);
+                        break;
+                    case "Cyan":
+                        views.setInt(R.id.widgetButton, "setBackgroundColor", Color.CYAN);
+                        break;
+                    default:
+                        break;
+                }
+                Log.d("MYTAG CONFIG", Integer.toString(mAppWidgetId));
+
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(Integer.toString(mAppWidgetId), "" + stopName.getText());
+                editor.putString(Integer.toString(mAppWidgetId)+"color", color);
+                editor.commit();
+
+                //ComponentName name = new ComponentName(getApplicationContext(), BusStopWidgetProvider.class);
                 appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
                 finish();

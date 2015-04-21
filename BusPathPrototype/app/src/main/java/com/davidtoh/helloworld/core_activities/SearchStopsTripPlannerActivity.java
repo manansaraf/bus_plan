@@ -45,7 +45,6 @@ public class SearchStopsTripPlannerActivity extends Activity implements AdapterV
 				bstopsDAO.getAllStops());
 		listview.setAdapter(mAdapter);
 
-
 		// Get the intent, verify the action and get the query
 		Intent intent = getIntent();
 		if (intent.hasExtra("startStopName")) {
@@ -61,7 +60,6 @@ public class SearchStopsTripPlannerActivity extends Activity implements AdapterV
 	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
 
         Intent intent = new Intent();
-        //Log.d("stopWidget", Boolean.toString(intent.hasExtra("stopWidget")));
         if(getIntent().hasExtra("stopWidget")) {
             intent.setClass(this, BusStopWidgetConfig.class);
             intent.putExtra("WIDGET_ID", getIntent().getIntExtra("WIDGET_ID", 0));
