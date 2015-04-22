@@ -122,7 +122,7 @@ public class TripPlannerActivity extends FragmentActivity {
 				timeEdit.setText(timeFormatter.format(newDate.getTime()));
 			}
 
-		}, newCalendar.get(Calendar.HOUR), newCalendar.get(Calendar.MINUTE), false);
+		}, newCalendar.get(Calendar.HOUR_OF_DAY), newCalendar.get(Calendar.MINUTE), false);
 	}
 
 	private void setDateField() {

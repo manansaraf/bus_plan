@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.database.AlarmDAO;
+import com.davidtoh.helloworld.utils.AlarmHandler;
 import com.davidtoh.helloworld.utils.AlarmInfo;
 import com.davidtoh.helloworld.utils.AlarmReceiver;
 
@@ -132,16 +133,17 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 	}
 
 	private void setAlarm() {
+		AlarmHandler alarmHandler = new AlarmHandler(this);
+		alarmHandler.setTodaysAlarms();
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 10);
 		calendar.set(Calendar.SECOND, 0);
-		calendar.setTimeInMillis(System.currentTimeMillis()+1000);
 		Intent intent = new Intent(this, AlarmReceiver.class);
         intent.putExtra("type",0);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,intent, 0);
 		AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
-		am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+		am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 		Toast.makeText(getApplicationContext(), "Scheduler alarms turned on", Toast.LENGTH_LONG).show();
 	}
 

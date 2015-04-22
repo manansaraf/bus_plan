@@ -61,6 +61,9 @@ public class SchedulerPlannerActivity extends Activity {
 		spinner = (ProgressBar) findViewById(R.id.progressBar1);
 		spinner.setVisibility(View.GONE);
 		makeAPICalls(alarmInfo);
+		if (!Boolean.valueOf(alarmInfo.getRepeat())) {
+			alarmDAO.deleteAlarm(alarmInfo.getID());
+		}
 	}
 
 	@Override

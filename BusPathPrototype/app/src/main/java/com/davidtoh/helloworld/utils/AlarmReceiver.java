@@ -30,8 +30,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 	}
     private void runMidnightProcess(Context context){
-        new AlarmHandler(context);
-
+        AlarmHandler alarmHandler = new AlarmHandler(context);
+		alarmHandler.setTodaysAlarms();
     }
     private void runSchedulerPlanner(Context context, int id){
         AlarmDAO alarmDAO = new AlarmDAO(context);

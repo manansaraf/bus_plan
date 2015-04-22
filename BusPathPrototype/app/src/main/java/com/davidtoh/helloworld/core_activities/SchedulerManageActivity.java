@@ -20,6 +20,7 @@ import android.widget.ToggleButton;
 
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.database.AlarmDAO;
+import com.davidtoh.helloworld.utils.AlarmHandler;
 import com.davidtoh.helloworld.utils.AlarmInfo;
 
 import java.text.SimpleDateFormat;
@@ -100,7 +101,7 @@ public class SchedulerManageActivity extends Activity {
 				timeEdit.setText(timeFormatter.format(newDate.getTime()));
 			}
 
-		}, newCalendar.get(Calendar.HOUR), newCalendar.get(Calendar.MINUTE), false);
+		}, newCalendar.get(Calendar.HOUR_OF_DAY), newCalendar.get(Calendar.MINUTE), false);
 	}
 
 	public void addAlarm(View view) {
@@ -116,15 +117,20 @@ public class SchedulerManageActivity extends Activity {
 		if (destination.length() > 0 && time.length() > 0 && days.length() > 0) {
 			alarmDAO = new AlarmDAO(this);
 			alarmDAO.open();
+			AlarmInfo alarmInfo;
 			if (!getIntent().hasExtra("alarm")) {
 				alarmDAO.createAlarm(destination, time, days, String.valueOf(repeat));
 				Toast.makeText(getApplicationContext(), "Alarm added", Toast.LENGTH_LONG).show();
+				alarmInfo = alarmDAO.getLastAlarm();
 			} else {
 				int id = getIntent().getIntExtra("id", 0);
 				alarmDAO.editAlarm(id, destination, time, days, String.valueOf(repeat));
 				Toast.makeText(getApplicationContext(), "Alarm edited", Toast.LENGTH_LONG).show();
 				getIntent().removeExtra("alarm");
+				alarmInfo = alarmDAO.getAlarmById(id);
 			}
+			AlarmHandler alarmHandler = new AlarmHandler(this);
+			alarmHandler.setThisAlarm(alarmInfo);
 			finish();
 			Intent intent = new Intent(SchedulerManageActivity.this, SchedulerActivity.class);
 			startActivity(intent);

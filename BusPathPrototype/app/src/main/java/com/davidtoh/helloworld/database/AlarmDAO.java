@@ -75,6 +75,16 @@ public class AlarmDAO {
 		cursor.close();
 		return alarm;
 	}
+
+	public AlarmInfo getLastAlarm() {
+		Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
+				allColumns, null, null, null, null, SQLiteHelper.COLUMN_ALARM_ID + " DESC","1");
+		cursor.moveToFirst();
+		AlarmInfo alarm = cursorToAlarm(cursor);
+		cursor.close();
+		return alarm;
+	}
+
     public AlarmInfo getAlarmById(int id){
 
         Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
