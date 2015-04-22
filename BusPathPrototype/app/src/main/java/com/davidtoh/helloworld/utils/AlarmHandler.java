@@ -55,14 +55,10 @@ public class AlarmHandler {
 
 	private List<AlarmInfo> getTodayAlarmList() {
 		alarmDAO = new AlarmDAO(context);
-
 		String weekDay;
 		SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
-
 		Calendar calendar = Calendar.getInstance();
 		weekDay = dayFormat.format(calendar.getTime()).toLowerCase();
-
-		//deleteOldAlarms(calendar);
 
 		alarmDAO.open();
 		return alarmDAO.getAlarmsByDay(weekDay);
@@ -84,20 +80,21 @@ public class AlarmHandler {
 			AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 			am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 		}
+		removeDayFromNonRepeating(alarms);
 	}
 
-/*	private void deleteOldAlarms(Calendar calendar) {
-		String yesterday;
+	private void removeDayFromNonRepeating(List<AlarmInfo> alarms) {
+		String weekDay;
 		SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
-		calendar.add(Calendar.DAY_OF_WEEK, -1);
-		yesterday = dayFormat.format(calendar.getTime()).toLowerCase();
-
+		Calendar calendar = Calendar.getInstance();
+		weekDay = dayFormat.format(calendar.getTime()).toLowerCase();
 		alarmDAO.open();
-		List<AlarmInfo> alarms = alarmDAO.getAlarmsByDay(yesterday);
-		for (AlarmInfo alarmInfo : alarms) {
-			if (!Boolean.valueOf(alarmInfo.getRepeat())) {
-				alarmDAO.deleteAlarm(alarmInfo.getID());
+		for (AlarmInfo alarm : alarms) {
+			if (!Boolean.valueOf(alarm.getRepeat())) {
+				String days = alarm.getDay().replace(weekDay + " ", "");
+				alarmDAO.editAlarm(alarm.getID(), alarm.getDestination(), alarm.getTime(), days,
+						alarm.getRepeat());
 			}
 		}
-	}*/
+	}
 }

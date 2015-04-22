@@ -125,7 +125,8 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 				return true;
 			case R.id.action_help:
 				Toast.makeText(getApplicationContext(), "Click a reminder to edit it, and click " +
-								"and hold a reminder to delete it", Toast.LENGTH_LONG).show();
+							"and hold a reminder to delete it. To use, turn on Scheduler in Menu.",
+							Toast.LENGTH_LONG).show();
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
@@ -133,15 +134,13 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 	}
 
 	private void setAlarm() {
-		AlarmHandler alarmHandler = new AlarmHandler(this);
-		alarmHandler.setTodaysAlarms();
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 10);
+		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		Intent intent = new Intent(this, AlarmReceiver.class);
         intent.putExtra("type",0);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,intent, 0);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 		AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
 		am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
 		Toast.makeText(getApplicationContext(), "Scheduler alarms turned on", Toast.LENGTH_LONG).show();
@@ -154,7 +153,8 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 		calendar.set(Calendar.SECOND, 0);
 		calendar.setTimeInMillis(System.currentTimeMillis()+1000);
 		Intent intent = new Intent(this, AlarmReceiver.class);
-		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,intent, 0);
+		intent.putExtra("type",0);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 		AlarmManager am = (AlarmManager) this.getSystemService(ALARM_SERVICE);
 		am.cancel(pendingIntent);
 		Toast.makeText(getApplicationContext(), "Scheduler alarms turned off", Toast.LENGTH_LONG).show();

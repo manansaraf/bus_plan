@@ -25,7 +25,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             runMidnightProcess(context);
         }
         else{
-            runSchedulerPlanner(context,intent.getIntExtra("type",0));
+            sendNotificationForAlarm(context, intent.getIntExtra("type", 0));
         }
 
 	}
@@ -33,7 +33,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         AlarmHandler alarmHandler = new AlarmHandler(context);
 		alarmHandler.setTodaysAlarms();
     }
-    private void runSchedulerPlanner(Context context, int id){
+    private void sendNotificationForAlarm(Context context, int id){
         AlarmDAO alarmDAO = new AlarmDAO(context);
         alarmDAO.open();
         AlarmInfo alarminfo = alarmDAO.getAlarmById(id);
@@ -59,6 +59,5 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentIntent(pendingIntent)
                 .build();
         notificationManager.notify(0, note);
-
     }
 }
