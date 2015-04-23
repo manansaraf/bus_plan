@@ -8,10 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
-import android.util.Log;
-import android.widget.EditText;
 import android.widget.RemoteViews;
-import android.widget.Spinner;
 
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.core_activities.BusStopStatisticsActivity;
@@ -32,7 +29,7 @@ public class BusStopWidgetProvider extends AppWidgetProvider {
                 if(!sharedPref.contains(Integer.toString(appWidgetId))) {
                     Intent intent = new Intent(context, BusStopWidgetConfig.class);
                     intent.putExtra("WIDGET_ID", appWidgetId);
-                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
                     // Get the layout for the App Widget and attach an on-click listener
                     // to the button
@@ -40,7 +37,6 @@ public class BusStopWidgetProvider extends AppWidgetProvider {
                     views.setOnClickPendingIntent(R.id.widgetButton, pendingIntent);
 
                     // Tell the AppWidgetManager to perform an update on the current app widget
-                    Log.d("MYTAG PROVIDER", Integer.toString(appWidgetId));
                     appWidgetManager.updateAppWidget(appWidgetId, views);
                 }
                 else {
@@ -48,7 +44,7 @@ public class BusStopWidgetProvider extends AppWidgetProvider {
                     String stopName = sharedPref.getString(Integer.toString(appWidgetId), "NOT_FOUND");
                     String color = sharedPref.getString(Integer.toString(appWidgetId)+"color", "NOT_FOUND");
                     intent.putExtra("busStopName", stopName);
-                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
                     RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.shortcut_widget);
                     views.setOnClickPendingIntent(R.id.widgetButton, pendingIntent);

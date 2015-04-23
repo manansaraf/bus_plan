@@ -3,20 +3,15 @@ package com.davidtoh.helloworld.widgets;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RemoteViews;
 import android.widget.Spinner;
 
@@ -37,8 +32,6 @@ public class BusStopWidgetConfig extends Activity {
 
         setContentView(R.layout.shortcut_config);
         final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getBaseContext());
-        RemoteViews views = new RemoteViews(getBaseContext().getPackageName(), R.layout.shortcut_widget);
-        appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -63,7 +56,8 @@ public class BusStopWidgetConfig extends Activity {
                 Intent intent = new Intent(getApplicationContext(), BusStopStatisticsActivity.class);
                 EditText stopName = (EditText) findViewById(R.id.stopWidgetEditText);
                 intent.putExtra("busStopName", "" + stopName.getText());
-                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),
+                        mAppWidgetId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
                 RemoteViews views = new RemoteViews(getApplicationContext().getPackageName(), R.layout.shortcut_widget);
                 views.setOnClickPendingIntent(R.id.widgetButton, pendingIntent);
@@ -98,7 +92,6 @@ public class BusStopWidgetConfig extends Activity {
                     default:
                         break;
                 }
-                Log.d("MYTAG CONFIG", Integer.toString(mAppWidgetId));
 
                 SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = sharedPref.edit();

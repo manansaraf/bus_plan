@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -8,6 +8,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:inputType="textPostalAddress"
         android:ems="10"
         android:id="@+id/stopWidgetEditText"
@@ -18,14 +19,16 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/stopWidgetEditText"
         android:id="@+id/colorSpinner" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/colorSpinner"
         android:text="Create Widget"
         android:id="@+id/createButton"
         android:layout_centerHorizontal="true"/>
 
 
-</LinearLayout>
+</RelativeLayout>
