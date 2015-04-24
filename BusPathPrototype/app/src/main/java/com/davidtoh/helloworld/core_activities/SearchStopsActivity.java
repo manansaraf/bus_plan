@@ -43,13 +43,17 @@ public class SearchStopsActivity extends Activity implements AdapterView.OnItemC
 
 	@Override
 	public void onItemClick(AdapterView<?> l, View v, int position, long id) {
-		Intent intent = new Intent();
-		intent.setClass(this, BusStopStatisticsActivity.class);
-		intent.putExtra("busStopName", l.getItemAtPosition(position).toString());
-
-		intent.putExtra("id", id);
-		startActivity(intent);
+        String stopName = l.getItemAtPosition(position).toString();
+		startActivity(newBusStopStatisticsIntent(stopName));
 	}
+
+    public Intent newBusStopStatisticsIntent(String stopName)
+    {
+        Intent intent = new Intent();
+        intent.setClass(this, BusStopStatisticsActivity.class);
+        intent.putExtra("busStopName", stopName);
+        return intent;
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

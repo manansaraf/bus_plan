@@ -18,4 +18,14 @@
         <item>11/11/2011 11:11 am</item>
         <item>12/21/2012 12:21 am</item>
     </string-array>
+    <string-array name="colors">
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Yellow</item>
+        <item>Magenta</item>
+        <item>Cyan</item>
+        <item>Grey</item>
+        <item>White</item>
+    </string-array>
 </resources>
