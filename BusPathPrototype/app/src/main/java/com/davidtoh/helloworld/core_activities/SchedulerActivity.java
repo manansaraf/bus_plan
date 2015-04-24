@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.database.AlarmDAO;
-import com.davidtoh.helloworld.utils.AlarmHandler;
 import com.davidtoh.helloworld.utils.AlarmInfo;
 import com.davidtoh.helloworld.utils.AlarmReceiver;
 
@@ -45,7 +44,7 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 
 		alarmDAO = new AlarmDAO(this);
 		alarmDAO.open();
-		mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
+		mAdapter = new ArrayAdapter<>(this, R.layout.scheduler_list_item,
 				alarmDAO.getAllAlarms());
 		listview.setAdapter(mAdapter);
 	}

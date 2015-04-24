@@ -54,12 +54,12 @@ public class AlarmHandler {
 	}
 
 	private List<AlarmInfo> getTodayAlarmList() {
-		alarmDAO = new AlarmDAO(context);
 		String weekDay;
 		SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
 		Calendar calendar = Calendar.getInstance();
 		weekDay = dayFormat.format(calendar.getTime()).toLowerCase();
 
+		alarmDAO = new AlarmDAO(context);
 		alarmDAO.open();
 		return alarmDAO.getAlarmsByDay(weekDay);
 	}
@@ -88,6 +88,7 @@ public class AlarmHandler {
 		SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
 		Calendar calendar = Calendar.getInstance();
 		weekDay = dayFormat.format(calendar.getTime()).toLowerCase();
+		alarmDAO = new AlarmDAO(context);
 		alarmDAO.open();
 		for (AlarmInfo alarm : alarms) {
 			if (!Boolean.valueOf(alarm.getRepeat())) {

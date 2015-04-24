@@ -19,6 +19,7 @@ package com.davidtoh.helloworld.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 
 /**
@@ -89,7 +90,7 @@ public class DateParser {
 
 	public static String toString(Date date) {
 
-		SimpleDateFormat df = new SimpleDateFormat("hh:mm a");
+		SimpleDateFormat df = new SimpleDateFormat("h:mm a", Locale.US);
 
 		return df.format(date);
 

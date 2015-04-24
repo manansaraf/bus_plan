@@ -32,5 +32,9 @@
     <string name="title_activity_search_stops_trip_planner">SearchStopsTripPlannerActivity</string>
     <string name="title_activity_draw_route">Bus Route</string>
     <string name="title_activity_draw_route_helper">drawRouteHelperActivity</string>
+    <string name="widget_stop_box">Bus Stop Name</string>
+    <string name="create_widget">Create Widget</string>
+    <string name="reminder_title">Reminders</string>
+    <string name="add_reminder_button">Add Reminder</string>
 
 </resources>

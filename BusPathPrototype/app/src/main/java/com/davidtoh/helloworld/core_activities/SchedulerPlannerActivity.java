@@ -107,7 +107,8 @@ public class SchedulerPlannerActivity extends Activity {
 				"https://developer.cumtd.com/api/v2.2/JSON/GetPlannedTripsByLatLon?key="
 						+ getResources().getString(R.string.apiKey) + "&origin_lat=" + origin_lat
 						+ "&origin_lon=" + origin_lon + "&destination_lat=" + dest_lat
-						+ "&destination_lon=" + dest_lon + "&time=" + arriveTime;
+						+ "&destination_lon=" + dest_lon + "&time=" + arriveTime
+						+ "&arrive_depart=arrive";
 
 		if (networkInfo != null && networkInfo.isConnected()) {
 			showProgressBar();
@@ -156,7 +157,11 @@ public class SchedulerPlannerActivity extends Activity {
 			List<String> busStopInfoList = new ArrayList<>();
 			for (TripInfo trip : stop) {
 				if (trip.getBus_name() == null) {
-					String inside = "Walk from " + trip.getStartBusStop() + " to " + trip.getEndBusStop() +
+					String location = trip.getStartBusStop();
+					if (location.contains(".")) {
+						location = "your location";
+					}
+					String inside = "Walk from " + location + " to " + trip.getEndBusStop() +
 							" for " + trip.getWalk_distance() + " miles";
 					String up = trip.getStartTime();
 					busStopInfoList.add(up + "%" + inside);

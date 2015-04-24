@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Reminders"
+        android:text="@string/reminder_title"
         android:id="@+id/textView2"
         android:paddingTop="16dp"
         android:layout_alignParentTop="true"
@@ -19,7 +19,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Reminder"
+        android:text="@string/add_reminder_button"
         android:id="@+id/addRemButton"
         android:onClick="toSchedulerAddReminder"
         android:layout_marginTop="6dp"

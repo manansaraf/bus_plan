@@ -5,5 +5,7 @@
     android:minWidth="40dp"
     android:minHeight="40dp"
     android:updatePeriodMillis="0"
-    android:previewImage="@mipmap/bus_widget_shortcut">
+    android:previewImage="@mipmap/bus_widget_shortcut"
+    android:layout_height="40dp"
+    android:layout_width="40dp">
 </appwidget-provider>

@@ -1,5 +1,7 @@
 package com.davidtoh.helloworld.utils;
 
+import java.util.Calendar;
+
 /**
  * Created by dylan on 4/03/2015.
  * helper class to pass information to and from the database
@@ -16,7 +18,14 @@ public class AlarmInfo {
 
 	@Override
 	public String toString() {
-		return this.getDestination() + "  |  " + this.getTime();
+		String[] time_a = this.getTime().split(":");
+		int hours = Integer.parseInt(time_a[0]);
+		int minutes = Integer.parseInt(time_a[1]);
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.HOUR_OF_DAY, hours);
+		c.set(Calendar.MINUTE, minutes);
+		String time = DateParser.toString(c.getTime());
+		return this.getDestination() + "  |  " + time;
 	}
 
 	public void setId(int id) {
