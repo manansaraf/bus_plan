@@ -61,7 +61,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 		c.set(Calendar.MINUTE, minutes);
 		String time = DateParser.toString(c.getTime());
         Notification note = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.ic_action_search)
+                .setSmallIcon(R.drawable.ic_launcher)
                 .setContentTitle("Scheduler Reminder")
                 .setContentText(alarminfo.getDestination() + " " + time)
                 .setSound(alarmSound)

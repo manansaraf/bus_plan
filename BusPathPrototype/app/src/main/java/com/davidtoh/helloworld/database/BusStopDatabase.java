@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.davidtoh.helloworld.MainActivity;
 import com.davidtoh.helloworld.R;
 import com.davidtoh.helloworld.utils.BusStopInfo;
 
@@ -23,10 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BusStopDatabase {
-	Context context;
+	private Context context;
+	private MainActivity main;
 
 	public void populate(Context context) {
 		this.context = context;
+		this.main = (MainActivity)context;
 		String URL = "https://developer.cumtd.com/api/v2.2/JSON/GetLastFeedUpdate?key="
 				+ context.getResources().getString(R.string.apiKey);
 
@@ -68,7 +71,21 @@ public class BusStopDatabase {
 			versionDAO.setDate(newFeedDate);
 			String URL = "https://developer.cumtd.com/api/v2.2/JSON/GetStops?key="
 					+ context.getResources().getString(R.string.apiKey);
+			main.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					main.showProgressBar();
+				}
+			});
 			new getStops().execute(URL);
+		}
+		else {
+			main.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					main.closeProgressBar();
+				}
+			});
 		}
 	}
 
@@ -86,7 +103,7 @@ public class BusStopDatabase {
 		// onPostExecute displays the results of the AsyncTask.
 		@Override
 		protected void onPostExecute(String result) {
-
+			main.closeProgressBar();
 		}
 	}
 

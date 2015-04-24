@@ -80,4 +80,23 @@
         android:layout_below="@+id/textView6">
     </ListView>
 
+    <ProgressBar
+        android:id="@+id/spinner_main"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:id="@+id/database_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_main"
+        android:text="@string/database_message"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:visibility="gone"/>
+
 </RelativeLayout>
+
+

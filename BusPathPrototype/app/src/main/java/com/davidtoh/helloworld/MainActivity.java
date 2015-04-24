@@ -8,7 +8,10 @@ import android.view.View;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.davidtoh.helloworld.core_activities.BusStopStatisticsActivity;
 import com.davidtoh.helloworld.core_activities.NearbyBusStopsActivity;
@@ -23,11 +26,17 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 
 	private ArrayAdapter<BusStopInfo> mAdapter;
 	private FavoriteStopsDAO fstopsDAO;
+	private ProgressBar spinner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		spinner = (ProgressBar) findViewById(R.id.spinner_main);
+		spinner.setVisibility(View.GONE);
+		TextView textView = (TextView) findViewById(R.id.database_message);
+		textView.setVisibility(View.GONE);
 
 		ListView listview = (ListView) findViewById(R.id.listView);
 		listview.setOnItemClickListener(this);
@@ -39,26 +48,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 		mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,
 				fstopsDAO.getAllFavoriteStops());
 		listview.setAdapter(mAdapter);
-/*
-
-		Intent intent = new Intent(this, SearchStopsActivity.class);
-		PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
-
-		// build notification
-		// the addAction re-use the same intent to keep the example short
-		Notification n  = new Notification.Builder(this)
-				.setContentTitle("New mail from " + "test@gmail.com")
-				.setContentText("Subject")
-				.setSmallIcon(R.drawable.ic_action_search)
-				.setContentIntent(pIntent)
-				.setAutoCancel(true)
-				.build();
-
-
-		NotificationManager notificationManager =
-				(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-		notificationManager.notify(0, n);*/
 	}
 
 	@Override
@@ -119,5 +108,37 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
 	public void toTripPlanner(View view) {
 		Intent changeToTripPlanner = new Intent(view.getContext(), TripPlannerActivity.class);
 		startActivityForResult(changeToTripPlanner, 0);
+	}
+
+	public void showProgressBar() {
+		spinner.setVisibility(View.VISIBLE);
+		TextView textView = (TextView) findViewById(R.id.database_message);
+		textView.setVisibility(View.VISIBLE);
+		ListView listview = (ListView) findViewById(R.id.listView);
+		listview.setVisibility(View.GONE);
+		Button nearBy = (Button) findViewById(R.id.button);
+		Button search = (Button) findViewById(R.id.button2);
+		Button plan = (Button) findViewById(R.id.button3);
+		Button scheduler = (Button) findViewById(R.id.button4);
+		nearBy.setEnabled(false);
+		search.setEnabled(false);
+		plan.setEnabled(false);
+		scheduler.setEnabled(false);
+	}
+
+	public void closeProgressBar() {
+		spinner.setVisibility(View.GONE);
+		TextView textView = (TextView) findViewById(R.id.database_message);
+		textView.setVisibility(View.GONE);
+		ListView listview = (ListView) findViewById(R.id.listView);
+		listview.setVisibility(View.VISIBLE);
+		Button nearBy = (Button) findViewById(R.id.button);
+		Button search = (Button) findViewById(R.id.button2);
+		Button plan = (Button) findViewById(R.id.button3);
+		Button scheduler = (Button) findViewById(R.id.button4);
+		nearBy.setEnabled(true);
+		search.setEnabled(true);
+		plan.setEnabled(true);
+		scheduler.setEnabled(true);
 	}
 }

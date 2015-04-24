@@ -36,5 +36,6 @@
     <string name="create_widget">Create Widget</string>
     <string name="reminder_title">Reminders</string>
     <string name="add_reminder_button">Add Reminder</string>
+    <string name="database_message">Fetching Data From CUMTD</string>
 
 </resources>
