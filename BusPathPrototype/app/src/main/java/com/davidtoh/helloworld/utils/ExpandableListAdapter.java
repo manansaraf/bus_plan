@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.davidtoh.helloworld.R;
@@ -56,10 +57,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 		int splitPosition = childText.indexOf(':');
 		TextView routeTextView = (TextView) convertView.findViewById(R.id.routeLabel);
 		TextView timeTextView = (TextView) convertView.findViewById(R.id.timeLabel);
+        ImageView imgViewChild = (ImageView ) convertView
+                .findViewById(R.id.img);
+        if(childText.charAt(childText.length()-1)=='Y')
+            imgViewChild.setImageResource(R.drawable.istop);
+        String text_top = childText.substring(0, splitPosition)+"  ";
+		routeTextView.setText(text_top);
 
-		routeTextView.setText(childText.substring(0, splitPosition));
-
-		String time = childText.substring(splitPosition + 1);
+		String time = childText.substring(splitPosition + 1,childText.length()-1);
 		switch (time) {
 			case "0":
 				time = "DUE";

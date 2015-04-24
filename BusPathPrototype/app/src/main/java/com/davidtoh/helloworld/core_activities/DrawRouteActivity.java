@@ -24,7 +24,9 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -198,7 +200,16 @@ public class DrawRouteActivity extends FragmentActivity {
 	}
 
 	public void drawBusLocation(Loc cur_bus_location) {
-		mMap.addMarker(new MarkerOptions().position(new LatLng(cur_bus_location.getLatitude(), cur_bus_location.getLongitude())).title("BUS"));
+		mMap.addMarker(new MarkerOptions().position(new LatLng(cur_bus_location.getLatitude(),
+                cur_bus_location.getLongitude())).title("BUS")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_marker)));
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                marker.showInfoWindow();
+                return true;
+            }
+        });
 		LatLng latLng = new LatLng(cur_bus_location.getLatitude(), cur_bus_location.getLongitude());
 		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15.5f);
 		mMap.moveCamera(cameraUpdate);
