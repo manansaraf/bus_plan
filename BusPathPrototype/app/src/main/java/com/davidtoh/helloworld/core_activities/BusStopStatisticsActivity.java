@@ -134,6 +134,11 @@ public class BusStopStatisticsActivity extends Activity {
 				if (route.getStopID().equals(stop.getStopID())) {
 					String value = route.getBusName() + ":"
 							+ route.getTimeExpected();
+                    if(route.isIstop()){
+                        value+="Y";
+                    }
+                    else
+                    value+="N";
 					hash.put(value, route);
 					busStopInfoList.add(value);
 				}
@@ -151,11 +156,17 @@ public class BusStopStatisticsActivity extends Activity {
 				String childText = (String) listAdapter.getChild(groupPosition, childPosition);
 				BusRouteInfo route = hash.get(childText);
 				// This is just testing to see what i come up with
-				Intent intent = new Intent(BusStopStatisticsActivity.this, DrawRouteActivity.class);
-				intent.putExtra("vehicle_id", route.getVehicleID());
-				intent.putExtra("shape_id", route.getShape_id());
-				intent.putExtra("route_color", route.getRouteColor());
-				startActivity(intent);
+                if(route.getShape_id()!=null) {
+                    Intent intent = new Intent(BusStopStatisticsActivity.this, DrawRouteActivity.class);
+                    intent.putExtra("vehicle_id", route.getVehicleID());
+                    intent.putExtra("shape_id", route.getShape_id());
+                    intent.putExtra("route_color", route.getRouteColor());
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "No information available",
+                            Toast.LENGTH_LONG).show();
+                }
 				return true;
 			}
 		});
@@ -181,12 +192,20 @@ public class BusStopStatisticsActivity extends Activity {
 			for (int i = 0; i < JArray.length(); i++) {
 				JObject = JArray.getJSONObject(i);
 				JSONObject color = JObject.getJSONObject("route");
-				JSONObject shape = JObject.getJSONObject("trip");
-				String Shape = shape.getString("shape_id");
-				Shape = Shape.replaceAll(" ", "%20");
+                JSONObject shape = null;
+                if(JObject.has("trip"))
+				    shape = JObject.getJSONObject("trip");
+                boolean istop = JObject.getBoolean("is_istop");
+                String Shape = null;
+                if(shape!=null) {
+                    Shape = shape.getString("shape_id");
+
+                    Shape = Shape.replaceAll(" ", "%20");
+                }
+                Log.v("Android",JObject.getString("vehicle_id"));
 				BusRouteInfo routeInfo = new BusRouteInfo(JObject.getString("headsign"),
 						Integer.parseInt(JObject.getString("expected_mins")), JObject.getString("stop_id")
-						, Shape, JObject.getInt("vehicle_id"), "#" + color.getString("route_color"));
+						, Shape, JObject.getInt("vehicle_id"), "#" + color.getString("route_color"),istop);
 
 				BusList.add(routeInfo);
 			}
