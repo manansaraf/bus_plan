@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.davidtoh.helloworld">
+          package="com.busplan">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -20,9 +20,9 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <!-- Register the Alarm Receiver -->
-        <receiver android:name="com.davidtoh.helloworld.utils.AlarmReceiver"/>
+        <receiver android:name="com.busplan.utils.AlarmReceiver"/>
         <activity
-            android:name=".MainActivity"
+            android:name="com.busplan.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -30,66 +30,66 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".core_activities.NearbyBusStopsActivity"
+            android:name="com.busplan.core_activities.NearbyBusStopsActivity"
             android:label="Nearby Bus Stops"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.busplan.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.MainActivity"/>
+                android:value="com.busplan.MainActivity"/>
         </activity>
         <activity
-            android:name=".core_activities.SearchStopsActivity"
+            android:name="com.busplan.core_activities.SearchStopsActivity"
             android:label="Search"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.busplan.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.MainActivity"/>
+                android:value="com.busplan.MainActivity"/>
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
         </activity>
         <activity
-            android:name=".core_activities.BusStopStatisticsActivity"
+            android:name="com.busplan.core_activities.BusStopStatisticsActivity"
             android:label="Stop Statistics"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.busplan.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.MainActivity"/>
+                android:value="com.busplan.MainActivity"/>
         </activity>
         <activity
-            android:name=".core_activities.SchedulerActivity"
+            android:name="com.busplan.core_activities.SchedulerActivity"
             android:label="Scheduler"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.busplan.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.MainActivity"/>
+                android:value="com.busplan.MainActivity"/>
         </activity>
         <activity
-            android:name=".core_activities.SchedulerManageActivity"
+            android:name="com.busplan.core_activities.SchedulerAddReminderActivity"
             android:label="Add Reminder"
-            android:parentActivityName=".core_activities.SchedulerActivity">
+            android:parentActivityName="com.busplan.core_activities.SchedulerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.core_activities.SchedulerActivity"/>
+                android:value="com.busplan.core_activities.SchedulerActivity"/>
         </activity>
-        <activity android:name=".core_activities.SchedulerPlannerActivity"
+        <activity android:name="com.busplan.core_activities.SchedulerViewTripActivity"
                   android:label="Trip Plan"
-                  android:parentActivityName=".MainActivity">
+                  android:parentActivityName="com.busplan.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.MainActivity"/>
+                android:value="com.busplan.MainActivity"/>
         </activity>
         <activity
-            android:name=".core_activities.TripPlannerActivity"
+            android:name="com.busplan.core_activities.TripPlannerActivity"
             android:label="Trip Planner"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.busplan.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.MainActivity"/>
+                android:value="com.busplan.MainActivity"/>
         </activity>
 
         <meta-data
@@ -100,37 +100,37 @@
             android:value="@string/google_maps_key"/>
 
         <activity
-            android:name=".core_activities.TripPlannerResultActivity"
+            android:name="com.busplan.core_activities.TripPlannerResultActivity"
             android:label="Trip Itinerary"
-            android:parentActivityName=".core_activities.TripPlannerActivity">
+            android:parentActivityName="com.busplan.core_activities.TripPlannerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.core_activities.TripPlannerActivity"/>
+                android:value="com.busplan.core_activities.TripPlannerActivity"/>
         </activity>
         <activity
-            android:name=".core_activities.SearchStopsTripPlannerActivity"
+            android:name="com.busplan.core_activities.SearchStopsTripPlannerActivity"
             android:label="Search"
-            android:parentActivityName=".core_activities.TripPlannerActivity">
+            android:parentActivityName="com.busplan.core_activities.TripPlannerActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.core_activities.TripPlannerActivity"/>
+                android:value="com.busplan.core_activities.TripPlannerActivity"/>
         </activity>
         <activity
-            android:name=".core_activities.DrawRouteActivity"
+            android:name="com.busplan.core_activities.DrawRouteActivity"
             android:label="@string/title_activity_draw_route"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.busplan.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.davidtoh.helloworld.MainActivity"/>
+                android:value="com.busplan.MainActivity"/>
         </activity>
-        <receiver android:name=".widgets.BusStopWidgetProvider" >
+        <receiver android:name="com.busplan.widgets.BusStopWidgetProvider" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@layout/shortcut_provider" />
         </receiver>
-        <activity android:name=".widgets.BusStopWidgetConfig"
+        <activity android:name="com.busplan.widgets.BusStopWidgetConfig"
                   android:noHistory="true" >
         </activity>
     </application>
