@@ -99,10 +99,20 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 		alarmDAO = new AlarmDAO(this);
 		alarmDAO.open();
 		AlarmInfo alarmInfo = alarmDAO.getAlarm(position);
+		removeAlarm(alarmInfo);
 		alarmDAO.deleteAlarm(alarmInfo.getID());
 		Toast.makeText(getApplicationContext(), "Alarm deleted", Toast.LENGTH_LONG).show();
 		finish();
 		startActivity(getIntent());
+	}
+
+	private void removeAlarm(AlarmInfo alarmInfo) {
+		Intent intent = new Intent(this, AlarmReceiver.class);
+		intent.putExtra("type", alarmInfo.getID());
+
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, alarmInfo.getID(), intent, 0);
+		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+		am.cancel(pendingIntent);
 	}
 
 	@Override
@@ -146,11 +156,6 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 	}
 
 	private void cancelAlarm() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 10);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.setTimeInMillis(System.currentTimeMillis()+1000);
 		Intent intent = new Intent(this, AlarmReceiver.class);
 		intent.putExtra("type",0);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
