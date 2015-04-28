@@ -50,9 +50,9 @@ public class BusStopsDAO {
 	/**
 	 * Used to add a bus stop to the database
 	 *
-	 * @param stopName - name of the bus stop
-	 * @param stopID - id of the bus stop
-	 * @param latitude - latitude of the bus stop
+	 * @param stopName  - name of the bus stop
+	 * @param stopID    - id of the bus stop
+	 * @param latitude  - latitude of the bus stop
 	 * @param longitude - longitude of the bus stop
 	 */
 	public void createStop(String stopName, String stopID, double latitude, double longitude) {

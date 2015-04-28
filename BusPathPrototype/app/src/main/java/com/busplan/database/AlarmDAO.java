@@ -25,6 +25,7 @@ public class AlarmDAO {
 
 	/**
 	 * creates a DAO to work with
+	 *
 	 * @param context
 	 */
 	public AlarmDAO(Context context) {
@@ -33,6 +34,7 @@ public class AlarmDAO {
 
 	/**
 	 * opens the database, MUST be called before any other function of the DAO is used
+	 *
 	 * @throws SQLException
 	 */
 	public void open() throws SQLException {
@@ -43,9 +45,9 @@ public class AlarmDAO {
 	 * Used to add an alarm to the database
 	 *
 	 * @param destination - destination stop name
-	 * @param time - time in HH:mm format that user wants to arrive
-	 * @param day - string of days that the alarm should happen on
-	 * @param repeat - string value representing if alarm should happen repeatedly
+	 * @param time        - time in HH:mm format that user wants to arrive
+	 * @param day         - string of days that the alarm should happen on
+	 * @param repeat      - string value representing if alarm should happen repeatedly
 	 */
 	public void createAlarm(String destination, String time, String day, String repeat) {
 		ContentValues values = new ContentValues();
@@ -103,7 +105,7 @@ public class AlarmDAO {
 	 */
 	public AlarmInfo getLastAlarm() {
 		Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
-				allColumns, null, null, null, null, SQLiteHelper.COLUMN_ALARM_ID + " DESC","1");
+				allColumns, null, null, null, null, SQLiteHelper.COLUMN_ALARM_ID + " DESC", "1");
 		cursor.moveToFirst();
 		AlarmInfo alarm = cursorToAlarm(cursor);
 		cursor.close();
@@ -116,15 +118,15 @@ public class AlarmDAO {
 	 * @param id - the id of the alarm
 	 * @return - information about the alarm
 	 */
-    public AlarmInfo getAlarmById(int id){
+	public AlarmInfo getAlarmById(int id) {
 
-        Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
-                allColumns, SQLiteHelper.COLUMN_ALARM_ID+" = '"+id+"'", null, null, null, SQLiteHelper.COLUMN_ALARM_ID + " ASC");
-        cursor.moveToFirst();
-        AlarmInfo alarm = cursorToAlarm(cursor);
-        cursor.close();
-        return alarm;
-    }
+		Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
+				allColumns, SQLiteHelper.COLUMN_ALARM_ID + " = '" + id + "'", null, null, null, SQLiteHelper.COLUMN_ALARM_ID + " ASC");
+		cursor.moveToFirst();
+		AlarmInfo alarm = cursorToAlarm(cursor);
+		cursor.close();
+		return alarm;
+	}
 
 	/**
 	 * Used to get all alarms that have the specified day in their day string
@@ -132,29 +134,30 @@ public class AlarmDAO {
 	 * @param day - the day that each returned alarm should have
 	 * @return - list of alarms that have day in their days attribute
 	 */
-    public List<AlarmInfo> getAlarmsByDay(String day){
-        List<AlarmInfo> alarms = new ArrayList<>();
+	public List<AlarmInfo> getAlarmsByDay(String day) {
+		List<AlarmInfo> alarms = new ArrayList<>();
 
-        Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
-                allColumns, SQLiteHelper.COLUMN_REMIND_DAY+" Like '%"+day +"%'", null, null, null, SQLiteHelper.COLUMN_ALARM_ID + " ASC");
+		Cursor cursor = database.query(SQLiteHelper.TABLE_ALARM,
+				allColumns, SQLiteHelper.COLUMN_REMIND_DAY + " Like '%" + day + "%'", null, null, null, SQLiteHelper.COLUMN_ALARM_ID + " ASC");
 
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            AlarmInfo alarmInfo = cursorToAlarm(cursor);
-            alarms.add(alarmInfo);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return alarms;
-    }
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			AlarmInfo alarmInfo = cursorToAlarm(cursor);
+			alarms.add(alarmInfo);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return alarms;
+	}
 
 	/**
 	 * Used to edit an alarm already existing in the database
-	 * @param id - current id of alarm
+	 *
+	 * @param id          - current id of alarm
 	 * @param destination - new or old destination
-	 * @param time - new or old time
-	 * @param day - new or old days
-	 * @param repeat - new or old repeat value
+	 * @param time        - new or old time
+	 * @param day         - new or old days
+	 * @param repeat      - new or old repeat value
 	 */
 	public void editAlarm(int id, String destination, String time, String day,
 						  String repeat) {

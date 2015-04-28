@@ -57,14 +57,14 @@ public class CustomListAdapter extends BaseExpandableListAdapter {
 		int splitPosition = childText.indexOf(':');
 		TextView routeTextView = (TextView) convertView.findViewById(R.id.routeLabel);
 		TextView timeTextView = (TextView) convertView.findViewById(R.id.timeLabel);
-        ImageView imgViewChild = (ImageView ) convertView
-                .findViewById(R.id.img);
-        if(childText.charAt(childText.length()-1)=='Y')
-            imgViewChild.setImageResource(R.drawable.istop);
-        String text_top = childText.substring(0, splitPosition)+"  ";
+		ImageView imgViewChild = (ImageView) convertView
+				.findViewById(R.id.img);
+		if (childText.charAt(childText.length() - 1) == 'Y')
+			imgViewChild.setImageResource(R.drawable.istop);
+		String text_top = childText.substring(0, splitPosition) + "  ";
 		routeTextView.setText(text_top);
 
-		String time = childText.substring(splitPosition + 1,childText.length()-1);
+		String time = childText.substring(splitPosition + 1, childText.length() - 1);
 		switch (time) {
 			case "0":
 				time = "DUE";

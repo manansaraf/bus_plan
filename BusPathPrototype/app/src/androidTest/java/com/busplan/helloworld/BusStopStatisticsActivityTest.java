@@ -6,6 +6,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.util.Log;
 import android.widget.CheckBox;
+
 import com.busplan.R;
 
 

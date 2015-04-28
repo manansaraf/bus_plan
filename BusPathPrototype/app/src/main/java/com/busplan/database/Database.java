@@ -39,7 +39,7 @@ public class Database {
 	 */
 	public void populate(Context context) {
 		this.context = context;
-		this.main = (MainActivity)context;
+		this.main = (MainActivity) context;
 		String URL = "https://developer.cumtd.com/api/v2.2/JSON/GetLastFeedUpdate?key="
 				+ context.getResources().getString(R.string.apiKey);
 
@@ -74,6 +74,7 @@ public class Database {
 	/**
 	 * Checks the version table and sees if the current returned data version from the API is different
 	 * than the data version in the database. If so it calls a function to re fill the table.
+	 *
 	 * @param url
 	 * @throws IOException
 	 */
@@ -94,8 +95,7 @@ public class Database {
 				}
 			});
 			new getStops().execute(URL);
-		}
-		else {
+		} else {
 			main.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {

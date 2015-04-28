@@ -12,7 +12,7 @@ public class BusRouteInfo {
 	String shape_id = null;
 	int vehicleID = 0;
 	String routeColor = null;
-    boolean istop =false;
+	boolean istop = false;
 
 	public BusRouteInfo(String busName, int timeExpected, String stopID,
 						String shape_id, int vehicleID, String routeColor, boolean istop) {
@@ -22,7 +22,7 @@ public class BusRouteInfo {
 		this.shape_id = shape_id;
 		this.vehicleID = vehicleID;
 		this.routeColor = routeColor;
-        this.istop = istop;
+		this.istop = istop;
 	}
 
 	public String getBusName() {
@@ -49,9 +49,9 @@ public class BusRouteInfo {
 		return routeColor;
 	}
 
-    public boolean isIstop() {
-        return istop;
-    }
+	public boolean isIstop() {
+		return istop;
+	}
 
 
 }

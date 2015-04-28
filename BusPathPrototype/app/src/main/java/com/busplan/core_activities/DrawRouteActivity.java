@@ -201,15 +201,15 @@ public class DrawRouteActivity extends FragmentActivity {
 
 	public void drawBusLocation(LocationInfo cur_bus_location) {
 		mMap.addMarker(new MarkerOptions().position(new LatLng(cur_bus_location.getLatitude(),
-                cur_bus_location.getLongitude())).title("BUS")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_marker)));
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                marker.showInfoWindow();
-                return true;
-            }
-        });
+				cur_bus_location.getLongitude())).title("BUS")
+				.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_marker)));
+		mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+			@Override
+			public boolean onMarkerClick(Marker marker) {
+				marker.showInfoWindow();
+				return true;
+			}
+		});
 		LatLng latLng = new LatLng(cur_bus_location.getLatitude(), cur_bus_location.getLongitude());
 		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15.5f);
 		mMap.moveCamera(cameraUpdate);

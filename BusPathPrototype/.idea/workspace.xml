@@ -22,24 +22,31 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.busplan" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54e6a57c-b941-4287-877c-84bbffe23464" name="Default" comment="Comments added for public functions for all classes that group 2 worked on">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/model_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/model_data.bin" />
+    <list default="true" id="54e6a57c-b941-4287-877c-84bbffe23464" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/database/AlarmDAO.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/database/AlarmDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/AlarmHandler.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/AlarmHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/AlarmInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/AlarmInfo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/AlarmReceiver.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/AlarmReceiver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/BusRouteInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/BusRouteInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/BusStopInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/BusStopInfo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/BusStopStatisticsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/BusStopStatisticsActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/busplan/helloworld/BusStopStatisticsActivityTest.java" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/busplan/helloworld/BusStopStatisticsActivityTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/widgets/BusStopWidgetConfig.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/widgets/BusStopWidgetConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/widgets/BusStopWidgetProvider.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/widgets/BusStopWidgetProvider.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/database/BusStopsDAO.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/database/BusStopsDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/Connection.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/Connection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/CustomListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/utils/CustomListAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/database/Database.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/database/Database.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/DrawRouteActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/DrawRouteActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/database/FavoriteStopsDAO.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/database/FavoriteStopsDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/NearbyBusStopsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/NearbyBusStopsActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/database/SQLiteHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/database/SQLiteHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/SchedulerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/SchedulerActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/SchedulerAddReminderActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/SchedulerAddReminderActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/SchedulerViewTripActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/SchedulerViewTripActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/database/VersionDAO.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/database/VersionDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/SearchStopsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/SearchStopsActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/busplan/helloworld/SearchStopsActivityTest.java" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/busplan/helloworld/SearchStopsActivityTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/SearchStopsTripPlannerActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/SearchStopsTripPlannerActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/list_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/scheduler_list_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/scheduler_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/shortcut_config.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/shortcut_config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/shortcut_widget.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/shortcut_widget.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BusPathPrototype.iws" />
@@ -63,21 +70,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BusStopInfo.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="BusStopInfo.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/busplan/utils/BusStopInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
+            <state vertical-scroll-proportion="0.15483871" vertical-offset="0" max-vertical-offset="846">
               <caret line="4" column="74" selection-start-line="4" selection-start-column="74" selection-end-line="4" selection-end-column="74" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlarmDAO.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/busplan/database/AlarmDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334" vertical-offset="1141" max-vertical-offset="3276">
-              <caret line="86" column="54" selection-start-line="86" selection-start-column="54" selection-end-line="86" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -1483,33 +1480,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="widgets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BusPathPrototype" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="busplan" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
+              <option name="myItemId" value="core_activities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1981,7 +1952,11 @@
       <created>1429975920289</created>
       <updated>1429975920289</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Comments added for public functions for all classes that group 2 worked on">
+      <created>1430246765076</created>
+      <updated>1430246765076</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2181,8 +2156,8 @@
         <state vertical-scroll-proportion="0.8888889" vertical-offset="0" max-vertical-offset="774">
           <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
           <folding>
-            <element signature="e#689#714#0" expanded="false" />
-            <element signature="e#1246#1269#0" expanded="false" />
+            <element signature="e#766#791#0" expanded="false" />
+            <element signature="e#1323#1346#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2229,14 +2204,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7407407" vertical-offset="1782" max-vertical-offset="2502">
           <caret line="119" column="8" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2592">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2343,6 +2310,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="297" max-vertical-offset="1350">
           <caret line="38" column="35" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2369,23 +2337,6 @@
         <state vertical-scroll-proportion="0.2890511" vertical-offset="0" max-vertical-offset="3186">
           <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/BusStopStatisticsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="5418">
-          <caret line="52" column="7" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="58" />
-          <folding>
-            <element signature="e#2651#2692#0" expanded="true" />
-            <element signature="e#2799#2840#0" expanded="true" />
-            <element signature="e#8904#8905#0" expanded="true" />
-            <element signature="e#8946#8947#0" expanded="true" />
-            <element signature="e#9059#9060#0" expanded="true" />
-            <element signature="e#9098#9099#0" expanded="true" />
-            <element signature="e#9591#10007#0" expanded="true" />
-            <element signature="e#10002#10003#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2440,14 +2391,14 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3546">
           <caret line="128" column="37" selection-start-line="128" selection-start-column="37" selection-end-line="128" selection-end-column="37" />
           <folding>
-            <element signature="e#1160#1209#0" expanded="true" />
-            <element signature="e#2606#2655#0" expanded="true" />
-            <element signature="e#2679#2773#0" expanded="true" />
-            <element signature="e#2767#2768#0" expanded="true" />
-            <element signature="e#2843#2938#0" expanded="true" />
-            <element signature="e#2932#2933#0" expanded="true" />
-            <element signature="e#3349#3350#0" expanded="true" />
-            <element signature="e#3381#3382#0" expanded="true" />
+            <element signature="e#1161#1210#0" expanded="true" />
+            <element signature="e#2611#2660#0" expanded="true" />
+            <element signature="e#2684#2778#0" expanded="true" />
+            <element signature="e#2772#2773#0" expanded="true" />
+            <element signature="e#2846#2941#0" expanded="true" />
+            <element signature="e#2935#2936#0" expanded="true" />
+            <element signature="e#3352#3353#0" expanded="true" />
+            <element signature="e#3384#3385#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2555,18 +2506,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/busplan/utils/BusStopInfo.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/busplan/core_activities/BusStopStatisticsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
-          <caret line="4" column="74" selection-start-line="4" selection-start-column="74" selection-end-line="4" selection-end-column="74" />
+        <state vertical-scroll-proportion="-9.645162" vertical-offset="4845" max-vertical-offset="5310">
+          <caret line="52" column="7" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11612903" vertical-offset="0" max-vertical-offset="2682">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/busplan/database/AlarmDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="1141" max-vertical-offset="3276">
-          <caret line="86" column="54" selection-start-line="86" selection-start-column="54" selection-end-line="86" selection-end-column="54" />
+        <state vertical-scroll-proportion="2.3340707" vertical-offset="529" max-vertical-offset="3582">
+          <caret line="88" column="39" selection-start-line="88" selection-start-column="39" selection-end-line="88" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#830#831#0" expanded="true" />
+            <element signature="e#873#874#0" expanded="true" />
+            <element signature="e#1039#1040#0" expanded="true" />
+            <element signature="e#1087#1088#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/busplan/utils/BusStopInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15483871" vertical-offset="0" max-vertical-offset="846">
+          <caret line="4" column="74" selection-start-line="4" selection-start-column="74" selection-end-line="4" selection-end-column="74" />
           <folding />
         </state>
       </provider>

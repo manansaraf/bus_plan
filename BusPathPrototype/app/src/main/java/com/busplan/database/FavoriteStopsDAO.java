@@ -38,7 +38,7 @@ public class FavoriteStopsDAO {
 	 * Used to add a favorite stop to the database
 	 *
 	 * @param stopName - name of stop to add
-	 * @param stopID - id of stop to add
+	 * @param stopID   - id of stop to add
 	 */
 	public void createFavoriteStop(String stopName, String stopID) {
 		ContentValues values = new ContentValues();

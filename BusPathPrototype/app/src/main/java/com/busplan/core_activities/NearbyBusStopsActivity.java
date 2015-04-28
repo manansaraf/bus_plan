@@ -150,8 +150,8 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 		markers = new BusStopInfo[list.size()];
 		for (int i = 0; i < marker.size(); i++) {
 			mMap.addMarker(new MarkerOptions().position(new LatLng(marker.get(i).getLatitude(),
-                    marker.get(i).getLongitude())).title(marker.get(i).getStopName())
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_stop)));
+					marker.get(i).getLongitude())).title(marker.get(i).getStopName())
+					.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_stop)));
 			markers[i] = marker.get(i);
 		}
 		mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {

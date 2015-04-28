@@ -56,6 +56,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
 	/**
 	 * Called when class is made, this function executes all of the make table SQL commands
+	 *
 	 * @param database
 	 */
 	@Override

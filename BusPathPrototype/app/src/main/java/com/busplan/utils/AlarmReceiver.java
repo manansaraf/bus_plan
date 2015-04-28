@@ -32,33 +32,34 @@ public class AlarmReceiver extends BroadcastReceiver {
 	 */
 	@Override
 	public void onReceive(Context context, Intent intent) {
-        if(intent.getIntExtra("type",0) == 0){
-            runMidnightProcess(context);
-        }
-        else{
-            sendNotificationForAlarm(context, intent.getIntExtra("type", 0));
-        }
+		if (intent.getIntExtra("type", 0) == 0) {
+			runMidnightProcess(context);
+		} else {
+			sendNotificationForAlarm(context, intent.getIntExtra("type", 0));
+		}
 
 	}
-    private void runMidnightProcess(Context context){
-        AlarmHandler alarmHandler = new AlarmHandler(context);
+
+	private void runMidnightProcess(Context context) {
+		AlarmHandler alarmHandler = new AlarmHandler(context);
 		alarmHandler.setTodaysAlarms();
-    }
-    private void sendNotificationForAlarm(Context context, int id){
-        AlarmDAO alarmDAO = new AlarmDAO(context);
-        alarmDAO.open();
-        AlarmInfo alarminfo = alarmDAO.getAlarmById(id);
+	}
+
+	private void sendNotificationForAlarm(Context context, int id) {
+		AlarmDAO alarmDAO = new AlarmDAO(context);
+		alarmDAO.open();
+		AlarmInfo alarminfo = alarmDAO.getAlarmById(id);
 
 
-        long when = System.currentTimeMillis();
-        NotificationManager notificationManager = (NotificationManager) context
-                .getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent notificationIntent = new Intent(context, SchedulerViewTripActivity.class);
-        notificationIntent.putExtra("id",id);
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, id,
-                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+		long when = System.currentTimeMillis();
+		NotificationManager notificationManager = (NotificationManager) context
+				.getSystemService(Context.NOTIFICATION_SERVICE);
+		Intent notificationIntent = new Intent(context, SchedulerViewTripActivity.class);
+		notificationIntent.putExtra("id", id);
+		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, id,
+				notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
 
 		String[] time_a = alarminfo.getTime().split(":");
@@ -68,15 +69,15 @@ public class AlarmReceiver extends BroadcastReceiver {
 		c.set(Calendar.HOUR_OF_DAY, hours);
 		c.set(Calendar.MINUTE, minutes);
 		String time = DateParser.toString(c.getTime());
-        Notification note = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setContentTitle("Scheduler Reminder")
-                .setContentText(alarminfo.getDestination() + " " + time)
-                .setSound(alarmSound)
-                .setWhen(when)
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent)
-                .build();
-        notificationManager.notify(0, note);
-    }
+		Notification note = new NotificationCompat.Builder(context)
+				.setSmallIcon(R.drawable.ic_launcher)
+				.setContentTitle("Scheduler Reminder")
+				.setContentText(alarminfo.getDestination() + " " + time)
+				.setSound(alarmSound)
+				.setWhen(when)
+				.setAutoCancel(true)
+				.setContentIntent(pendingIntent)
+				.build();
+		notificationManager.notify(0, note);
+	}
 }

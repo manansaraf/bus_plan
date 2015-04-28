@@ -87,6 +87,7 @@
         android:layout_height="50sp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
+
     <TextView
         android:id="@+id/database_message"
         android:layout_width="wrap_content"
