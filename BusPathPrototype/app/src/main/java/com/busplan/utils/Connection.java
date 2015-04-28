@@ -9,6 +9,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Helper class to make a connection to the given URL. This is used to make all of the API calls in
+ * the activities
+ */
 public class Connection {
 	String connectionURL;
 	String JSON;
@@ -26,6 +30,13 @@ public class Connection {
 		return JSON;
 	}
 
+	/**
+	 * Used to connect to the given URL
+	 *
+	 * @param urlString - the url to connect to
+	 * @return - JSON string result of the API call
+	 * @throws IOException
+	 */
 	public String makeConnection(String urlString) throws IOException {
 		InputStream inputStream = null;
 		try {
@@ -45,6 +56,13 @@ public class Connection {
 		}
 	}
 
+	/**
+	 * Converts the result of the connection to JSON format
+	 *
+	 * @param stream - the result of the API call
+	 * @return - JSON string
+	 * @throws IOException
+	 */
 	public String readIt(InputStream stream) throws IOException {
 		BufferedReader reader;
 		reader = new BufferedReader(new InputStreamReader(stream, "UTF-8"));

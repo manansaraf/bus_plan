@@ -38,13 +38,20 @@ import java.util.List;
 
 /**
  * Created by Elee on 2015-04-08.
- * This activity will make api calls and return ideal trip plan
+ * This activity is responsible for displaying the trip information of the reminder once the user
+ * clicks on the reminder notification
  */
 public class SchedulerViewTripActivity extends Activity {
 	private ProgressBar spinner;
 	private BusStopsDAO busStopsDAO;
 	LocationManager loc;
 
+	/**
+	 * This function gets called when the activity is made, it gets the extra information passed to
+	 * this activity and gets the reminder alarm and uses it to make an API call
+	 *
+	 * @param savedInstanceState
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -197,6 +204,14 @@ public class SchedulerViewTripActivity extends Activity {
 			return "";
 	}
 
+	/**
+	 * Similar to the trip planner JSON builder, this function parses the JSON returned from the
+	 * API call in a fashion that can be displayed in a listView for the user to see
+	 *
+	 * @param str - string of the JSON return from the API call
+	 * @return - list of the info that the listView needs to display
+	 * @throws IOException
+	 */
 	public List<List<TripInfo>> buildTripJSON(String str) throws IOException {
 		JSONObject JObject;
 		List<List<TripInfo>> trips = null;

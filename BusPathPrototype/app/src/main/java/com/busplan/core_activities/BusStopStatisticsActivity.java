@@ -36,7 +36,8 @@ import java.util.List;
 
 /**
  * Created by dylan on 2/19/15.
- * activity to display routes coming to each child stop of stop selected
+ * This activity displays all the incoming routes for the stop selected and passed to it from another
+ * activity. From here a stop can be favorited and the user can click a route to see the shape.
  */
 public class BusStopStatisticsActivity extends Activity {
 
@@ -48,6 +49,12 @@ public class BusStopStatisticsActivity extends Activity {
 	private BusStopInfo busStopInfo;
 	private HashMap<String, BusRouteInfo> hash;
 
+	/**
+	 * This function gets called when the activity is made, it makes sure the calling activity
+	 * passed it a stop to look up
+	 *
+	 * @param savedInstanceState
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -182,6 +189,14 @@ public class BusStopStatisticsActivity extends Activity {
 		});
 	}
 
+	/**
+	 * This function interprets the JSON string recieved from the API call and retrieves specific
+	 * information that will be displayed in this activity
+	 *
+	 * @param str - JSON that needs to be broken down and interpreted
+	 * @return - list of stops found in the str JSON
+	 * @throws IOException
+	 */
 	public List<BusRouteInfo> buildDepartJSON(String str) throws IOException {
 		JSONObject JObject;
 		List<BusRouteInfo> BusList = null;
@@ -233,14 +248,25 @@ public class BusStopStatisticsActivity extends Activity {
 		return ChildList;
 	}
 
+	/**
+	 * shows the status spinner while the API call is happening
+	 */
 	public void showProgressBar() {
 		spinner.setVisibility(View.VISIBLE);
 	}
 
+	/**
+	 * closes the spinner after the API call is done or failed to work
+	 */
 	public void closeProgressBar() {
 		spinner.setVisibility(View.GONE);
 	}
 
+	/**
+	 * used to set the onClick function for the favorite button in the action bar menu
+	 * @param menu
+	 * @return
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -264,6 +290,10 @@ public class BusStopStatisticsActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * checks to see if the current stop that this activity is displaying is a favorite of the user
+	 * @return
+	 */
 	public boolean getFavoriteStatus() {
 		fstopsDAO.open();
 		List<BusStopInfo> allFavorites = fstopsDAO.getAllFavoriteStops();

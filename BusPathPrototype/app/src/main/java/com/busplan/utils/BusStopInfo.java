@@ -2,7 +2,7 @@ package com.busplan.utils;
 
 /**
  * Created by dylan on 3/3/15.
- * helper class to hold information to make expandableListViews on BusStopStatistics actitivy
+ * Helper class to pass information to and from the database for Bus Stops
  */
 public class BusStopInfo {
 	String stopName;

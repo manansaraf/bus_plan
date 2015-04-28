@@ -2,7 +2,7 @@ package com.busplan.core_activities;
 
 /**
  * Created by dylan on 3/03/15.
- * class that adds the input of an alarm to the database
+ * This activity is a helper activity for the scheduler and handles the user input for each alarm
  */
 
 import android.app.Activity;
@@ -33,6 +33,12 @@ public class SchedulerAddReminderActivity extends Activity {
 	private SimpleDateFormat timeFormatter;
 	private AlarmDAO alarmDAO;
 
+	/**
+	 * This function gets called when the activity is made, it sets up the activity depending on if
+	 * the user is adding a new alarm or trying to edit an existing alarm
+	 *
+	 * @param savedInstanceState
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -78,6 +84,12 @@ public class SchedulerAddReminderActivity extends Activity {
 		timePickerDialog.show();
 	}
 
+	/**
+	 * Called when the user is inputting the destination field for the alarm, it takes them to
+	 * the SearchStopsTripPlannerActivity for them to pick a stop and then returns
+	 *
+	 * @param view
+	 */
 	public void endNameFiller(View view) {
 		Intent intent = new Intent(SchedulerAddReminderActivity.this, SearchStopsTripPlannerActivity.class);
 		EditText editText = (EditText) findViewById(R.id.dest);
@@ -104,6 +116,12 @@ public class SchedulerAddReminderActivity extends Activity {
 		}, newCalendar.get(Calendar.HOUR_OF_DAY), newCalendar.get(Calendar.MINUTE), false);
 	}
 
+	/**
+	 * Checks to make sure all parameters are included and if so then adds or edits the alarm and
+	 * displays a message to the user. Returns to the main scheduler activity on success.
+	 *
+	 * @param view
+	 */
 	public void addAlarm(View view) {
 
 		EditText destText = (EditText) findViewById(R.id.dest);

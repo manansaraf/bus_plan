@@ -23,10 +23,20 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is responsible for managing the database. It checks the version and populates the bus
+ * stop table if needed.
+ */
 public class Database {
 	private Context context;
 	private MainActivity main;
 
+	/**
+	 * Called from the main activity and handles the function calls to check if database needs to be
+	 * populated or updated
+	 *
+	 * @param context
+	 */
 	public void populate(Context context) {
 		this.context = context;
 		this.main = (MainActivity)context;
@@ -61,6 +71,12 @@ public class Database {
 
 	}
 
+	/**
+	 * Checks the version table and sees if the current returned data version from the API is different
+	 * than the data version in the database. If so it calls a function to re fill the table.
+	 * @param url
+	 * @throws IOException
+	 */
 	public void checkUpdateDate(String url) throws IOException {
 		VersionDAO versionDAO = new VersionDAO(this.context);
 		versionDAO.open();
@@ -107,6 +123,12 @@ public class Database {
 		}
 	}
 
+	/**
+	 * Called to add stops to the database from the JSON returned from the API
+	 *
+	 * @param url - JSON from the API
+	 * @throws IOException
+	 */
 	public void CreateBusStop(String url) throws IOException {
 		String JSONstring = makeConnection(url);
 		List<BusStopInfo> busStopList = buildBusStopJSON(JSONstring);

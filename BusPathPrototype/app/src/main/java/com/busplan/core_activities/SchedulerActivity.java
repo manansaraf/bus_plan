@@ -2,7 +2,8 @@ package com.busplan.core_activities;
 
 /**
  * Created by dylan on 4/03/15.
- * main scheduler activity where alarms are listed
+ * This activity is the main activity of the scheduler feature. Here the scheduler can be turn off
+ * and on and users can view and delete alarms.
  */
 
 import android.app.Activity;
@@ -33,6 +34,12 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 	private ArrayAdapter<AlarmInfo> mAdapter;
 	private AlarmDAO alarmDAO;
 
+	/**
+	 * This function gets called when the activity is made, it fetches the alarms from the database
+	 * and makes them be displayed in the listView
+	 *
+	 * @param savedInstanceState
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,6 +56,10 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 		listview.setAdapter(mAdapter);
 	}
 
+	/**
+	 * Called after a pause state, clears the listView and redisplays the alarms. This is useful to
+	 * update the view if any alarm was edited or deleted.
+	 */
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -64,11 +75,24 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 		return true;
 	}
 
+	/**
+	 * Called from the Add Reminder button, redirects user to the add reminder activity
+	 *
+	 * @param view
+	 */
 	public void toSchedulerAddReminder(View view) {
 		Intent changeToScheduler = new Intent(view.getContext(), SchedulerAddReminderActivity.class);
 		startActivityForResult(changeToScheduler, 0);
 	}
 
+	/**
+	 * Called when user clicks an alarm in the listView, takes them to the edit page to edit that alarm
+	 *
+	 * @param av
+	 * @param v
+	 * @param position
+	 * @param id
+	 */
 	public void onItemClick(AdapterView<?> av, View v, int position, long id) {
 		Intent intent = new Intent();
 		intent.setClass(this, SchedulerAddReminderActivity.class);
@@ -76,6 +100,16 @@ public class SchedulerActivity extends Activity implements AdapterView.OnItemCli
 		startActivity(intent);
 	}
 
+	/**
+	 * Called when user long clicks an alarm in the listView, sets up the delete function for each
+	 * alarm
+	 *
+	 * @param av
+	 * @param v
+	 * @param pos
+	 * @param id
+	 * @return
+	 */
 	public boolean onItemLongClick(final AdapterView<?> av, View v, final int pos, final long id) {
 
 		final AlertDialog.Builder b = new AlertDialog.Builder(SchedulerActivity.this);

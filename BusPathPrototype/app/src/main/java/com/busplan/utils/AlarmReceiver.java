@@ -18,10 +18,18 @@ import java.util.Calendar;
 
 /**
  * Created by dylan on 4/17/15.
- * this class is responsible for creating the notifications for scheduler when a system alarm is received
+ * This class is responsible for creating the notifications for scheduler when a system alarm is
+ * received
  */
 public class AlarmReceiver extends BroadcastReceiver {
 
+	/**
+	 * When an alarm is triggered, this distinguishes if it is a reminder alarm or the scheduled
+	 * repeating alarm that triggers to set the alarms for each day
+	 *
+	 * @param context
+	 * @param intent
+	 */
 	@Override
 	public void onReceive(Context context, Intent intent) {
         if(intent.getIntExtra("type",0) == 0){

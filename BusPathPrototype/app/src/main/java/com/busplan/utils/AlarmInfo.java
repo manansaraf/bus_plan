@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 /**
  * Created by dylan on 4/03/2015.
- * helper class to pass information to and from the database
+ * Helper class to pass information to and from the database for Alarms
  */
 public class AlarmInfo {
 	int id;
@@ -16,6 +16,11 @@ public class AlarmInfo {
 	public AlarmInfo() {
 	}
 
+	/**
+	 * Used to display the alarmInfo in the Scheduler main activity listView
+	 *
+	 * @return - string with the alarm information to be displayed
+	 */
 	@Override
 	public String toString() {
 		String[] time_a = this.getTime().split(":");

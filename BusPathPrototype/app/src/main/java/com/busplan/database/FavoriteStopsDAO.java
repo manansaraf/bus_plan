@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Created by dylan on 3/13/15.
- * this class interacts with the database and passes back objects to the caller
+ * This dao is responsible for interacting with the database with the Favorites table
  */
 public class FavoriteStopsDAO {
 
@@ -25,14 +25,21 @@ public class FavoriteStopsDAO {
 		dbHelper = new SQLiteHelper(context);
 	}
 
+	/**
+	 * opens the database, MUST be called before any other function of the DAO is used
+	 *
+	 * @throws SQLException
+	 */
 	public void open() throws SQLException {
 		database = dbHelper.getWritableDatabase();
 	}
 
-	public void close() {
-		dbHelper.close();
-	}
-
+	/**
+	 * Used to add a favorite stop to the database
+	 *
+	 * @param stopName - name of stop to add
+	 * @param stopID - id of stop to add
+	 */
 	public void createFavoriteStop(String stopName, String stopID) {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_NAME, stopName);
@@ -42,6 +49,11 @@ public class FavoriteStopsDAO {
 				values);
 	}
 
+	/**
+	 * Used to return all favorite stops in the database
+	 *
+	 * @return - list of all stops found in the favorite table
+	 */
 	public List<BusStopInfo> getAllFavoriteStops() {
 		List<BusStopInfo> busStops = new ArrayList<>();
 
@@ -59,6 +71,11 @@ public class FavoriteStopsDAO {
 		return busStops;
 	}
 
+	/**
+	 * Used to delete a stop from favorites
+	 *
+	 * @param stopName - name of stop to be deleted
+	 */
 	public void deleteFavoriteStop(String stopName) {
 		database.delete(SQLiteHelper.TABLE_FAVORITES, SQLiteHelper.COLUMN_NAME +
 				" = " + "\"" + stopName + "\"", null);

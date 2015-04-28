@@ -19,7 +19,7 @@ import java.util.Locale;
 
 /**
  * Created by Elee on 2015-04-17.
- * Class that called from Alarm, and check database to push today's alarm.
+ * This class is responsible for setting a system alarm using the alarm manager
  */
 public class AlarmHandler {
 	private Context context;
@@ -29,10 +29,18 @@ public class AlarmHandler {
 		this.context = context;
 	}
 
+	/**
+	 * Used to set all of the alarms that occur on the current day that are in the database
+	 */
 	public void setTodaysAlarms() {
 		setAlarms(getTodayAlarmList());
 	}
 
+	/**
+	 * Used to set a specific alarm added by a user if it occurs later on the same day it was added
+	 *
+	 * @param alarm - the alarmInfo that was just added to the database
+	 */
 	public void setThisAlarm(AlarmInfo alarm) {
 		List<AlarmInfo> alarmInfos = new ArrayList<>();
 		alarmInfos.add(alarm);

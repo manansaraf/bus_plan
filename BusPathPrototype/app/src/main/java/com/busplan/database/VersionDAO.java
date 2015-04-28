@@ -8,7 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 /**
  * Created by dylan on 3/16/15.
- * this DAO is for keeping track of the database version from CUMTD API
+ * This dao is responsible for interacting with the database with the Version table and keeps track
+ * of the version returned from the API of the data in the Bus Stops table
  */
 public class VersionDAO {
 
@@ -20,14 +21,20 @@ public class VersionDAO {
 		dbHelper = new SQLiteHelper(context);
 	}
 
+	/**
+	 * opens the database, MUST be called before any other function of the DAO is used
+	 *
+	 * @throws SQLException
+	 */
 	public void open() throws SQLException {
 		database = dbHelper.getWritableDatabase();
 	}
 
-	public void close() {
-		dbHelper.close();
-	}
-
+	/**
+	 * Used to return the date of the current version in the database
+	 *
+	 * @return - string containing the date
+	 */
 	public String getDate() {
 		Cursor cursor = database.query(SQLiteHelper.TABLE_VERSION,
 				allColumns, null, null, null, null, null);
@@ -41,6 +48,11 @@ public class VersionDAO {
 		return date;
 	}
 
+	/**
+	 * Used to set the date of the version
+	 *
+	 * @param newDate - string containing the date of the new data
+	 */
 	public void setDate(String newDate) {
 		database.delete(SQLiteHelper.TABLE_VERSION, null, null);
 

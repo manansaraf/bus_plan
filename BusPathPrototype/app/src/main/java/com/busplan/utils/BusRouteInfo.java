@@ -2,7 +2,8 @@ package com.busplan.utils;
 
 /**
  * Created by dylan on 2/27/15.
- * this class saves information form the stop JSON to be displayed on the BusStopStatistics activity
+ * This class stores route information from the stop JSON to be displayed on the BusStopStatistics
+ * activity
  */
 public class BusRouteInfo {
 	String busName = null;

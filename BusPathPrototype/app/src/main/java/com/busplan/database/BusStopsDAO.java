@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Created by dylan on 3/13/15.
- * this class interacts with the database and passes back objects to the caller
+ * This dao is responsible for interacting with the database with the Bus Stops table
  */
 public class BusStopsDAO {
 
@@ -26,6 +26,11 @@ public class BusStopsDAO {
 		dbHelper = new SQLiteHelper(context);
 	}
 
+	/**
+	 * opens the database, MUST be called before any other function of the DAO is used
+	 *
+	 * @throws SQLException
+	 */
 	public void open() throws SQLException {
 		database = dbHelper.getWritableDatabase();
 	}
@@ -34,10 +39,22 @@ public class BusStopsDAO {
 		dbHelper.close();
 	}
 
+	/**
+	 * Used to drop the current table, useful when current information is out of date and needs to
+	 * be updated from the API
+	 */
 	public void drop() {
 		database.delete(SQLiteHelper.TABLE_BUSSTOPS, null, null);
 	}
 
+	/**
+	 * Used to add a bus stop to the database
+	 *
+	 * @param stopName - name of the bus stop
+	 * @param stopID - id of the bus stop
+	 * @param latitude - latitude of the bus stop
+	 * @param longitude - longitude of the bus stop
+	 */
 	public void createStop(String stopName, String stopID, double latitude, double longitude) {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_NAME, stopName);
@@ -49,6 +66,11 @@ public class BusStopsDAO {
 				values);
 	}
 
+	/**
+	 * Used to get all stops currently in the database
+	 *
+	 * @return - list of all stops in the database
+	 */
 	public List<BusStopInfo> getAllStops() {
 		List<BusStopInfo> busStops = new ArrayList<>();
 
@@ -65,6 +87,12 @@ public class BusStopsDAO {
 		return busStops;
 	}
 
+	/**
+	 * Used to get a specific stop by name
+	 *
+	 * @param stopName - name of the stop tp be returned
+	 * @return - information about the stop
+	 */
 	public BusStopInfo getStop(String stopName) {
 		Cursor cursor = database.query(SQLiteHelper.TABLE_BUSSTOPS,
 				allColumns, SQLiteHelper.COLUMN_NAME + " = " + "\"" + stopName + "\"",
@@ -76,6 +104,12 @@ public class BusStopsDAO {
 		return stop;
 	}
 
+	/**
+	 * Used to return list of stops based on a substring search
+	 *
+	 * @param stopSubString - substring that user wants to search by
+	 * @return - list of all stops that need to be displayed
+	 */
 	public List<BusStopInfo> searchStops(String stopSubString) {
 		List<BusStopInfo> busStops = new ArrayList<>();
 

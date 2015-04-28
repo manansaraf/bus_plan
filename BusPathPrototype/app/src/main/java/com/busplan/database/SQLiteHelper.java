@@ -6,7 +6,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
- * Created by dylan on 3/13/15.\
+ * Created by dylan on 3/13/15.
+ * This class holds all of the static names of the table and columns in the database. It also has
+ * the SQL commands to initially make the tables.
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
 
@@ -52,6 +54,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
+	/**
+	 * Called when class is made, this function executes all of the make table SQL commands
+	 * @param database
+	 */
 	@Override
 	public void onCreate(SQLiteDatabase database) {
 		database.execSQL(STOPS_CREATE);
@@ -60,6 +66,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 		database.execSQL(ALARM_CREATE);
 	}
 
+	/**
+	 * Currently not implemented by our app but required in this class for it to function
+	 *
+	 * @param db
+	 * @param oldVersion
+	 * @param newVersion
+	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		Log.w(SQLiteHelper.class.getName(),
