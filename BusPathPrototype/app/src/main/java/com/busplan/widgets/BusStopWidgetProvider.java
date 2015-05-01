@@ -14,11 +14,18 @@ import com.busplan.R;
 import com.busplan.core_activities.BusStopStatisticsActivity;
 
 /**
- * Created by davidtoh on 4/7/15.
+ * Created by davidtoh on 4/7/15. This class is responsible for managing and updating widgets.
  */
 public class BusStopWidgetProvider extends AppWidgetProvider {
 
-	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+    /**
+     * Gets called when the widget needs to be updated. Behavior is different depending on if the widget
+     * has already been configured or needs to be configured (i.e., it's already been bound to a stop and color).
+     * @param context Widget Context
+     * @param appWidgetManager updates and manages Widgets
+     * @param appWidgetIds list of app widget ID's
+     */
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
 		// Perform this loop procedure for each App Widget that belongs to this provider
 		for (int appWidgetId : appWidgetIds) {

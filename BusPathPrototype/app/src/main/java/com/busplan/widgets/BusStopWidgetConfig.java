@@ -20,13 +20,17 @@ import com.busplan.core_activities.BusStopStatisticsActivity;
 import com.busplan.core_activities.SearchStopsTripPlannerActivity;
 
 /**
- * Created by davidtoh on 4/9/15.
+ * Created by davidtoh on 4/9/15. This class is responsible for setting up and configuring new widgets.
  */
 public class BusStopWidgetConfig extends Activity {
 
 	int mAppWidgetId;
 
-	@Override
+    /**
+     * Called when a widget is created in order to set up and configure the new widget.
+     * @param savedInstanceState passed to the superclass constructor
+     */
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -99,7 +103,6 @@ public class BusStopWidgetConfig extends Activity {
 				editor.putString(Integer.toString(mAppWidgetId) + "color", color);
 				editor.commit();
 
-				//ComponentName name = new ComponentName(getApplicationContext(), BusStopWidgetProvider.class);
 				appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
 				finish();
@@ -111,7 +114,11 @@ public class BusStopWidgetConfig extends Activity {
 		});
 	}
 
-	public void startNameFiller(View view) {
+    /**
+     * Called after the EditText field is clicked to create an Intent to launch the Search Stops page.
+     * @param view parent View
+     */
+    public void startNameFiller(View view) {
 		Intent intent = new Intent(BusStopWidgetConfig.this, SearchStopsTripPlannerActivity.class);
 		intent.putExtra("WIDGET_ID", mAppWidgetId);
 		intent.putExtra("stop", 1);

@@ -75,7 +75,6 @@ public class SearchStopsActivity extends Activity implements AdapterView.OnItemC
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 			case R.id.action_search:
-				//openSettings();
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);

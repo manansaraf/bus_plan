@@ -91,7 +91,6 @@ public class SearchStopsTripPlannerActivity extends Activity implements AdapterV
 		SearchView mSearch = (SearchView) menu.findItem(R.id.action_search).getActionView();
 		mSearch.setOnQueryTextListener(this);
 		return true;
-		//return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
@@ -103,7 +102,6 @@ public class SearchStopsTripPlannerActivity extends Activity implements AdapterV
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 			case R.id.action_search:
-				//openSettings();
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
