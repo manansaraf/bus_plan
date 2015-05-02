@@ -38,6 +38,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This activity displays the route of the CUMTD Bus which has been selected and clicked by the user
+ * from the BusStopStatisticsActivity. It also shows the current location of the bus on its route.
+ */
 public class DrawRouteActivity extends FragmentActivity {
 
 	private GoogleMap mMap; // Might be null if Google Play services APK is not available.
@@ -48,7 +52,12 @@ public class DrawRouteActivity extends FragmentActivity {
 	String route_color;
 	List<LocationInfo> points;
 	LocationInfo LocationInfo;
-
+    /**
+     * This function gets called when the activity is made, it makes sure the calling activity
+     * passed it a stop to look up
+     *
+     * @param savedInstanceState
+     */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,6 +80,12 @@ public class DrawRouteActivity extends FragmentActivity {
 		return true;
 	}
 
+    /**
+     * This function calls the CUMTD API functions to get the shape of the specified bus route
+     * and the vehicle's current location
+     * @param vehicleID, the vehicle ID of the bus
+     * @param shapeID, the shape ID of the bus route
+     */
 	private void makeAPICalls(int vehicleID, String shapeID) {
 
 		//check connection
@@ -126,10 +141,9 @@ public class DrawRouteActivity extends FragmentActivity {
 	}
 
 	/**
-	 * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-	 * just add a marker near Africa.
-	 * <p/>
-	 * This should only be called once and when we are sure that {@link #mMap} is not null.
+	 * This function sets the camera position of the map to the desired location by getting the
+     * current GPS location and the bus location on the route.
+     * If the bus location is provided, we set the camera to focus on that point instead on the GPS location.
 	 */
 	private void setUpMap() {
 		final Location lastKnown = loc.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -188,6 +202,11 @@ public class DrawRouteActivity extends FragmentActivity {
 		//createBusStopLocation();
 	}
 
+    /**
+     * This function takes in the list of locations returned by the CUMTD API to draw the route
+     * and then calls the Google maps API to drat the specific location on the map and draw lines between them.
+     * @param points, the list of points for the route
+     */
 	public void drawRouteS(List<LocationInfo> points) {
 		PolylineOptions line = new PolylineOptions();
 		int i;
@@ -199,6 +218,10 @@ public class DrawRouteActivity extends FragmentActivity {
 		mMap.addPolyline(line);
 	}
 
+    /**
+     *  This function sets a marker for the current bus location if any
+     * @param cur_bus_location, the current location of the bus
+     */
 	public void drawBusLocation(LocationInfo cur_bus_location) {
 		mMap.addMarker(new MarkerOptions().position(new LatLng(cur_bus_location.getLatitude(),
 				cur_bus_location.getLongitude())).title("BUS")
@@ -243,6 +266,13 @@ public class DrawRouteActivity extends FragmentActivity {
 		}
 	}
 
+    /**
+     * This function first genreates the JSON files and then calls the parsers
+     * and then does the specific tasks on the UI thread
+     * @param vehicleURL
+     * @param shapeURL
+     * @throws IOException
+     */
 	private void createLists(String vehicleURL, String shapeURL) throws IOException {
 		Connection connect = new Connection(shapeURL);
 		String shapeJSON = connect.getJSON();
@@ -260,7 +290,14 @@ public class DrawRouteActivity extends FragmentActivity {
 			}
 		});
 	}
-
+    /**
+     * This function interprets the JSON string recieved from the API call and retrieves specific
+     * information that will be displayed in this activity
+     *
+     * @param str - JSON that needs to be broken down and interpreted
+     * @return - list of stops found in the str JSON
+     * @throws IOException
+     */
 	public List<LocationInfo> buildShapeJSON(String str) throws IOException {
 		JSONObject JObject;
 		List<LocationInfo> BusList = null;
@@ -278,7 +315,14 @@ public class DrawRouteActivity extends FragmentActivity {
 		}
 		return BusList;
 	}
-
+    /**
+     * This function interprets the JSON string recieved from the API call and retrieves specific
+     * information that will be displayed in this activity
+     *
+     * @param str - JSON that needs to be broken down and interpreted
+     * @return - list of stops found in the str JSON
+     * @throws IOException
+     */
 	public LocationInfo buildVehicleJSON(String str) throws IOException {
 		JSONObject JObject;
 		LocationInfo point = null;

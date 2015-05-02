@@ -76,6 +76,11 @@ public class DateParser {
 	//      ss   = two digits of second (00 through 59)
 	//      s    = one or more digits representing a decimal fraction of a second
 	//      TZD  = time zone designator (Z or +hh:mm or -hh:mm)
+    /**
+     * This function converts a String input to a date
+     * @param input, The String input needed
+     * @return Date, the date object
+     */
 	public static Date parse(String input) throws java.text.ParseException {
 
 		//NOTE: SimpleDateFormat uses GMT[-+]hh:mm for the TZ which breaks
@@ -88,6 +93,11 @@ public class DateParser {
 
 	}
 
+    /**
+     * This function converts a date object to a string
+     * @param date, the date object
+     * @return String, the converted string
+     */
 	public static String toString(Date date) {
 
 		SimpleDateFormat df = new SimpleDateFormat("h:mm a", Locale.US);

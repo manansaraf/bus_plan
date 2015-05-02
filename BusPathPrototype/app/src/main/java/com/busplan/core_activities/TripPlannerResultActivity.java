@@ -34,7 +34,12 @@ import java.util.List;
 
 public class TripPlannerResultActivity extends Activity {
 	private ProgressBar spinner;
-
+    /**
+     * This function gets called when the activity is made, it makes sure the calling activity
+     * passed it a stop to look up
+     *
+     * @param savedInstanceState
+     */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,7 +85,13 @@ public class TripPlannerResultActivity extends Activity {
 
 		return super.onOptionsItemSelected(item);
 	}
-
+    /**
+     * This function calls the CUMTD API functions to the planned trips from the API.
+     *
+     * @param start_name, the start stop name
+     * @param end_name, the end stop name
+     * @param timeAndDate, the time and date of the planned trip if given
+     */
 	private void makeAPICalls(String start_name, String end_name, String timeAndDate) {
 
 		BusStopsDAO busStopsDAO = new BusStopsDAO(this);
@@ -138,6 +149,14 @@ public class TripPlannerResultActivity extends Activity {
 		}
 	}
 
+    /**
+     * This function calls the api function, retrieves the JSON file from the API,
+     * sends it to the JSON parsers below and then calls the Custom List Adapters
+     * to build that information on the UI thread.
+     * @param tripPlannerURL, the URL to call tehe API function
+     * @return String
+     * @throws IOException
+     */
 	private String createLists(String tripPlannerURL) throws IOException {
 		Connection connect = new Connection(tripPlannerURL);
 		String tripJSON = connect.getJSON();
@@ -194,7 +213,14 @@ public class TripPlannerResultActivity extends Activity {
 	private void closeProgressBar() {
 		spinner.setVisibility(View.GONE);
 	}
-
+    /**
+     * This function interprets the JSON string recieved from the API call and retrieves specific
+     * information that will be displayed in this activity
+     *
+     * @param str - JSON that needs to be broken down and interpreted
+     * @return - list of stops found in the str JSON
+     * @throws IOException
+     */
 	public List<List<TripInfo>> buildTripJSON(String str) throws IOException {
 		JSONObject JObject;
 		List<List<TripInfo>> trips = null;
@@ -226,7 +252,14 @@ public class TripPlannerResultActivity extends Activity {
 		}
 		return trips;
 	}
-
+    /**
+     * This function interprets the JSON string recieved from the API call and retrieves specific
+     * information that will be displayed in this activity
+     *
+     * @param JObject_leg - JSON that needs to be broken down and interpreted
+     * @return - list of stops found in the str JSON
+     * @throws IOException
+     */
 	public TripInfo getTripInfoWalk(JSONObject JObject_leg) {
 		TripInfo trip = null;
 		try {
@@ -248,7 +281,14 @@ public class TripPlannerResultActivity extends Activity {
 		}
 		return trip;
 	}
-
+    /**
+     * This function interprets the JSON string recieved from the API call and retrieves specific
+     * information that will be displayed in this activity
+     *
+     * @param JObject_leg - JSON that needs to be broken down and interpreted
+     * @return - list of stops found in the str JSON
+     * @throws IOException
+     */
 	public TripInfo getTripInfoService(JSONObject JObject_leg) {
 		TripInfo trip = null;
 		try {

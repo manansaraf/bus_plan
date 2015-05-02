@@ -17,10 +17,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NearbyBusStopsActivity extends FragmentActivity {
@@ -31,7 +33,14 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 	BusStopsDAO busStopsDAO;
 	LocationManager loc;
 	LocationListener listener;
-
+    ArrayList<Marker> markerList;
+    float prevZoomLevel = 20;
+    /**
+     * This function gets called when the activity is made, it makes sure the calling activity
+     * passed it a stop to look up
+     *
+     * @param savedInstanceState
+     */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -87,6 +96,7 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 	 * This should only be called once and when we are sure that {@link #mMap} is not null.
 	 */
 	private void setUpMap() {
+        markerList =new ArrayList<>();
 		final Location lastKnown = loc.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		if (lastKnown != null) {
 			LatLng latLng = new LatLng(lastKnown.getLatitude(), lastKnown.getLongitude());
@@ -98,6 +108,7 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 			mMap.moveCamera(cameraUpdate);
 		}
 		mMap.setMyLocationEnabled(true);
+        mMap.setOnCameraChangeListener(getCameraChangeListener());
 		listener = new LocationListener() {
 			@Override
 			public void onLocationChanged(Location location) {
@@ -142,6 +153,10 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 		createBusStopLocation();
 	}
 
+    /**
+     * This function gets the list of bus stop locations from the database
+     * and then puts them on the map as markers.
+     */
 	private void createBusStopLocation() {
 		busStopsDAO = new BusStopsDAO(this);
 		busStopsDAO.open();
@@ -149,9 +164,10 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 		List<BusStopInfo> marker = list;
 		markers = new BusStopInfo[list.size()];
 		for (int i = 0; i < marker.size(); i++) {
-			mMap.addMarker(new MarkerOptions().position(new LatLng(marker.get(i).getLatitude(),
+			Marker mark = mMap.addMarker(new MarkerOptions().position(new LatLng(marker.get(i).getLatitude(),
 					marker.get(i).getLongitude())).title(marker.get(i).getStopName())
 					.icon(BitmapDescriptorFactory.fromResource(R.drawable.bus_stop)));
+            markerList.add(mark);
 			markers[i] = marker.get(i);
 		}
 		mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -174,4 +190,30 @@ public class NearbyBusStopsActivity extends FragmentActivity {
 			}
 		});
 	}
+
+    /**
+     * This listener handles zoom level change to show or hide the markers
+     * @return GoogleMap.OnCameraChangeListener
+     */
+    public GoogleMap.OnCameraChangeListener getCameraChangeListener()
+    {
+        return new GoogleMap.OnCameraChangeListener()
+        {
+            @Override
+            public void onCameraChange(CameraPosition position)
+            {
+                if(position.zoom<15&&prevZoomLevel>15){
+                    for(int i=0;i<markerList.size();i++){
+                        markerList.get(i).setVisible(false);
+                    }
+                }
+                else if(position.zoom>15&&prevZoomLevel<15){
+                    for(int i=0;i<markerList.size();i++){
+                        markerList.get(i).setVisible(true);
+                    }
+                }
+                prevZoomLevel = position.zoom;
+            }
+        };
+    }
 }

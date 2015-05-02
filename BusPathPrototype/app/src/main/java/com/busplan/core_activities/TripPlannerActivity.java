@@ -27,7 +27,12 @@ public class TripPlannerActivity extends FragmentActivity {
 	private TimePickerDialog timePickerDialog;
 	private SimpleDateFormat dateFormatter;
 	private SimpleDateFormat timeFormatter;
-
+    /**
+     * This function gets called when the activity is made, it makes sure the calling activity
+     * passed it a stop to look up
+     *
+     * @param savedInstanceState
+     */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,6 +53,10 @@ public class TripPlannerActivity extends FragmentActivity {
 		setTimeField();
 	}
 
+    /**
+     * This function calls the search stop activity when the start stop edit text field is pressed
+     * @param view, the button view
+     */
 	public void startNameFiller(View view) {
 		EditText editText = (EditText) findViewById(R.id.endDest);
 		String endStop = editText.getText().toString();
@@ -57,7 +66,10 @@ public class TripPlannerActivity extends FragmentActivity {
 		startActivity(intent);
 
 	}
-
+    /**
+     * This function calls the search stop activity when the end stop edit text field is pressed
+     * @param view, the button view
+     */
 	public void endNameFiller(View view) {
 		Intent intent = new Intent(TripPlannerActivity.this, SearchStopsTripPlannerActivity.class);
 		EditText editText = (EditText) findViewById(R.id.sourceDest);
@@ -67,6 +79,13 @@ public class TripPlannerActivity extends FragmentActivity {
 
 	}
 
+    /**
+     * This function retrieves all the information gathered in this page such as the start stop,
+     * the end stop, the date and the time if given and then sends it to the TripPlannerResultActivity
+     * which then shows the planned trips.
+     * All this happens when the submit button is pressed
+     * @param view, the submit button view
+     */
 	public void submitTripPlan(View view) {
 		Intent intent = new Intent(TripPlannerActivity.this, TripPlannerResultActivity.class);
 
@@ -108,6 +127,9 @@ public class TripPlannerActivity extends FragmentActivity {
 		timePickerDialog.show();
 	}
 
+    /**
+     * This function creates a timePickerDialog for the user to enter the time he wants
+     */
 	private void setTimeField() {
 		final EditText timeEdit = (EditText) findViewById(R.id.time);
 
@@ -124,7 +146,9 @@ public class TripPlannerActivity extends FragmentActivity {
 
 		}, newCalendar.get(Calendar.HOUR_OF_DAY), newCalendar.get(Calendar.MINUTE), false);
 	}
-
+    /**
+     * This function creates a datePickerDialog for the user to enter the time he wants
+     */
 	private void setDateField() {
 		final EditText dateEdit = (EditText) findViewById(R.id.date);
 
